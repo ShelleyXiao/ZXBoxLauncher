@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="zx_b3aeae">#b3aeae</color>
+    <color name="zx_color2">#9B9A9A</color>
+    <color name="zx_color3">#FFF</color>
+    <color name="zx_3df1ed">#3df1ed</color>
+    <color name="zx_dcdcdc">#DCDCDC</color>
+    <color name="zx_0E0A0B">#0E0A0B</color>
+
+    <color name="zx_87CEFA">#87CEFA</color>
+    <color name="zx_ADFF2F">#ADFF2F</color>
+</resources>

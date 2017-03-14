@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:cv="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/view_group"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <!--<com.zx.zxboxlauncher.widget.MetroItemFrameLayout-->
+    <!--android:id="@+id/main_item_video"-->
+    <!--android:layout_width="@dimen/px412"-->
+    <!--android:layout_height="@dimen/px672"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_marginLeft="@dimen/px240"-->
+    <!--android:layout_marginRight="5dp"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:background="@drawable/border_shape"-->
+    <!--android:focusable="true"-->
+    <!--app:radius="4dp">-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_gravity="left|center_vertical"-->
+    <!--android:scaleType="centerCrop"-->
+    <!--android:src="@drawable/mainview_cloudlist"/>-->
+
+
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="60dp"-->
+    <!--android:layout_gravity="bottom"-->
+    <!--android:background="@drawable/border_down_shape"-->
+    <!--android:gravity="center|left"-->
+    <!--android:padding="15px"-->
+    <!--android:text="@string/main_item_video"-->
+    <!--android:textColor="#fff"-->
+    <!--android:textSize="18dp"/>-->
+
+    <!--</com.zx.zxboxlauncher.widget.MetroItemFrameLayout>-->
+
+    <!--<com.zx.zxboxlauncher.widget.MetroItemFrameLayout-->
+    <!--android:id="@+id/main_item_online"-->
+    <!--android:layout_width="@dimen/px412"-->
+    <!--android:layout_height="@dimen/px672"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_marginLeft="5dp"-->
+    <!--android:layout_marginRight="5dp"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:background="@drawable/border_shape"-->
+    <!--android:focusable="true"-->
+    <!--app:radius="4dp">-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_gravity="left|center_vertical"-->
+    <!--android:scaleType="centerCrop"-->
+    <!--android:src="@drawable/mainview_cloudlist"/>-->
+
+
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="60dp"-->
+    <!--android:layout_gravity="bottom"-->
+    <!--android:background="@drawable/border_down_shape"-->
+    <!--android:gravity="center|left"-->
+    <!--android:padding="15px"-->
+    <!--android:text="@string/main_item_onlinevideo"-->
+    <!--android:textColor="#fff"-->
+    <!--android:textSize="18dp"/>-->
+
+    <!--</com.zx.zxboxlauncher.widget.MetroItemFrameLayout>-->
+
+    <!--<com.zx.zxboxlauncher.widget.MetroItemFrameLayout-->
+    <!--android:id="@+id/main_item_fileManger"-->
+    <!--android:layout_width="@dimen/px412"-->
+    <!--android:layout_height="@dimen/px672"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_marginLeft="5dp"-->
+    <!--android:layout_marginRight="@dimen/px240"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:background="@drawable/border_shape"-->
+    <!--android:focusable="true"-->
+    <!--app:radius="4dp">-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_gravity="left|center_vertical"-->
+    <!--android:scaleType="centerCrop"-->
+    <!--android:src="@drawable/mainview_cloudlist"/>-->
+
+
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="60dp"-->
+    <!--android:layout_gravity="bottom"-->
+    <!--android:background="@drawable/border_down_shape"-->
+    <!--android:gravity="center|left"-->
+    <!--android:padding="15px"-->
+    <!--android:text="@string/main_item_filemanager"-->
+    <!--android:textColor="#fff"-->
+    <!--android:textSize="18dp"/>-->
+
+    <!--</com.zx.zxboxlauncher.widget.MetroItemFrameLayout>-->
+
+    <com.open.androidtvwidget.view.SmoothHorizontalScrollView
+        android:id="@+id/test_hscroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <com.open.androidtvwidget.view.RelativeMainLayout
+            android:id="@+id/page1_main_lay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal">
+
+            <com.open.androidtvwidget.view.ReflectItemView
+                android:id="@+id/main_item_video"
+                android:layout_width="@dimen/px412"
+                android:layout_height="@dimen/px672"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/px240"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                app:isReflect="true"
+                app:isShape="true">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/mainview_huodong"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/border_down_shape"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="@string/main_item_video"
+                    android:textColor="#ffffff"/>
+            </com.open.androidtvwidget.view.ReflectItemView>
+
+
+            <com.open.androidtvwidget.view.ReflectItemView
+                android:id="@+id/main_item_online"
+                android:layout_width="@dimen/px412"
+                android:layout_height="@dimen/px672"
+                android:layout_centerInParent="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                app:isReflect="true"
+                app:isShape="true">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/mainview_huodong"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/border_down_shape"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="@string/main_item_onlinevideo"
+                    android:textColor="#ffffff"/>
+            </com.open.androidtvwidget.view.ReflectItemView>
+
+
+            <com.open.androidtvwidget.view.ReflectItemView
+                android:id="@+id/main_filemanager_lay"
+                android:layout_width="@dimen/px412"
+                android:layout_height="@dimen/px672"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/px240"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                app:isReflect="true"
+                app:isShape="true">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/mainview_huodong"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/border_down_shape"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="@string/main_item_filemanager"
+                    android:textColor="#ffffff"/>
+            </com.open.androidtvwidget.view.ReflectItemView>
+
+
+        </com.open.androidtvwidget.view.RelativeMainLayout>
+
+    </com.open.androidtvwidget.view.SmoothHorizontalScrollView>
+
+    <!-- 最顶层的边框移动 -->
+    <com.open.androidtvwidget.view.MainUpView
+        android:id="@+id/mainUpView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></com.open.androidtvwidget.view.MainUpView>
+
+</RelativeLayout>
