@@ -26,19 +26,29 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp" />
 
+    <com.open.androidtvwidget.view.OpenTabHost
+        android:id="@+id/openTabHost"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px100"
+        android:layout_margin="@dimen/px20"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/px200"
         android:layout_alignParentBottom="true"
         android:baselineAligned="false"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        >
 
         <com.zx.zxboxlauncher.view.RippleLayout
             android:id="@+id/ripple_layout_home"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:descendantFocusability="beforeDescendants">
 
             <ImageButton
                 android:id="@+id/home_button"
@@ -57,7 +67,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:descendantFocusability="beforeDescendants">
 
             <ImageButton
                 android:id="@+id/app_button"
@@ -76,7 +87,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:descendantFocusability="beforeDescendants">
 
             <ImageButton
                 android:id="@+id/setting_button"

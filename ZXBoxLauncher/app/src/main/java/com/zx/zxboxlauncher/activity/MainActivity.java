@@ -1,6 +1,7 @@
 package com.zx.zxboxlauncher.activity;
 
 import android.animation.Animator;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -9,21 +10,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.GridView;
+import android.widget.ImageButton;
 
 import com.open.androidtvwidget.bridge.EffectNoDrawBridge;
 import com.open.androidtvwidget.bridge.OpenEffectBridge;
 import com.open.androidtvwidget.utils.OPENLOG;
 import com.open.androidtvwidget.view.MainUpView;
+import com.open.androidtvwidget.view.OpenTabHost;
 import com.open.androidtvwidget.view.ReflectItemView;
 import com.zx.zxboxlauncher.R;
+import com.zx.zxboxlauncher.adpter.OpenTabTitleAdapter;
 import com.zx.zxboxlauncher.utils.LogUtils;
 import com.zx.zxboxlauncher.view.StatusTitleView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity {
+import static android.R.attr.id;
+import static com.zx.zxboxlauncher.R.drawable.focus;
+
+public class MainActivity extends BaseActivity implements View.OnFocusChangeListener, OpenTabHost.OnTabSelectListener,View.OnClickListener{
 
     private List<View> viewList;// view数组
     private View view1, view2, view3;
@@ -33,6 +42,14 @@ public class MainActivity extends BaseActivity {
 
     private OpenEffectBridge mSavebridge;
     private View mOldFocus;
+
+    private ImageButton mHomeBtn;
+    private ImageButton mAppBtn;
+    private ImageButton mSettingBtn;
+
+    private OpenTabHost mOpenTabHost;
+
+    private int mSelectIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +63,15 @@ public class MainActivity extends BaseActivity {
         initViewpaper();
         initViewMove();
 
+        initTabHost();
+
     }
 
     private void initViewpaper() {
         viewpager = (ViewPager) findViewById(R.id.my_pager);
         LayoutInflater layoutInflater = getLayoutInflater();
         view1 = layoutInflater.inflate(R.layout.layout_paper_view_1, null);
-        view2 = layoutInflater.inflate(R.layout.layout_paper_view_1, null);
+        view2 = layoutInflater.inflate(R.layout.layout_paper_view_2, null);
         view3 = layoutInflater.inflate(R.layout.layout_paper_view_1, null);
         viewList = new ArrayList<>();
         viewList.add(view1);
@@ -109,7 +128,7 @@ public class MainActivity extends BaseActivity {
             public void onPageSelected(int position) {
                 LogUtils.i(TAG, "onPageSelected position:" + position);
                 //position = viewpager.getCurrentItem();
-//                switchFocusTab(mOpenTabHost, position);
+                switchTab(position);
                 // 这里加入是为了防止移动过去后，移动的边框还在的问题.
                 // 从标题栏翻页就能看到上次的边框.
                 if (position > 0) {
@@ -148,6 +167,22 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    private void initTabHost() {
+        mHomeBtn = (ImageButton) findViewById(R.id.home_button);
+        mAppBtn = (ImageButton) findViewById(R.id.app_button);
+        mSettingBtn = (ImageButton) findViewById(R.id.setting_button);
+
+        mHomeBtn.setOnFocusChangeListener(this);
+        mAppBtn.setOnFocusChangeListener(this);
+        mSettingBtn.setOnFocusChangeListener(this);
+
+//        mOpenTabHost = (OpenTabHost) findViewById(R.id.openTabHost);
+//        OpenTabTitleAdapter adapter = new OpenTabTitleAdapter();
+//        mOpenTabHost.setAdapter(adapter);
+//        mOpenTabHost.setOnTabSelectListener(this);
+        mHomeBtn.setFocusable(true);
+    }
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -161,6 +196,124 @@ public class MainActivity extends BaseActivity {
     @Override
     public void netWorkChange() {
         mStatusTitleView.netWorkChange();
+    }
+
+
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.home_button:
+                LogUtils.e(" ************home_button");
+                switchTab(0);
+                if(viewpager.getCurrentItem() != 0) {
+                    viewpager.setCurrentItem(0);
+                }
+                break;
+            case R.id.app_button:
+                LogUtils.e(" ************app_button");
+                switchTab(1);
+                if(viewpager.getCurrentItem() != 1) {
+                    viewpager.setCurrentItem(1);
+                }
+
+                break;
+            case R.id.setting_button:
+                LogUtils.e(" ************setting_button");
+                switchTab(2);
+                if(viewpager.getCurrentItem() != 2) {
+                    viewpager.setCurrentItem(2);
+                }
+                break;
+
+        }
+    }
+
+    private void switchTab(int index) {
+        switch (index) {
+            case 0:
+                LogUtils.e(" ************home_button");
+                mSettingBtn.setBackground(getDrawable(R.drawable.icon_setbtn_normal));
+                mHomeBtn.setBackground(getDrawable(R.drawable.icon_homebtn_checked));
+                mAppBtn.setBackground(getDrawable(R.drawable.icon_appbtn_normal));
+                if(index != mSelectIndex) {
+                    tabBtnLarger(mHomeBtn);
+                    tabBtnNormal(mAppBtn);
+                    tabBtnNormal(mSettingBtn);
+                } else {
+
+                }
+                break;
+            case 1:
+                LogUtils.e(" ************app_button");
+                mSettingBtn.setBackground(getDrawable(R.drawable.icon_setbtn_normal));
+                mHomeBtn.setBackground(getDrawable(R.drawable.icon_homebtn_normal));
+                mAppBtn.setBackground(getDrawable(R.drawable.icon_appbtn_checked));
+                if(index != mSelectIndex) {
+                    tabBtnLarger(mAppBtn);
+                    tabBtnNormal(mHomeBtn);
+                    tabBtnNormal(mSettingBtn);
+                } else {
+
+                }
+                break;
+            case 2:
+                LogUtils.e(" ************setting_button");
+                mSettingBtn.setBackground(getDrawable(R.drawable.icon_setbtn_checked));
+                mHomeBtn.setBackground(getDrawable(R.drawable.icon_homebtn_normal));
+                mAppBtn.setBackground(getDrawable(R.drawable.icon_appbtn_normal));
+                if(index != mSelectIndex) {
+                    tabBtnLarger(mSettingBtn);
+                    tabBtnNormal(mAppBtn);
+                    tabBtnNormal(mHomeBtn);
+                } else {
+
+                }
+                break;
+
+        }
+
+        mSelectIndex = index;
+    }
+
+    private void tabBtnLarger(View v) {
+        tabBtnFocusChangeAnim(v, true, R.anim.enlarge);
+    }
+
+    private void tabBtnNormal(View v) {
+        tabBtnFocusChangeAnim(v, false, R.anim.decrease);
+    }
+
+    private void tabBtnFocusChangeAnim(View v, boolean hasFocus,  int animRes) {
+
+        int focus = animRes;
+//        if (hasFocus) {
+//
+//            focus = R.anim.enlarge;
+//            mTabOldFocus = v;
+//        } else {
+//
+//            focus = R.anim.decrease;
+//        }
+        //如果有焦点就放大，没有焦点就缩小
+        Animation mAnimation = AnimationUtils.loadAnimation(
+                getContext(), focus);
+        mAnimation.setBackgroundColor(Color.TRANSPARENT);
+        mAnimation.setFillAfter(hasFocus);
+        v.startAnimation(mAnimation);
+        mAnimation.start();
+        v.bringToFront();
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onTabSelect(OpenTabHost openTabHost, View titleWidget, int postion) {
+
     }
 
     class ViewPagerAdapter extends PagerAdapter {
