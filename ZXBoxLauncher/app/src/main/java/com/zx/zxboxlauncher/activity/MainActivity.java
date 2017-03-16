@@ -22,15 +22,15 @@ import com.open.androidtvwidget.view.MainUpView;
 import com.open.androidtvwidget.view.OpenTabHost;
 import com.open.androidtvwidget.view.ReflectItemView;
 import com.zx.zxboxlauncher.R;
-import com.zx.zxboxlauncher.adpter.OpenTabTitleAdapter;
+import com.zx.zxboxlauncher.page.AppPage;
+import com.zx.zxboxlauncher.page.HomePage;
+import com.zx.zxboxlauncher.page.SettingPage;
+import com.zx.zxboxlauncher.utils.Constant;
 import com.zx.zxboxlauncher.utils.LogUtils;
 import com.zx.zxboxlauncher.view.StatusTitleView;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.R.attr.id;
-import static com.zx.zxboxlauncher.R.drawable.focus;
 
 public class MainActivity extends BaseActivity implements View.OnFocusChangeListener, OpenTabHost.OnTabSelectListener,View.OnClickListener{
 
@@ -51,6 +51,10 @@ public class MainActivity extends BaseActivity implements View.OnFocusChangeList
 
     private int mSelectIndex;
 
+    private HomePage mHomePage;
+    private AppPage mAppPage;
+    private SettingPage mSettingPage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,13 +74,15 @@ public class MainActivity extends BaseActivity implements View.OnFocusChangeList
     private void initViewpaper() {
         viewpager = (ViewPager) findViewById(R.id.my_pager);
         LayoutInflater layoutInflater = getLayoutInflater();
-        view1 = layoutInflater.inflate(R.layout.layout_paper_view_1, null);
-        view2 = layoutInflater.inflate(R.layout.layout_paper_view_2, null);
-        view3 = layoutInflater.inflate(R.layout.layout_paper_view_1, null);
+
+        mHomePage = new HomePage(this);
+        mAppPage = new AppPage(this);
+        mSettingPage = new SettingPage(this);
+
         viewList = new ArrayList<>();
-        viewList.add(view1);
-        viewList.add(view2);
-        viewList.add(view3);
+        viewList.add(mHomePage.getViewParent());
+        viewList.add(mAppPage.getViewParent());
+        viewList.add(mSettingPage.getViewParent());
 
         viewpager.setAdapter(new ViewPagerAdapter());
         viewpager.setOffscreenPageLimit(3);
@@ -153,6 +159,7 @@ public class MainActivity extends BaseActivity implements View.OnFocusChangeList
             }
         });
     }
+
 
     public void initViewMove() {
         for (View view : viewList) {
@@ -232,7 +239,7 @@ public class MainActivity extends BaseActivity implements View.OnFocusChangeList
 
     private void switchTab(int index) {
         switch (index) {
-            case 0:
+            case Constant.MENU_HOME:
                 LogUtils.e(" ************home_button");
                 mSettingBtn.setBackground(getDrawable(R.drawable.icon_setbtn_normal));
                 mHomeBtn.setBackground(getDrawable(R.drawable.icon_homebtn_checked));
@@ -245,7 +252,7 @@ public class MainActivity extends BaseActivity implements View.OnFocusChangeList
 
                 }
                 break;
-            case 1:
+            case Constant.MENU_APP:
                 LogUtils.e(" ************app_button");
                 mSettingBtn.setBackground(getDrawable(R.drawable.icon_setbtn_normal));
                 mHomeBtn.setBackground(getDrawable(R.drawable.icon_homebtn_normal));
@@ -258,7 +265,7 @@ public class MainActivity extends BaseActivity implements View.OnFocusChangeList
 
                 }
                 break;
-            case 2:
+            case Constant.MENU_SETTING:
                 LogUtils.e(" ************setting_button");
                 mSettingBtn.setBackground(getDrawable(R.drawable.icon_setbtn_checked));
                 mHomeBtn.setBackground(getDrawable(R.drawable.icon_homebtn_normal));

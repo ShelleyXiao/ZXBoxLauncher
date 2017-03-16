@@ -1,142 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:cv="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/view_group"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
 
-    <com.open.androidtvwidget.view.SmoothHorizontalScrollView
-        android:id="@+id/test_hscroll"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <com.zx.zxboxlauncher.view.PageIndicator
+        android:id="@+id/indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:fillViewport="true"
-        android:scrollbars="none">
+        android:layout_marginTop="@dimen/px100"
+        app:indicator_spacing="@dimen/px30"
+        app:indicator_type="fraction"/>
 
-        <com.open.androidtvwidget.view.RelativeMainLayout
-            android:id="@+id/page2_main_lay"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <com.open.androidtvwidget.view.ReflectItemView
-                android:id="@+id/setting_net"
-                android:layout_width="@dimen/px680"
-                android:layout_height="@dimen/px420"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="@dimen/px100"
-                android:background="@drawable/setting_net"
-                android:clickable="true"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                app:isReflect="false"
-                app:isShape="true">
-
-
-            </com.open.androidtvwidget.view.ReflectItemView>
-
-            <com.open.androidtvwidget.view.ReflectItemView
-                android:id="@+id/setting_display"
-                android:layout_width="@dimen/px680"
-                android:layout_height="@dimen/px420"
-                android:layout_alignLeft="@+id/setting_net"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/setting_net"
-                android:layout_marginLeft="@dimen/px100"
-                android:layout_marginTop="@dimen/px5"
-                android:background="@drawable/setting_display"
-                android:clickable="true"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                app:isReflect="false"
-                app:isShape="true">
-
-
-            </com.open.androidtvwidget.view.ReflectItemView>
-
-            <com.open.androidtvwidget.view.ReflectItemView
-                android:id="@+id/setting_bluethee"
-                android:layout_width="@dimen/px680"
-                android:layout_height="@dimen/px420"
-                android:layout_marginLeft="@dimen/px5"
-                android:layout_toRightOf="@+id/setting_net"
-                android:background="@drawable/setting_bluethee"
-
-                android:clickable="true"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                app:isReflect="false"
-                app:isShape="true">
-
-
-            </com.open.androidtvwidget.view.ReflectItemView>
-
-            <com.open.androidtvwidget.view.ReflectItemView
-                android:id="@+id/setting_uninstall"
-                android:layout_width="@dimen/px680"
-                android:layout_height="@dimen/px420"
-                android:layout_below="@+id/setting_bluethee"
-                android:layout_marginLeft="@dimen/px5"
-                android:layout_marginTop="@dimen/px5"
-                android:layout_toRightOf="@+id/setting_display"
-                android:background="@drawable/setting_uninstall"
-                android:clickable="true"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                app:isReflect="false"
-                app:isShape="true"
-                android:nextFocusDown="@+id/ripple_layout_info">
-
-
-            </com.open.androidtvwidget.view.ReflectItemView>
-
-            <com.open.androidtvwidget.view.ReflectItemView
-                android:id="@+id/setting_more"
-                android:layout_width="@dimen/px680"
-                android:layout_height="@dimen/px420"
-                android:layout_marginLeft="@dimen/px5"
-                android:layout_toRightOf="@+id/setting_bluethee"
-                android:background="@drawable/setting_more"
-
-                android:clickable="true"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                app:isReflect="false"
-                app:isShape="true">
-
-
-            </com.open.androidtvwidget.view.ReflectItemView>
-
-            <com.open.androidtvwidget.view.ReflectItemView
-                android:id="@+id/setting_about"
-                android:layout_width="@dimen/px680"
-                android:layout_height="@dimen/px420"
-                android:layout_below="@+id/setting_more"
-                android:layout_marginLeft="@dimen/px5"
-                android:layout_marginTop="@dimen/px5"
-                android:layout_toRightOf="@+id/setting_uninstall"
-                android:background="@drawable/setting_about"
-                android:clickable="true"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                app:isReflect="false"
-                app:isShape="true">
-
-
-            </com.open.androidtvwidget.view.ReflectItemView>
-
-
-        </com.open.androidtvwidget.view.RelativeMainLayout>
-
-    </com.open.androidtvwidget.view.SmoothHorizontalScrollView>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/px100"
+        android:layout_marginRight="@dimen/px100"
+        android:layout_marginTop="@dimen/px50"/>
 
     <!-- 最顶层的边框移动 -->
     <com.open.androidtvwidget.view.MainUpView
         android:id="@+id/mainUpView1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></com.open.androidtvwidget.view.MainUpView>
+        android:layout_height="wrap_content">
+
+    </com.open.androidtvwidget.view.MainUpView>
 
 </RelativeLayout>

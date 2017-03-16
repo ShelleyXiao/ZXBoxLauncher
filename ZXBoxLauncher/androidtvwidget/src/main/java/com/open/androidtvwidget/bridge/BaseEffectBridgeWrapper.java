@@ -1,7 +1,5 @@
 package com.open.androidtvwidget.bridge;
 
-import com.open.androidtvwidget.view.MainUpView;
-
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -12,6 +10,9 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+
+import com.open.androidtvwidget.utils.OPENLOG;
+import com.open.androidtvwidget.view.MainUpView;
 
 public class BaseEffectBridgeWrapper extends BaseEffectBridge {
 
@@ -256,6 +257,7 @@ public class BaseEffectBridgeWrapper extends BaseEffectBridge {
             int bottom = (int)Math.rint(paddingRect.bottom);
             int top = (int)Math.rint(paddingRect.top);
             //
+			OPENLOG.E("left " + left + "right " + right);
 			drawableUp.setBounds(-padding.left - (left), -padding.top - (top),
 					width + padding.right + (right), height + padding.bottom + (bottom));
 			drawableUp.draw(canvas);

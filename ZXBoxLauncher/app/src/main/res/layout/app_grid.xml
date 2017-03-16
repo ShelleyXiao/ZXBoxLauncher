@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_centerInParent="true"
+             android:layout_marginTop="@dimen/px120">
+
+    <com.open.androidtvwidget.view.GridViewTV
+        android:id="@+id/app_gridview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+
+        android:listSelector="@android:color/transparent"
+        android:numColumns="4"
+        android:paddingTop="@dimen/px50"
+        android:paddingLeft="@dimen/px120"
+        android:paddingRight="@dimen/px120"
+        android:paddingBottom="@dimen/px50"/>
+
+    <com.zx.zxboxlauncher.view.FlyBorderView
+        android:id="@+id/flyBorder_view"
+        android:layout_width="@dimen/px400"
+        android:layout_height="@dimen/px260"
+        android:background="@drawable/health_focus_border"
+        android:visibility="invisible"/>
+
+</FrameLayout>
