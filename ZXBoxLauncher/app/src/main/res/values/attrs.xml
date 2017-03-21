@@ -108,4 +108,10 @@
         </attr>
     </declare-styleable>
 
+    <attr name="wifi_signal" format="reference" />
+
+    <declare-styleable name="WifiEncryptionState">
+        <attr name="state_encrypted" format="boolean" />
+    </declare-styleable>
+
 </resources>

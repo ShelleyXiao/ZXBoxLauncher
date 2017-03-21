@@ -82,6 +82,14 @@ public class WifiListAdpter extends BaseAdapter {
             holder.ArrowBottom.setVisibility(View.VISIBLE);
         }
 
+        int securtiy = Wifi.getSecurity(scanResult);
+        if(securtiy == Wifi.SECURITY_NONE) {
+            holder.mItemWifiImg.setImageDrawable(mContext.getDrawable(R.drawable.wifi_signal_open_light));
+        } else {
+            holder.mItemWifiImg.setImageDrawable(mContext.getDrawable(R.drawable.wifi_signal_lock_light));
+        }
+        holder.mItemWifiImg.setImageLevel(Wifi.getLevel(scanResult.level));
+
         return convertView;
     }
 

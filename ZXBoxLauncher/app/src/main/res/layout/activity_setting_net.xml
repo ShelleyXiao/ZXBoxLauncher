@@ -74,6 +74,18 @@
                 android:textColor="@android:color/white"
                 android:textSize="25sp"/>
 
+            <TextView
+                android:id="@+id/setting_custom_net_soft_ap"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/sel_focus"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/net_soft_ap"
+                android:textColor="@android:color/white"
+                android:textSize="25sp"/>
+
 
             <TextView
                 android:id="@+id/setting_custom_net_detection"

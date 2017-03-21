@@ -9,14 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@drawable/item_selecter_bg">
-
+        <!--android:src="@drawable/wifi_img"-->
         <ImageView
             android:id="@+id/item_wifi_img"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:src="@drawable/wifi_img" />
+            android:src="@drawable/wifi_signal_lock_light"/>
 
         <TextView
             android:id="@+id/wifi_list_item_wifiname"

@@ -61,6 +61,7 @@
 
         <activity android:name="com.zx.zxtvsettings.activity.NetSetting"></activity>
         <activity android:name="com.zx.zxtvsettings.activity.WifiActivity"></activity>
+        <activity android:name="com.zx.zxtvsettings.activity.WIfiApActivity"></activity>
         <activity android:name="com.zx.zxtvsettings.activity.BluethoothActivity"></activity>
         <activity android:name="com.zx.zxtvsettings.activity.SpeedTestActivity"></activity>
         <activity android:name="com.zx.zxtvsettings.activity.AppUninstallActivity"></activity>

@@ -34,6 +34,9 @@ public class NetSetting extends BaseActivity {
     @BindView(R.id.setting_custom_rl)
     RelativeLayout mSettingCustomRl;
 
+    @BindView(R.id.setting_custom_net_soft_ap)
+    TextView mSettingCustomNetSoftAp;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_setting_net;
@@ -68,7 +71,11 @@ public class NetSetting extends BaseActivity {
 //                intent.setClass(this, WifiActivity.class);
                 startActivity(WifiActivity.class);
                 break;
+
             case R.id.setting_custom_ethernet:
+                break;
+            case R.id.setting_custom_net_soft_ap:
+                startActivity(WIfiApActivity.class);
                 break;
             case R.id.setting_custom_net_detection:
                 if(NetWorkUtil.isNetWorkAvailable(this)) {
