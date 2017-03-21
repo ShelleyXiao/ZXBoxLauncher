@@ -32,7 +32,7 @@ import com.zx.zxboxlauncher.view.StatusTitleView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity implements View.OnFocusChangeListener, OpenTabHost.OnTabSelectListener,View.OnClickListener{
+public class MainActivity extends BaseActivity implements View.OnFocusChangeListener, View.OnClickListener{
 
     private List<View> viewList;// view数组
     private View view1, view2, view3;
@@ -148,6 +148,12 @@ public class MainActivity extends BaseActivity implements View.OnFocusChangeList
                     OpenEffectBridge bridge1 = (OpenEffectBridge) mainUpView1.getEffectBridge();
                     bridge1.setVisibleWidget(true);
                 }
+
+//                if(position == 1) {
+//                    MainUpView mainUpView1 = (MainUpView) viewList.get(position + 1).findViewById(R.id.mainUpView1);
+//                    OpenEffectBridge bridge1 = (OpenEffectBridge) mainUpView1.getEffectBridge();
+//                    bridge1.setVisibleWidget(false);
+//                }
             }
 
             @Override
@@ -315,11 +321,6 @@ public class MainActivity extends BaseActivity implements View.OnFocusChangeList
 
     @Override
     public void onClick(View v) {
-
-    }
-
-    @Override
-    public void onTabSelect(OpenTabHost openTabHost, View titleWidget, int postion) {
 
     }
 

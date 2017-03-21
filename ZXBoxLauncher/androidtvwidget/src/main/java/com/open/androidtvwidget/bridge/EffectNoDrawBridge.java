@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
@@ -72,6 +73,7 @@ public class EffectNoDrawBridge extends OpenEffectBridge {
 	 */
 	@Override
 	public void flyWhiteBorder(final View focusView, View moveView, float scaleX, float scaleY) {
+		Log.e("debug", " 7777777777777***********" + moveView.getVisibility());
 		RectF paddingRect = getDrawUpRect();
 		int newWidth = 0;
 		int newHeight = 0;

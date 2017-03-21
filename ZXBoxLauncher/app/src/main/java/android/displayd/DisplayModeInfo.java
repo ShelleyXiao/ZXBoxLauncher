@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package com.zx.zxboxlauncher.displayd;
+package com.com.android.displayd;
 
 
 import android.os.Parcel;
-import android.util.Log;
-
 //import android.os.Parcelable;
+import android.os.RemoteException;
+import android.util.Log;
+import java.util.ArrayList;
+import java.util.List;
 
 //Parcelable interface is not suitable for transaction across native/java
 public class DisplayModeInfo {

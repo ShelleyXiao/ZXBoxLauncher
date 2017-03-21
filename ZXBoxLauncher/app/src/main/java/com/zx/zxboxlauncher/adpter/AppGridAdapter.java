@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +21,8 @@ public class AppGridAdapter extends BaseAdapter {
     private List<AppInfo> mData = null;
     private Context mContext = null;
     private List<AppInfo> appList = null;
+
+    private GridView mGridView;
 
     public AppGridAdapter(int page, int pageSize, List<AppInfo> data, Context context) {
 
@@ -81,6 +84,12 @@ public class AppGridAdapter extends BaseAdapter {
         // convertView.measure(w, h);
         // int height = convertView.getMeasuredHeight();
         // int width = convertView.getMeasuredWidth();
+
+//        AbsListView.LayoutParams params = new AbsListView.LayoutParams(
+//                android.view.ViewGroup.LayoutParams.FILL_PARENT,
+//                this.getVmGridView.getHeight()/3);
+//        convertView.setLayoutParams(params);
+
         return convertView;
 
     }

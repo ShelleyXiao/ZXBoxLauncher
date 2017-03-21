@@ -47,4 +47,6 @@ abstract class BasePage {
 
     public abstract void initViews();
 
+
+
 }

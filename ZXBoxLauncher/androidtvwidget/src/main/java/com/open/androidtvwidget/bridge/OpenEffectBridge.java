@@ -1,16 +1,17 @@
 package com.open.androidtvwidget.bridge;
 
-import com.open.androidtvwidget.utils.Utils;
-import com.open.androidtvwidget.view.MainUpView;
-
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
+
+import com.open.androidtvwidget.utils.Utils;
+import com.open.androidtvwidget.view.MainUpView;
 
 /**
  * 自定义Anim Bridge DEMO. <br>
@@ -40,6 +41,7 @@ public class OpenEffectBridge extends BaseEffectBridgeWrapper {
 		 * 防止边框第一次出现,<br>
 		 * 从另一个地方飘过来的问题.<br>
 		 */
+		Log.e("zx", "onInitBridge ");
 		view.setVisibility(View.INVISIBLE);
 	}
 
@@ -83,6 +85,7 @@ public class OpenEffectBridge extends BaseEffectBridgeWrapper {
 	 */
 	public void setVisibleWidget(boolean isHide) {
 		this.mIsHide = isHide;
+		Log.e("zx", "isHide " + isHide);
 		getMainUpView().setVisibility(mIsHide ? View.INVISIBLE : View.VISIBLE);
 	}
 	
@@ -181,6 +184,7 @@ public class OpenEffectBridge extends BaseEffectBridgeWrapper {
 			public void onAnimationStart(Animator animation) {
 				if (!isDrawUpRect)
 					isInDraw = false;
+				Log.e("zx", "isHide " + mIsHide);
 				if (mIsHide) {
 					getMainUpView().setVisibility(View.INVISIBLE);
 				}
@@ -198,6 +202,7 @@ public class OpenEffectBridge extends BaseEffectBridgeWrapper {
 			public void onAnimationEnd(Animator animation) {
 				if (!isDrawUpRect)
 					isInDraw = true;
+				Log.e("zx", "isHide " + mIsHide);
 				getMainUpView().setVisibility(mIsHide ? View.INVISIBLE : View.VISIBLE);
 				if (mNewAnimatorListener != null)
 					mNewAnimatorListener.onAnimationEnd(OpenEffectBridge.this, focusView, animation);

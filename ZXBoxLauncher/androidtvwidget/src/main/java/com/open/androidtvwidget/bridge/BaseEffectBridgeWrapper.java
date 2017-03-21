@@ -7,11 +7,11 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 
-import com.open.androidtvwidget.utils.OPENLOG;
 import com.open.androidtvwidget.view.MainUpView;
 
 public class BaseEffectBridgeWrapper extends BaseEffectBridge {
@@ -191,6 +191,7 @@ public class BaseEffectBridgeWrapper extends BaseEffectBridge {
 	 */
 	@Override
 	public void onFocusView(View focusView, float scaleX, float scaleY) {
+		Log.e("zx", " ***********+ onFocusView" );
 		if (focusView != null) {
 			focusView.animate().scaleX(scaleX).scaleY(scaleY).setDuration(DEFAULT_TRAN_DUR_ANIM).start(); // 放大焦点VIEW的动画.
 			runTranslateAnimation(focusView, scaleX, scaleY); // 移动边框的动画。
@@ -206,6 +207,7 @@ public class BaseEffectBridgeWrapper extends BaseEffectBridge {
 	 */
 	@Override
 	public boolean onDrawMainUpView(Canvas canvas) {
+		Log.e("zx", " ***********+ onDrawMainUpView" );
 		canvas.save();
 		// 绘制阴影.
 		onDrawShadow(canvas);
@@ -257,7 +259,7 @@ public class BaseEffectBridgeWrapper extends BaseEffectBridge {
             int bottom = (int)Math.rint(paddingRect.bottom);
             int top = (int)Math.rint(paddingRect.top);
             //
-			OPENLOG.E("left " + left + "right " + right);
+			Log.e("ZX", "left " + left + "right " + right);
 			drawableUp.setBounds(-padding.left - (left), -padding.top - (top),
 					width + padding.right + (right), height + padding.bottom + (bottom));
 			drawableUp.draw(canvas);
@@ -266,6 +268,7 @@ public class BaseEffectBridgeWrapper extends BaseEffectBridge {
 
 	public void runTranslateAnimation(View toView, float scaleX, float scaleY) {
 		try {
+			Log.e("zx", " ***********+ runTranslateAnimation" );
 			flyWhiteBorder(toView, getMainUpView(), scaleX, scaleY);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -273,6 +276,7 @@ public class BaseEffectBridgeWrapper extends BaseEffectBridge {
 	}
 
 	public Rect findLocationWithView(View view) {
+		Log.e("zx", " ***********+ findLocationWithView" );
 		ViewGroup root = (ViewGroup) getMainUpView().getParent();
 		Rect rect = new Rect();
 		root.offsetDescendantRectToMyCoords(view, rect);

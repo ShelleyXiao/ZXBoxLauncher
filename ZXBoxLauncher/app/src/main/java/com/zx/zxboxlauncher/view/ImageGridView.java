@@ -2,6 +2,8 @@ package com.zx.zxboxlauncher.view;
 
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,8 @@ public class ImageGridView extends FrameLayout implements OnItemClickListener, O
     //private static final String TAG = ImageGridView.class.getSimpleName();
     private OnImageActionListener mActionListener = null;
     private FlyBorderView mFlyBorderView = null;
+
+    private GridViewTV gridView;
 
     public ImageGridView(Context context) {
         super(context);
@@ -45,8 +49,9 @@ public class ImageGridView extends FrameLayout implements OnItemClickListener, O
 
     private void init(Context context, ListAdapter adapter, int numCol) {
         View view = LayoutInflater.from(context).inflate(R.layout.app_grid, this, true);
-        GridViewTV gridView = (GridViewTV) view.findViewById(R.id.app_gridview);
+        gridView = (GridViewTV) view.findViewById(R.id.app_gridview);
         mFlyBorderView = (FlyBorderView) view.findViewById(R.id.flyBorder_view);
+        gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
         gridView.setNumColumns(numCol);
         gridView.setNextFocusDownId(R.id.app_button);
         gridView.setOnItemClickListener(this);
@@ -58,6 +63,14 @@ public class ImageGridView extends FrameLayout implements OnItemClickListener, O
 
     private void setGridAdapter(GridView gv, ListAdapter adapter) {
         gv.setAdapter(adapter);
+    }
+
+    public void setSelectItem(int position) {
+        gridView.setSelection(position);
+    }
+
+    public int getSelectItem() {
+        return gridView.getSelectedItemPosition();
     }
 
     public interface OnImageActionListener {

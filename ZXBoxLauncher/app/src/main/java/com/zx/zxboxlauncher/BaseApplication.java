@@ -4,6 +4,7 @@ package com.zx.zxboxlauncher;
 import android.app.Activity;
 import android.app.Application;
 
+import com.open.androidtvwidget.utils.OPENLOG;
 import com.zx.zxboxlauncher.activity.BaseActivity;
 
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        OPENLOG.initTag("ZX", true);
     }
 
     /**

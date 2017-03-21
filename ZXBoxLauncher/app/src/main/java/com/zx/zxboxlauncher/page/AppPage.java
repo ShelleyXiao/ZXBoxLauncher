@@ -1,5 +1,6 @@
 package com.zx.zxboxlauncher.page;
 
+import android.animation.Animator;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
@@ -13,7 +14,9 @@ import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.Toast;
 
 import com.open.androidtvwidget.bridge.EffectNoDrawBridge;
@@ -37,6 +40,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
+import static com.zx.zxboxlauncher.R.id.mainUpView1;
 
 /**
  * User: ShaudXiao
@@ -53,7 +57,7 @@ public class AppPage extends BasePage {
     private ViewPager mViewPager = null;
     private PackageManager mPackManager = null;
     private List<AppInfo> mAppInfos = null;
-    private List<View> mListViews = null;
+    private List<View> mGridViews = null;
     private int move = 0;
     private AppInfo mSelectAppInfo = null;
     private int mPageCount = 0;
@@ -65,6 +69,8 @@ public class AppPage extends BasePage {
     private MainUpView mMainUpView;
 
     private View mOldView;
+
+    private  OpenEffectBridge mSavebridge = null;
 
     public AppPage(MainActivity activity) {
         super(activity);
@@ -96,25 +102,96 @@ public class AppPage extends BasePage {
         initOnePageData();
 
         mPageIndicator = (PageIndicator) getViewParent().findViewById(R.id.indicator);
-        MyViewPagerAdapter mViewPagerAdapter = new MyViewPagerAdapter(mListViews);
+        MyViewPagerAdapter mViewPagerAdapter = new MyViewPagerAdapter(mGridViews);
         mViewPager.setAdapter(mViewPagerAdapter);
         mPageIndicator.setViewPager(mViewPager);
         mViewPager.setPageTransformer(true, new CubeOutTransformer());
         ControlViewPagerSpeed mViewPagerSpeed = new ControlViewPagerSpeed(mViewPager);
         mViewPagerSpeed.controlSpeed();
+
         final PageIndicator pageIndicator = mPageIndicator;
+        final ViewPager viewPager = mViewPager;
+
+        mViewPager.getViewTreeObserver().addOnGlobalFocusChangeListener(new ViewTreeObserver.OnGlobalFocusChangeListener() {
+            @Override
+            public void onGlobalFocusChanged(View oldFocus, View newFocus) {
+                final OpenEffectBridge bridge = (OpenEffectBridge) mMainUpView.getEffectBridge();
+                if (!(newFocus instanceof GridView)) { // 不是 ReflectitemView 的话.
+                    LogUtils.e("debug", "onGlobalFocusChanged no GridView + " + (newFocus instanceof GridView));
+                    mMainUpView.setUnFocusView(mOldView);
+                    bridge.setVisibleWidget(true); // 隐藏.
+                    mSavebridge = null;
+                } else {
+                    LogUtils.e("debug", "onGlobalFocusChanged yes GridView");
+                    newFocus.bringToFront();
+                    mSavebridge = bridge;
+                    // 动画结束才设置边框显示，
+                    // 是位了防止翻页从另一边跑出来的问题.
+                    bridge.setOnAnimatorListener(new OpenEffectBridge.NewAnimatorListener() {
+                        @Override
+                        public void onAnimationStart(OpenEffectBridge bridge, View view, Animator animation) {
+                        }
+
+                        @Override
+                        public void onAnimationEnd(OpenEffectBridge bridge1, View view, Animator animation) {
+                            if (mSavebridge == bridge1)
+                                bridge.setVisibleWidget(false);
+                        }
+                    });
+                    float scale = 1.05f;
+
+//                    mMainUpView.setFocusView(newFocus, mOldFocus, scale);
+                }
+//                mOldFocus = newFocus;
+            }
+        });
+
+
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                LogUtils.e("debug", "onPageScrolled position = " + position);
                 mCurrentPageNum = position;
-                LogUtils.e("mPageIndicator " + mPageIndicator);
+
+                mMainUpView.setUpRectResource(R.drawable.focus_1); // 设置移动边框的图片.
+                mMainUpView.setDrawUpRectPadding(new Rect(-30,-10,-30,-14)); // 边框图片设置间距.
+
+                OpenEffectBridge bridge1 = (OpenEffectBridge) mMainUpView.getEffectBridge();
+                bridge1.setVisibleWidget(false);
+
                 if(pageIndicator != null) {
                     pageIndicator.updateIndicator(position);
                 }
+
+                if(null != mGridViews) {
+                    ImageGridView imageGridView = (ImageGridView) mGridViews.get(position);
+                    if(null != imageGridView) {
+                        imageGridView.setSelectItem(0);
+                        LogUtils.e("debug", "select item index = " + imageGridView.getSelectItem());
+                    }
+                }
+
             }
 
             @Override
             public void onPageSelected(int position) {
+                LogUtils.e("debug", "onPageSelected position = " +
+                        "" + position);
+
+                if (position > 0) {
+                    OpenEffectBridge bridge0 = (OpenEffectBridge) mMainUpView.getEffectBridge();
+//                    bridge0.setVisibleWidget(true);
+                    LogUtils.e("debug", "onPageSelected--1");
+
+
+                }
+                //
+                if (position < (viewPager.getChildCount() - 1)) {
+                    OpenEffectBridge bridge1 = (OpenEffectBridge) mMainUpView.getEffectBridge();
+                    bridge1.setVisibleWidget(true);
+                    LogUtils.e("debug", "onPageSelected--2");
+
+                }
 
             }
 
@@ -129,7 +206,7 @@ public class AppPage extends BasePage {
     }
 
     private void initOnePageData() {
-        mListViews = new ArrayList<View>();
+        mGridViews = new ArrayList<View>();
         for (int i = 0; i < mPageCount; i++) {
             AppGridAdapter mAppGridAdapter = new AppGridAdapter(i, (int) Constant.APP_PAGE_SIZE,
                             mAppInfos, thisActivity);
@@ -166,10 +243,17 @@ public class AppPage extends BasePage {
                 public void OnImageItemSelected(View selectView, FlyBorderView flyBorderView) {
 //                    flyBorderView.setTvScreen(true);
 //                    flyBorderView.setSelectView(selectView);
+                    LogUtils.e("debug", "OnImageItemSelected");
                     if (selectView != null) {
+                        LogUtils.e("debug", "OnImageItemSelected---1");
+
+                        OpenEffectBridge bridge = (OpenEffectBridge) mMainUpView.getEffectBridge();
+                        bridge.setVisibleWidget(false);
                         mMainUpView.setFocusView(selectView, mOldView, 1.2f);
+
                     }
                     mOldView = selectView;
+
 
                 }
 
@@ -181,7 +265,7 @@ public class AppPage extends BasePage {
 //                        flyBorderView.setVisibility(View.INVISIBLE);
 //                    }
 
-                    Log.e(TAG, "***********OnImageFocusChange*********" + hasFocus);
+                    Log.e("debug", "***********OnImageFocusChange*********" + hasFocus);
                     if(hasFocus) {
                         mMainUpView.setFocusView(mOldView, 1.2f);
 
@@ -195,20 +279,20 @@ public class AppPage extends BasePage {
 
             });
 
-            mListViews.add(appPage);
-
+            mGridViews.add(appPage);
         }
     }
 
     private void initMainUpView() {
-        mMainUpView = (MainUpView) getViewParent().findViewById(R.id.mainUpView1);
+        mMainUpView = (MainUpView) getViewParent().findViewById(mainUpView1);
         // 建议使用 noDrawBridge.
         mMainUpView.setEffectBridge(new EffectNoDrawBridge()); // 4.3以下版本边框移动.
-        mMainUpView.setUpRectResource(R.drawable.health_focus_border); // 设置移动边框的图片.
-        mMainUpView.setDrawUpRectPadding(new Rect(12,14,14,14)); // 边框图片设置间距.
+        mMainUpView.setUpRectResource(R.drawable.focus_1); // 设置移动边框的图片.
+        mMainUpView.setDrawUpRectPadding(new Rect(-22,-10,-22,-14)); // 边框图片设置间距.
 //        mMainUpView.setDrawUpRectPadding(new Rect(10,10,8,10)); // 边框图片设置间距.
         EffectNoDrawBridge bridget = (EffectNoDrawBridge) mMainUpView.getEffectBridge();
         bridget.setTranDurAnimTime(100);
+        bridget.setVisibleWidget(false);
     }
 
     public void refresh(boolean bDelete) {
@@ -220,7 +304,7 @@ public class AppPage extends BasePage {
         }
 
         initOnePageData();
-        mViewPager.setAdapter(new MyViewPagerAdapter(mListViews));
+        mViewPager.setAdapter(new MyViewPagerAdapter(mGridViews));
 
         if (pageNum == mPageCount)// one page has deleted all data
         {

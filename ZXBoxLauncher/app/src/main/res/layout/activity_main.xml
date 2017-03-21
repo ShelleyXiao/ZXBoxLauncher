@@ -100,6 +100,18 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:scaleType="center" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/setting_button"
+                android:layout_alignLeft="@+id/setting_button"
+                android:layout_alignRight="@+id/setting_button"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/menuline"
+                android:scaleType="fitXY"
+                android:visibility="gone"/>
+
         </com.zx.zxboxlauncher.view.RippleLayout>
     </LinearLayout>
 

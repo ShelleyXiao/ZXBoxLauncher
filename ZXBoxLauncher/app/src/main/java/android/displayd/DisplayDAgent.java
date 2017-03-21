@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package com.zx.zxboxlauncher.displayd;
+package com.com.android.displayd;
 
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.RemoteException;
+//import android.os.ServiceManager;
 import android.util.Log;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-
-//import android.os.ServiceManager;
 
 public class DisplayDAgent{
     private static final String TAG = "DisplayDAgent";

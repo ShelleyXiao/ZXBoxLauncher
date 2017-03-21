@@ -14,8 +14,16 @@ import com.zx.zxboxlauncher.BaseApplication;
 import com.zx.zxboxlauncher.R;
 import com.zx.zxboxlauncher.utils.LogUtils;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
- * Created by WXT on 2016/7/8.
+ * User: ShaudXiao
+ * Date: 2017-03-10
+ * Time: 15:48
+ * Company: zx
+ * Description:
+ * FIXME
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -26,6 +34,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private MyConnectionChanngeReceiver myReceiver;
     private boolean isNetWork = true;
     public Context context;
+    protected Unbinder mUnbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +43,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         int flag = WindowManager.LayoutParams.FLAG_FULLSCREEN;
         getWindow().setFlags(flag,flag);
         context = this.getApplicationContext();
-        LogUtils.i(TAG, "开始加载");
         int layoutId = getLayoutId();
         if (layoutId != 0) {
             setContentView(layoutId);
-            // 删除窗口背景
             getWindow().setBackgroundDrawable(null);
+
+            mUnbinder = ButterKnife.bind(this);
         }
         BaseApplication.getInstance().addActivity(this);
 
-        //向用户展示信息前的准备工作在这个方法里处理
         preliminary();
         registerReceiver();
     }
@@ -55,6 +63,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void onPause() {
         super.onPause();
     }
+
+
 
     /**
      * 向用户展示信息前的准备工作在这个方法里处理
@@ -251,6 +261,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mUnbinder.unbind();
         unregisterReceiver();
     }
 
@@ -274,6 +285,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
 
     }
+
+
 
 
 }

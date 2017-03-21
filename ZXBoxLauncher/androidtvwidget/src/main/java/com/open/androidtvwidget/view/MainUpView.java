@@ -18,10 +18,6 @@ limitations under the License.
  */
 package com.open.androidtvwidget.view;
 
-import com.open.androidtvwidget.R;
-import com.open.androidtvwidget.bridge.BaseEffectBridge;
-import com.open.androidtvwidget.bridge.OpenEffectBridge;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -30,10 +26,16 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
+
+import com.open.androidtvwidget.R;
+import com.open.androidtvwidget.bridge.BaseEffectBridge;
+import com.open.androidtvwidget.bridge.OpenEffectBridge;
+import com.open.androidtvwidget.utils.OPENLOG;
 
 /**
  * MainUpView是一个在最上层的移动边框，你可以使用它的API来完成你想要的效果.
@@ -377,7 +379,9 @@ public class MainUpView extends FrameLayout {
 
 	@Override
 	protected void onDraw(Canvas canvas) {
+		Log.e("zx"," ONdRAW************");
 		if (this.mEffectBridge != null) {
+			Log.e("zx", " ONdRAW");
 			if (this.mEffectBridge.onDrawMainUpView(canvas)) {
 				return;
 			}

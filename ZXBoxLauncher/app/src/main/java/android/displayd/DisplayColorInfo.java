@@ -14,11 +14,14 @@
  * limitations under the License.
  */
 
-package com.zx.zxboxlauncher.displayd;
+package com.com.android.displayd;
 
 
 import android.os.Parcel;
+import android.os.RemoteException;
 import android.util.Log;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DisplayColorInfo{
     public int Contrast;
@@ -42,7 +45,7 @@ public class DisplayColorInfo{
     public void dump(){dump(TAG);}
     public void dump(String _tag){
         Log.i(_tag,"  Contrast:"+this.Contrast+" Saturation:"+this.Saturation+" Hue:"+this.Hue+
-                  " Bright:"+this.Bright+" flag:0x"+ Integer.toHexString(this.flag)
+                  " Bright:"+this.Bright+" flag:0x"+Integer.toHexString(this.flag)
               );
     }
     public static DisplayColorInfo unflatten(Parcel in){
