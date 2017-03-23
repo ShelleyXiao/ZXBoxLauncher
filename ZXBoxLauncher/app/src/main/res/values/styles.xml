@@ -54,5 +54,6 @@
         <item name="android:focusable">false</item>
     </style>
 
+    <style name="TextAppearance.TileTitle" parent="@android:style/TextAppearance.Material.Medium"></style>
 
 </resources>

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">ZXBoxLauncher</string>
 
 
@@ -112,6 +112,30 @@
     <string name="wifi_security_psk_generic">@string/wifi_security_wpa_wpa2</string>
     <!-- Do not translate.  Concise terminology for wifi with 802.1x EAP security -->
     <string name="wifi_security_eap">802.1x EAP</string>
+
+    <!-- tethering set part -->
+    <string name="wifi_tether_configure_ssid_default">"热点ID"</string>
+    <string name="wifi_tether_enabled_subtext">"WIFI热点“<xliff:g id="NETWORK_SSID">%1$s</xliff:g>”已激活"</string>
+    <string name="wifi_tether_starting">"正在打开热点..."</string>
+    <string name="wifi_tether_stopping">"正在关闭热点..."</string>
+    <string name="wifi_tether_checkbox_text">"WIFI热点"</string>
+    <string name="wifi_tether_config_summary">配置热点</string>
+    <string name="wifi_tether_config_button">配置</string>
+    <string name="wifi_ap_hotspot_title">"热点名称:"</string>
+    <string name="wifi_ssid_hint">输入SSID</string>
+    <string name="wifi_ap_hotspot_hint">""</string>
+    <string name="wifi_ap_password_title">"输入密码:"</string>
+    <string name="wifi_ap_password_confirm_title">"确认密码:"</string>
+    <string name="credentials_password_too_short">"密码至少应包含8个字符。"</string>
+    <string name="wifi_ap_ok">完成</string>
+    <string name="wifi_ap_config_err_msg_ssid">"请输入正确的SSID!"</string>
+    <string name="wifi_ap_config_err_msg_pwd_short">"密码太短!\n请输入至少8位密码"</string>
+    <string name="wifi_ap_config_err_msg_pwd_match">"密码输入不一致!"</string>
+
+    <string name="wifi_ap_security_open_text">@string/wifi_security_none</string>
+    <string name="wifi_ap_security_wpa_psk_text">@string/wifi_security_wpa</string>
+    <string name="wifi_ap_security_wpa2_psk_text">@string/wifi_security_wpa2</string>
+    <string name="wifi_ap_security_title">"加密类型:"</string>
 
 
     <string name="bluetooth_setting_title">蓝牙设置</string>

@@ -22,6 +22,8 @@ import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.util.Log;
 
+import com.zx.zxtvsettings.Utils.Logger;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -52,11 +54,10 @@ public class WifiApManager {
 			if (enabled) { // disable WiFi in any case
 				mWifiManager.setWifiEnabled(false);
 			}
-
 			Method method = mWifiManager.getClass().getMethod("setWifiApEnabled", WifiConfiguration.class, boolean.class);
 			return (Boolean) method.invoke(mWifiManager, wifiConfig, enabled);
 		} catch (Exception e) {
-			Log.e(this.getClass().toString(), "", e);
+			Logger.getLogger().e( " " + e);
 			return false;
 		}
 	}
@@ -79,7 +80,7 @@ public class WifiApManager {
 
 			return WIFI_AP_STATE.class.getEnumConstants()[tmp];
 		} catch (Exception e) {
-			Log.e(this.getClass().toString(), "", e);
+			Logger.getLogger().e("" +  e);
 			return WIFI_AP_STATE.WIFI_AP_STATE_FAILED;
 		}
 	}
@@ -104,7 +105,7 @@ public class WifiApManager {
 			Method method = mWifiManager.getClass().getMethod("getWifiApConfiguration");
 			return (WifiConfiguration) method.invoke(mWifiManager);
 		} catch (Exception e) {
-			Log.e(this.getClass().toString(), "", e);
+			Logger.getLogger().e("" + e);
 			return null;
 		}
 	}
@@ -167,12 +168,12 @@ public class WifiApManager {
 						}
 					}
 				} catch (Exception e) {
-					Log.e(this.getClass().toString(), e.toString());
+					Logger.getLogger().e(e.toString());
 				} finally {
 					try {
 						br.close();
 					} catch (IOException e) {
-						Log.e(this.getClass().toString(), e.getMessage());
+						Logger.getLogger().e(e.getMessage());
 					}
 				}
 

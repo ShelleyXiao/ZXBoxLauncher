@@ -47,7 +47,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import static android.R.attr.drawable;
-import static android.R.attr.level;
 import static com.zx.zxboxlauncher.R.string.security;
 
 public class Wifi {

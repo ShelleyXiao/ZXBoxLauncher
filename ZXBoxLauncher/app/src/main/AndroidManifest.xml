@@ -28,6 +28,7 @@
     <uses-permission android:name="android.permission.CLEAR_APP_CACHE" />
     <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
     <protected-broadcast android:name="android.intent.action.MEDIA_MOUNTED" />
 
     <!-- WindowManger 权限(浮动窗口)-->

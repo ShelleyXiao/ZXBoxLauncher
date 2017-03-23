@@ -63,7 +63,7 @@ public class NetSetting extends BaseActivity {
     }
 
 
-    @OnClick({R.id.setting_custom_wifi, R.id.setting_custom_ethernet, R.id.setting_custom_net_detection})
+    @OnClick({R.id.setting_custom_wifi, R.id.setting_custom_ethernet, R.id.setting_custom_net_detection, R.id.setting_custom_net_soft_ap})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
