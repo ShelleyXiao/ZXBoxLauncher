@@ -138,8 +138,8 @@ public class WifiApEnabler {
 //            Settings.Global.putInt(cr, Settings.Global.WIFI_SAVED_STATE, 1);
         }
 
-//        if (mWifiManager.setWifiApEnabled(null, enable)) {
-        if (mWifiApManager.setWifiApEnabled(null, enable)) {
+        if (mWifiManager.setWifiApEnabled(null, enable)) {
+//        if (mWifiApManager.setWifiApEnabled(null, enable)) {
             if (mSwitch != null) {
 
                 /* Disable here, enabled on receiving success broadcast */
@@ -200,8 +200,8 @@ public class WifiApEnabler {
         }
 
         if (wifiTethered) {
-//            WifiConfiguration wifiConfig = mWifiManager.getWifiApConfiguration();
-            WifiConfiguration wifiConfig = mWifiApManager.getWifiApConfiguration();
+            WifiConfiguration wifiConfig = mWifiManager.getWifiApConfiguration();
+//            WifiConfiguration wifiConfig = mWifiApManager.getWifiApConfiguration();
             updateConfigSummary(wifiConfig);
         } else if (wifiErrored) {
             //mSwitch.setSummary(R.string.wifi_error);

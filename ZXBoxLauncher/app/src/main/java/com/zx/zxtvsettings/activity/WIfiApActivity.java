@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.zx.zxboxlauncher.R;
 import com.zx.zxboxlauncher.activity.BaseActivity;
-import com.zx.zxtvsettings.wifi.ap.WIFI_AP_STATE;
 import com.zx.zxtvsettings.wifi.ap.WifiApEnabler;
 import com.zx.zxtvsettings.wifi.ap.WifiApManager;
 
@@ -193,7 +192,7 @@ public class WIfiApActivity extends BaseActivity {
         mWifiManager =  (WifiManager) getService(Context.WIFI_SERVICE);
         mWifiApManager = new WifiApManager(this);
         mSecurityType = getResources().getStringArray(R.array.wifi_ap_security);
-        updateConfigSummary(mWifiApManager.getWifiApConfiguration());
+        updateConfigSummary(mWifiManager.getWifiApConfiguration());
     }
 
 
@@ -313,11 +312,11 @@ public class WIfiApActivity extends BaseActivity {
              * else restart with new config
              * TODO: update config on a running access point when framework support is added
              */
-            if (mWifiApManager.getWifiApState() == WIFI_AP_STATE.WIFI_AP_STATE_ENABLED) {
-                mWifiApManager.setWifiApEnabled(null, false);
-                mWifiApManager.setWifiApEnabled(wifiConfig, true);
+            if (mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_ENABLED) {
+            	mWifiManager.setWifiApEnabled(null, false);
+            	mWifiManager.setWifiApEnabled(wifiConfig, true);
             } else {
-                mWifiApManager.setWifiApConfiguration(wifiConfig);
+            	mWifiManager.setWifiApConfiguration(wifiConfig);
             }
             /*
             int index = this.getSecurityTypeIndex(mWifiConfig);
@@ -373,7 +372,7 @@ public class WIfiApActivity extends BaseActivity {
     static int getSecurityTypeIndex(WifiConfiguration wifiConfig) {
         if (wifiConfig.allowedKeyManagement.get(WifiConfiguration.KeyMgmt.WPA_PSK)) {
             return WPA_INDEX;
-        } else if (wifiConfig.allowedKeyManagement.get(4)) {// wpa2_psk 是系统API，故用数值表示
+        } else if (wifiConfig.allowedKeyManagement.get(WifiConfiguration.KeyMgmt.WPA2_PSK)) {// wpa2_psk 是系统API，故用数值表示
             return WPA2_INDEX;
         }
 
@@ -381,7 +380,7 @@ public class WIfiApActivity extends BaseActivity {
     }
 
     private void wifiConfigInit() {
-        WifiConfiguration wifiConfig = mWifiApManager.getWifiApConfiguration();
+        WifiConfiguration wifiConfig = mWifiManager.getWifiApConfiguration();
         if (wifiConfig != null) {
             mSecurityTypeIndex = getSecurityTypeIndex(wifiConfig);
         }
@@ -442,7 +441,7 @@ public class WIfiApActivity extends BaseActivity {
                 return config;
 
             case WPA2_INDEX:
-                config.allowedKeyManagement.set(4);//WPA2_PSK
+                config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA2_PSK);//WPA2_PSK
                 config.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.OPEN);
                 if (wifi_ap_password_icicle.length() != 0) {
                     String password = wifi_ap_password_icicle.getText().toString();
