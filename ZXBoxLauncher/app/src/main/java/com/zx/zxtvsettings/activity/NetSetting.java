@@ -73,6 +73,7 @@ public class NetSetting extends BaseActivity {
                 break;
 
             case R.id.setting_custom_ethernet:
+                startActivity(EthernetActvity.class);
                 break;
             case R.id.setting_custom_net_soft_ap:
                 startActivity(WIfiApActivity.class);

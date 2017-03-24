@@ -31,18 +31,18 @@ import android.widget.TextView;
 import com.zx.zxboxlauncher.R;
 
 public class WifiApEnabler {
-    public static final String WIFI_AP_STATE_CHANGED_ACTION =
-            "android.net.wifi.WIFI_AP_STATE_CHANGED";
+//    public static final String WIFI_AP_STATE_CHANGED_ACTION =
+//            "android.net.wifi.WIFI_AP_STATE_CHANGED";
     public static final String ACTION_TETHER_STATE_CHANGED =
             "android.net.conn.TETHER_STATE_CHANGED";
 
-    public static final String EXTRA_WIFI_AP_STATE = "wifi_state";
+//    public static final String EXTRA_WIFI_AP_STATE = "wifi_state";
 
-    public static final int WIFI_AP_STATE_DISABLING = 10;
-    public static final int WIFI_AP_STATE_DISABLED = 11;
-    public static final int WIFI_AP_STATE_ENABLING = 12;
-    public static final int WIFI_AP_STATE_ENABLED = 13;
-    public static final int WIFI_AP_STATE_FAILED = 14;
+//    public static final int WIFI_AP_STATE_DISABLING = 10;
+//    public static final int WIFI_AP_STATE_DISABLED = 11;
+//    public static final int WIFI_AP_STATE_ENABLING = 12;
+//    public static final int WIFI_AP_STATE_ENABLED = 13;
+//    public static final int WIFI_AP_STATE_FAILED = 14;
 
     private final Context mContext;
     private final Switch mSwitch;
@@ -61,9 +61,9 @@ public class WifiApEnabler {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (WIFI_AP_STATE_CHANGED_ACTION.equals(action)) {
+            if (WifiManager.WIFI_AP_STATE_CHANGED_ACTION.equals(action)) {
                 handleWifiApStateChanged(intent.getIntExtra(
-                        EXTRA_WIFI_AP_STATE, WIFI_AP_STATE_FAILED));
+                        WifiManager.EXTRA_WIFI_AP_STATE, WifiManager.WIFI_AP_STATE_FAILED));
             }
 //            else if (ConnectivityManager.ACTION_TETHER_STATE_CHANGED.equals(action)) {
 //                ArrayList<String> available = intent.getStringArrayListExtra(
@@ -93,7 +93,7 @@ public class WifiApEnabler {
 
 //        mWifiRegexs = mCm.getTetherableWifiRegexs();
 
-        mIntentFilter = new IntentFilter(WIFI_AP_STATE_CHANGED_ACTION);
+        mIntentFilter = new IntentFilter(WifiManager.WIFI_AP_STATE_CHANGED_ACTION);
         mIntentFilter.addAction(ACTION_TETHER_STATE_CHANGED);
         mIntentFilter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
         mReveiving=false;
@@ -211,12 +211,12 @@ public class WifiApEnabler {
 
     private void handleWifiApStateChanged(int state) {
         switch (state) {
-            case WIFI_AP_STATE_ENABLING:
+            case WifiManager.WIFI_AP_STATE_ENABLING:
                 //mSwitch.setSummary(R.string.wifi_tether_starting);
                 mSummaryText.setText(R.string.wifi_tether_starting);
                 mSwitch.setEnabled(false);
                 break;
-            case WIFI_AP_STATE_ENABLED:
+            case WifiManager.WIFI_AP_STATE_ENABLED:
                 /**
                  * Summary on enable is handled by tether
                  * broadcast notice
@@ -225,13 +225,13 @@ public class WifiApEnabler {
                 /* Doesnt need the airplane check */
                 mSwitch.setEnabled(true);
                 break;
-            case WIFI_AP_STATE_DISABLING:
+            case WifiManager.WIFI_AP_STATE_DISABLING:
                 //mSwitch.setSummary(R.string.wifi_tether_stopping);
                 mSummaryText.setText(R.string.wifi_tether_stopping);
                 mSwitch.setChecked(false);
                 mSwitch.setEnabled(false);
                 break;
-            case WIFI_AP_STATE_DISABLED:
+            case WifiManager.WIFI_AP_STATE_DISABLED:
                 mSwitch.setChecked(false);
                 //mSwitch.setSummary(mOriginalSummary);
                 mSummaryText.setText(mOriginalSummary);
