@@ -59,7 +59,9 @@
                 android:background="@drawable/radio_button_background_light"
                 android:nextFocusLeft="@+id/btn_ethernet_id"
                 android:text="@string/ethernet_configpppoe"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:visibility="gone"
+                />
         </RadioGroup>
     </LinearLayout>
 

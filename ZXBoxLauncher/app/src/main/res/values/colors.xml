@@ -33,4 +33,5 @@
 
     <color name="un_select_backgroud">#4682B4</color>
     <color name="select_backgroud">#00E5EE</color>
+    <color name="settings_backgroud">#000033</color>
 </resources>

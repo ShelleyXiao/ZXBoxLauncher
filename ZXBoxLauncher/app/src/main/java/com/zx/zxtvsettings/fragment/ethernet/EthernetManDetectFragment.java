@@ -13,16 +13,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.zx.zxboxlauncher.R;
+import com.zx.zxtvsettings.Utils.Logger;
 import com.zx.zxtvsettings.activity.EthernetActvity;
+import com.zx.zxtvsettings.fragment.BaseFragment;
 
 
-public class EthernetManDetectFragment extends Fragment {
+public class EthernetManDetectFragment extends BaseFragment {
+
     private static final String TAG = "EthernetManDetectFragment";
     private View mView = null;
     private TextView mTextView = null;
     private EthernetActvity mNetworkActivity = null;
     private Callbacks mCallbacks;
     private Integer times = 0;
+
     String mIpAddress;
     String mMaskAddress;
     String mGatewayAddress;
@@ -36,15 +40,15 @@ public class EthernetManDetectFragment extends Fragment {
         public void run() {
             if (times >= 3) {
                 if (mCallbacks.ethernet_mandetect_ethernet()) {
-                    Log.i(TAG, "ethernet_mandetect  success!");
+                    Logger.getLogger().i( "ethernet_mandetect  success!");
                     detect_result();
                 } else {
-                    Log.i(TAG, "ethernet_mandetect detect again");
+                    Logger.getLogger().i( "ethernet_mandetect detect again");
                     times++;
                     if (times < 30) {
                         mHandler.postDelayed(mRunnable, 1000);
                     } else {
-                        Log.i(TAG, "detect fail!");
+                        Logger.getLogger().i( "detect fail!");
                         detect_fail();
                     }
                 }
@@ -55,16 +59,16 @@ public class EthernetManDetectFragment extends Fragment {
         }
     };
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_ethernetmandetect, container, false);
+    @Override
+    protected void onCreateView(Bundle savedInstanceState) {
+        setContentView(R.layout.fragment_ethernetmandetect);
+
         mNetworkActivity = (EthernetActvity) getActivity();
         mTextView = (TextView) mView.findViewById(R.id.mandetect_text_id);
         times = 0;
         getFocus();
         mCallbacks.mandetect_ethernet();
         mHandler.post(mRunnable);
-        return mView;
     }
 
     @Override
@@ -87,7 +91,7 @@ public class EthernetManDetectFragment extends Fragment {
     private void getFocus() {
         FragmentManager fm = getFragmentManager();
         if (fm.findFragmentByTag(NetData.EthernetManDetect_Tag) != null) {
-            Log.i(TAG, "  getArguments()   " + getArguments());
+            Logger.getLogger().i( "  getArguments()   " + getArguments());
             if (getArguments() != null) {
                 if (getArguments().getBoolean(NetData.EthernetManDetect_KeyId)) {
                     mTextView.setFocusable(true);
@@ -115,8 +119,8 @@ public class EthernetManDetectFragment extends Fragment {
         Bundle arguments = new Bundle();
         arguments.putBoolean(NetData.EthernetConfigFail_KeyId, true);
         fragment.setArguments(arguments);
-        Log.i(TAG, "fragment = " + fragment);
-        Log.i(TAG, "transaction = " + transaction);
+        Logger.getLogger().i(  "fragment = " + fragment);
+        Logger.getLogger().i( "transaction = " + transaction);
         transaction.replace(R.id.network_framelayout, fragment, NetData.EthernetConfigFail_Tag).commit();
     }
 }

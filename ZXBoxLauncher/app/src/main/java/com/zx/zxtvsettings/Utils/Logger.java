@@ -4,147 +4,175 @@ import android.util.Log;
 
 public class Logger {
 
-	/**
-	 * log tag
-	 */
-	private String tag = "debug";// application name
+    /**
+     * log tag
+     */
+    private String tag = "debug";// application name
 
-	
-	/**
-	 * debug or not
-	 */
-	private static boolean debug = true;
 
-	private static Logger instance = new Logger();
+    /**
+     * debug or not
+     */
+    private static boolean debug = true;
 
-	private Logger() {
+    private static Logger instance = new Logger();
 
-	}
+    private Logger() {
 
-	public static Logger getLogger() {
-		return instance;
-	}
+    }
 
-	private String getFunctionName() {
-		StackTraceElement[] sts = Thread.currentThread().getStackTrace();
+    public static Logger getLogger() {
+        return instance;
+    }
 
-		if (sts == null) {
-			return null;
-		}
+    private String getFunctionName() {
+        StackTraceElement[] sts = Thread.currentThread().getStackTrace();
 
-		for (StackTraceElement st : sts) {
-			if (st.isNativeMethod()) {
-				continue;
-			}
+        if (sts == null) {
+            return null;
+        }
 
-			if (st.getClassName().equals(Thread.class.getName())) {
-				continue;
-			}
+        for (StackTraceElement st : sts) {
+            if (st.isNativeMethod()) {
+                continue;
+            }
 
-			if (st.getClassName().equals(this.getClass().getName())) {
-				continue;
-			}
+            if (st.getClassName().equals(Thread.class.getName())) {
+                continue;
+            }
 
-			return "[" + Thread.currentThread().getName() + "(" + Thread.currentThread().getId() + "): " + st.getFileName() + ":" + st.getLineNumber() + "]";
-		}
+            if (st.getClassName().equals(this.getClass().getName())) {
+                continue;
+            }
 
-		return null;
-	}
+            return "[" + Thread.currentThread().getName() + "(" + Thread.currentThread().getId() + "): " + st.getFileName() + ":" + st.getLineNumber() + "]";
+        }
 
-	private String createMessage(String msg) {
-		String functionName = getFunctionName();
-		String message = (functionName == null ? msg : (functionName + " - " + msg));
-		return message;
-	}
+        return null;
+    }
 
-	/**
-	 * log.i
-	 */
-	public void i(String msg) {
-		if (debug) {
-			String message = createMessage(msg);
-			Log.i(tag, message);
-		}
-	}
+    private String createMessage(String msg) {
+        String functionName = getFunctionName();
+        String message = (functionName == null ? msg : (functionName + " - " + msg));
+        return message;
+    }
 
-	/**
-	 * log.v
-	 */
-	public void v(String msg) {
-		if (debug) {
-			String message = createMessage(msg);
-			Log.v(tag, message);
-		}
-	}
+    /**
+     * log.i
+     */
+    public void i(String msg) {
+        if (debug) {
+            String message = createMessage(msg);
+            Log.i(tag, message);
+        }
+    }
 
-	/**
-	 * log.d
-	 */
-	public void d(String msg) {
-		if (debug) {
-			String message = createMessage(msg);
-			Log.d(tag, message);
-		}
-	}
+    public void i(String tag, String msg) {
+        if (debug) {
+            String message = createMessage(msg);
+            Log.i(tag, message);
+        }
+    }
 
-	/**
-	 * log.e
-	 */
-	public void e(String msg) {
-//		if (debug) {
-			String message = createMessage(msg);
-			Log.e(tag, message);
-//		}
-	}
+    /**
+     * log.v
+     */
+    public void v(String msg) {
+        if (debug) {
+            String message = createMessage(msg);
+            Log.v(tag, message);
+        }
+    }
 
-	/**
-	 * log.error
-	 */
-	public void error(Exception e) {
-		if (debug) {
-			StringBuffer sb = new StringBuffer();
-			String name = getFunctionName();
-			StackTraceElement[] sts = e.getStackTrace();
+    public void v(String tag, String msg) {
+        if (debug) {
+            String message = createMessage(msg);
+            Log.v(tag, message);
+        }
+    }
 
-			if (name != null) {
-				sb.append(name + " - " + e + "\r\n");
-			} else {
-				sb.append(e + "\r\n");
-			}
-			if (sts != null && sts.length > 0) {
-				for (StackTraceElement st : sts) {
-					if (st != null) {
-						sb.append("[ " + st.getFileName() + ":" + st.getLineNumber() + " ]\r\n");
-					}
-				}
-			}
-			
-			Log.e(tag, sb.toString());
-		}
-	}
+    /**
+     * log.d
+     */
+    public void d(String msg) {
+        if (debug) {
+            String message = createMessage(msg);
+            Log.d(tag, message);
+        }
+    }
 
-	/**
-	 * log.d
-	 */
-	public void w(String msg) {
-		if (debug) {
-			String message = createMessage(msg);
-			Log.w(tag, message);
-		}
-	}
+    public void d(String tag, String msg) {
+        if (debug) {
+            String message = createMessage(msg);
+            Log.d(tag, message);
+        }
+    }
 
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
+    /**
+     * log.e
+     */
+    public void e(String msg) {
+        if (debug) {
+            String message = createMessage(msg);
+            Log.e(tag, message);
+        }
+    }
 
-	/**
-	 * set debug
-	 */
-	public static void setDebug(boolean d) {
-		debug = d;
-	}
-	
-	public static boolean isDebug(){
-		return debug;
-	}
+    public void e(String tag, String msg) {
+        if (debug) {
+            String message = createMessage(msg);
+            Log.e(tag, message);
+        }
+    }
+
+    /**
+     * log.error
+     */
+    public void error(Exception e) {
+        if (debug) {
+            StringBuffer sb = new StringBuffer();
+            String name = getFunctionName();
+            StackTraceElement[] sts = e.getStackTrace();
+
+            if (name != null) {
+                sb.append(name + " - " + e + "\r\n");
+            } else {
+                sb.append(e + "\r\n");
+            }
+            if (sts != null && sts.length > 0) {
+                for (StackTraceElement st : sts) {
+                    if (st != null) {
+                        sb.append("[ " + st.getFileName() + ":" + st.getLineNumber() + " ]\r\n");
+                    }
+                }
+            }
+
+            Log.e(tag, sb.toString());
+        }
+    }
+
+    /**
+     * log.d
+     */
+    public void w(String msg) {
+        if (debug) {
+            String message = createMessage(msg);
+            Log.w(tag, message);
+        }
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    /**
+     * set debug
+     */
+    public static void setDebug(boolean d) {
+        debug = d;
+    }
+
+    public static boolean isDebug() {
+        return debug;
+    }
 }

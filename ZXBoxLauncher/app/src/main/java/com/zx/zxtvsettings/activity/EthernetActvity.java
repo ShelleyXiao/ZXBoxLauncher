@@ -1,14 +1,13 @@
 package com.zx.zxtvsettings.activity;
 
+import android.annotation.NonNull;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.os.Bundle;
 import android.widget.TextView;
 
 import com.zx.zxboxlauncher.R;
 import com.zx.zxboxlauncher.activity.BaseActivity;
 import com.zx.zxtvsettings.fragment.ethernet.EthernetFragment;
-import com.zx.zxtvsettings.fragment.ethernet.EthernetMode;
 import com.zx.zxtvsettings.fragment.ethernet.NetData;
 import com.zx.zxtvsettings.fragment.ethernet.NetState;
 
@@ -29,6 +28,7 @@ public class EthernetActvity extends BaseActivity implements EthernetFragment.Ca
 
     @BindView(R.id.ethernet_title)
     TextView mEthernetTitle;
+
 
     private NetState mNetState = null;
     private HashMap<String, Fragment> mFragmentMap = new HashMap<String, Fragment>();
@@ -70,22 +70,9 @@ public class EthernetActvity extends BaseActivity implements EthernetFragment.Ca
     }
 
     @Override
-    public void switchContent(String id) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        if(id.equals(NetData.EthernetAutoDetect_KeyId)) {
-            mNetState.setEthernetMode(EthernetMode.MODE_AUTO);
-            Fragment fragment = mFragmentMap.get(NetData.EthernetAutoDetect_KeyId);
-            Bundle arguments = new Bundle();
-            arguments.putBoolean(NetData.EthernetAutoDetect_KeyId, true);
-            fragment.setArguments(arguments);
-            transaction.replace(R.id.network_framelayout, fragment, NetData.EthernetAutoDetect_Tag).commit();
-        } else if( id.equals(NetData.EthernetManConfig_KeyId)) {
-            mNetState.setEthernetMode(EthernetMode.MODE_MAN);
-            Fragment fragment = mFragmentMap.get(NetData.EthernetManConfig_KeyId);
-            Bundle arguments = new Bundle();
-            arguments.putBoolean(NetData.EthernetManConfig_KeyId, true);
-            fragment.setArguments(arguments);
-            transaction.replace(R.id.network_framelayout, fragment, NetData.EthernetManConfig_Tag).commit();
+    public void registerNetworkFragments(@NonNull String key, Fragment frag) {
+        if (null != mFragmentMap && mFragmentMap.get(key) == null ) {
+           mFragmentMap.put(key, frag);
         }
     }
 }

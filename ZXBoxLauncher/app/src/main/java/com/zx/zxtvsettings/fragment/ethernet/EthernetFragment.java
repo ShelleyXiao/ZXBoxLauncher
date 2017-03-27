@@ -1,6 +1,8 @@
 package com.zx.zxtvsettings.fragment.ethernet;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,6 +33,8 @@ public class EthernetFragment extends BaseFragment implements View.OnClickListen
 
     private Callbacks mCallbacks;
 
+    private EthernetActvity mEthernetActvity;
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -51,6 +55,7 @@ public class EthernetFragment extends BaseFragment implements View.OnClickListen
     protected void onCreateView(Bundle savedInstanceState) {
         setContentView(R.layout.fragment_ethernet);
 
+        mEthernetActvity = (EthernetActvity) getActivity();
 
         mRadioGroup = (RadioGroup) findViewById(R.id.radiogroup_id);
         mRadioAuto = (RadioButton) findViewById(R.id.auto_radio_id);
@@ -58,10 +63,12 @@ public class EthernetFragment extends BaseFragment implements View.OnClickListen
         mRadioPppoe = (RadioButton) findViewById(R.id.pppoe_radio_id);
         mBtn_ConfigStart = (Button) findViewById(R.id.ethernet_configstart_id);
         mBtn_ConfigStart.setOnClickListener(this);
-        mPreferences = ((EthernetActvity)mCallbacks).getSharedPreferences("networkactivity", Context.MODE_PRIVATE);
+        mPreferences = ((EthernetActvity)mCallbacks).getSharedPreferences("EthernetActvity", Context.MODE_PRIVATE);
         mEditor = mPreferences.edit();
 
         initView();
+        registerfragment();
+
         restoremode();
     }
 
@@ -153,19 +160,44 @@ public class EthernetFragment extends BaseFragment implements View.OnClickListen
         }
     }
 
-    private void detect_start() {
-        if (mAutochecked) {
+    public void registerfragment() {
+//        mCallbacks.registerNetworkFragments(NetData.Netstate_KeyId, new NetstateFragment());
+//        mCallbacks.registerNetworkFragments(NetData.NetstateDetect_KeyId, new NetstateDetectFragment());
 
+//        mCallbacks.registerNetworkFragments(NetData.Ethernet_KeyId, new EthernetFragment());
+        mCallbacks.registerNetworkFragments(NetData.EthernetAutoDetect_KeyId, new EthernetAutoDetectFragment());
+        mCallbacks.registerNetworkFragments(NetData.EthernetManDetect_KeyId, new EthernetManDetectFragment());
+        mCallbacks.registerNetworkFragments(NetData.EthernetManConfig_KeyId, new EthernetManConfigFragment());
+        mCallbacks.registerNetworkFragments(NetData.EthernetDetectResult_KeyId, new EthernetDetectResultFragment());
+        mCallbacks.registerNetworkFragments(NetData.EthernetConfigFail_KeyId, new EthernetConfigFailFragment());
+
+    }
+
+    private void detect_start() {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        if (mAutochecked) {
+            mEthernetActvity.getNetState().setEthernetMode(EthernetMode.MODE_AUTO);
+            Fragment fragment = mEthernetActvity.getFragmentMap().get(NetData.EthernetAutoDetect_KeyId);
+            Bundle arguments = new Bundle();
+            arguments.putBoolean(NetData.EthernetAutoDetect_KeyId, true);
+            fragment.setArguments(arguments);
+            transaction.replace(R.id.network_framelayout, fragment, NetData.EthernetAutoDetect_Tag).commit();
 
         }
-        if (mManchecked) {
 
+        if (mManchecked) {
+            mEthernetActvity.getNetState().setEthernetMode(EthernetMode.MODE_MAN);
+            Fragment fragment = mEthernetActvity.getFragmentMap().get(NetData.EthernetManConfig_KeyId);
+            Bundle arguments = new Bundle();
+            arguments.putBoolean(NetData.EthernetManConfig_KeyId, true);
+            fragment.setArguments(arguments);
+            transaction.replace(R.id.network_framelayout, fragment, NetData.EthernetManConfig_Tag).commit();
 
         }
     }
 
     public interface Callbacks {
-        void switchContent(String id);
+        void registerNetworkFragments(String str, Fragment frag);
     }
 
 }

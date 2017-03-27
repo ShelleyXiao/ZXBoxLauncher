@@ -137,6 +137,52 @@
     <string name="wifi_ap_security_wpa2_psk_text">@string/wifi_security_wpa2</string>
     <string name="wifi_ap_security_title">"加密类型:"</string>
 
+
+    <!--fastset part -->
+    <string name ="fastset_desp">快速设置状态下，系统将会自动配置有线网络</string>
+    <string name ="fastset_detectwire">请检查网线已经插入</string>
+    <string name ="fastset_start">开始</string>
+    <string name ="fastset_detecting">网络自动配置中，请稍后...</string>
+    <string name ="fastsetconfigfail_finish">完成</string>
+    <string name ="fastsetconfigfail_finish_info">网络配置失败！</string>
+
+    <string name ="fastsetresult_netconfig">网络配置成功</string>
+    <string name ="fastsetresult_ipaddress">IP 地址:</string>
+    <string name ="fastsetresult_netmask">子网掩码:</string>
+    <string name ="fastsetresult_gateway">家庭网关:</string>
+    <string name ="fastsetresult_dns">DNS服务器:</string>
+    <string name ="fastsetresult_dot">.</string>
+    <string name ="fastsetresult_ip_1">195</string>
+    <string name ="fastsetresult_ip_2">168</string>
+    <string name ="fastsetresult_ip_3">1</string>
+    <string name ="fastsetresult_ip_4">255</string>
+    <string name ="fastsetresult_mask_1">255</string>
+    <string name ="fastsetresult_mask_2">255</string>
+    <string name ="fastsetresult_mask_3">255</string>
+    <string name ="fastsetresult_mask_4">0</string>
+    <string name ="fastsetresult_gate_1">192</string>
+    <string name ="fastsetresult_gate_2">168</string>
+    <string name ="fastsetresult_gate_3">1</string>
+    <string name ="fastsetresult_gate_4">1</string>
+    <string name ="fastsetresult_dns_1">192</string>
+    <string name ="fastsetresult_dns_2">168</string>
+    <string name ="fastsetresult_dns_3">1</string>
+    <string name ="fastsetresult_dns_4">1</string>
+
+    <!--newstatedetect fragment part -->
+    <string name ="netstatedetect_back">返回</string>
+    <string name ="netstatedetect_startdetect">开始检测</string>
+    <string name ="netstatedetect_repeatdetect">重新检测</string>
+    <string name ="netstatedetect_homenetype">家庭网络:</string>
+    <string name ="netstatedetect_typeethernet">有线</string>
+    <string name ="netstatedetect_typewifi">无线</string>
+    <string name ="netstatedetect_Internetconnect">互联网接入:</string>
+    <string name ="netstatedetect_connected">接入正常</string>
+    <string name ="netstatedetect_detecting">检测中...</string>
+    <string name ="netstatedetect_home_disconnect_info">无法连接家庭网络，请检查有线或无线设置</string>
+    <string name ="netstatedetect_internet_disconnect_info">无法连接到互联网,请确认互联网连接是否正常，或咨询网络运营商</string>
+    <string name ="netstatedetect_tv_disconnect_info">无法连接到百视通服务，请稍后再试</string>
+
     <!-- ethernet set part-->
     <string name="ethernet_title">有线设置</string>
 
