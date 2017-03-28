@@ -3,10 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg">
+    android:background="@drawable/bg"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
     <com.zx.zxboxlauncher.view.StatusTitleView
-        android:id="@+id/status_bar"
+        android:id="@+id/status_title_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/px200"
         />
@@ -14,7 +15,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/px100"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="@dimen/px80"
         android:gravity="center" >
 
         <TextView android:id="@+id/ethernet_title"
@@ -30,6 +31,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:id="@+id/network_framelayout"
         />
 

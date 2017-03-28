@@ -4,35 +4,33 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.zx.zxboxlauncher.R;
 import com.zx.zxtvsettings.Utils.Logger;
 import com.zx.zxtvsettings.activity.EthernetActvity;
+import com.zx.zxtvsettings.fragment.BaseFragment;
+import com.zx.zxtvsettings.fragment.ethernet.mode.NetData;
 
 
-public class EthernetConfigFailFragment extends Fragment implements View.OnClickListener {
+public class EthernetConfigFailFragment extends BaseFragment implements View.OnClickListener {
     private static final String TAG = "EthernetConfigFailFragment";
-    private View mView = null;
     private EthernetActvity mNetworkActivity = null;
     private TextView mTextView = null;
     private Button mBtn_finish = null;
 
+    @Override
+    protected void onCreateView(Bundle savedInstanceState) {
+        setContentView(R.layout.fragment_ethernetconfigfail);
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_ethernetconfigfail, container, false);
         mNetworkActivity = (EthernetActvity) getActivity();
-        mTextView = (TextView) mView.findViewById(R.id.ethernetconfigfail_text_id);
-        mBtn_finish = (Button) mView.findViewById(R.id.ethernetconfigfail_button_id);
+        mTextView = (TextView) findViewById(R.id.ethernetconfigfail_text_id);
+        mBtn_finish = (Button) findViewById(R.id.ethernetconfigfail_button_id);
         mBtn_finish.setOnClickListener(this);
         getFocus();
-        return mView;
+
     }
 
     @Override
@@ -72,7 +70,7 @@ public class EthernetConfigFailFragment extends Fragment implements View.OnClick
         Bundle arguments = new Bundle();
         arguments.putBoolean(NetData.Ethernet_KeyId, true);
         fragment.setArguments(arguments);
-        Logger.getLogger().i( "fragment = " + fragment);
+        Logger.getLogger().i("fragment = " + fragment);
         transaction.replace(R.id.network_framelayout, fragment, NetData.Ethernet_Tag).commit();
 
     }

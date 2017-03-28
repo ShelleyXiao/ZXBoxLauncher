@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.zx.zxboxlauncher.R;
 import com.zx.zxtvsettings.activity.EthernetActvity;
 import com.zx.zxtvsettings.fragment.BaseFragment;
+import com.zx.zxtvsettings.fragment.ethernet.mode.EthernetMode;
+import com.zx.zxtvsettings.fragment.ethernet.mode.NetData;
 
 public class EthernetFragment extends BaseFragment implements View.OnClickListener {
     private static final String TAG = "EthernetFragment";
@@ -97,15 +99,7 @@ public class EthernetFragment extends BaseFragment implements View.OnClickListen
             mRadioAuto.setChecked(false);
             mRadioMan.setChecked(true);
             mRadioPppoe.setChecked(false);
-        } else if (mode.equals("pppoe")) {
-            Log.i(TAG, "restore mode pppoe");
-            mAutochecked = false;
-            mManchecked = false;
-            mPppoechecked = true;
-            mRadioAuto.setChecked(false);
-            mRadioMan.setChecked(false);
-            mRadioPppoe.setChecked(true);
-        } else {
+        }  else {
             Log.e(TAG, "restore mode error! please check!");
         }
 
@@ -130,13 +124,13 @@ public class EthernetFragment extends BaseFragment implements View.OnClickListen
                     case R.id.auto_radio_id:
                         mAutochecked = true;
                         mManchecked = false;
-                        mPppoechecked = false;
+//                        mPppoechecked = false;
                         Toast.makeText(getActivity(), "Network Auto Connect ", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.man_radio_id:
                         mAutochecked = false;
                         mManchecked = true;
-                        mPppoechecked = false;
+//                        mPppoechecked = false;
                         Toast.makeText(getActivity(), "Network Manul Connect", Toast.LENGTH_LONG).show();
                         break;
                     default:

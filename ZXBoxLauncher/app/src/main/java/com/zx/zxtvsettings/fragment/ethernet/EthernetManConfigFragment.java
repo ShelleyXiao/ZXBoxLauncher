@@ -7,9 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,17 +15,20 @@ import android.widget.Toast;
 import com.zx.zxboxlauncher.R;
 import com.zx.zxtvsettings.Utils.Logger;
 import com.zx.zxtvsettings.activity.EthernetActvity;
+import com.zx.zxtvsettings.fragment.BaseFragment;
+import com.zx.zxtvsettings.fragment.ethernet.mode.DataID;
+import com.zx.zxtvsettings.fragment.ethernet.mode.NetData;
 
 import java.util.HashMap;
 
-public class EthernetManConfigFragment extends Fragment implements View.OnClickListener, View.OnKeyListener {
+public class EthernetManConfigFragment extends BaseFragment implements View.OnClickListener, View.OnKeyListener {
 	private static final String TAG = "EthernetManConfigFragment";
-	private View mView = null;
 	private EthernetActvity mEthernetActvity = null;
 	private Button mBtn_Finish = null;
 	private Button mBtn_LastStep = null;
 	private SharedPreferences mPreferences;
 	private SharedPreferences.Editor mEditor;
+
 	String mIpAddress;
 	String mMaskAddress;
 	String mGatewayAddress;
@@ -35,16 +36,28 @@ public class EthernetManConfigFragment extends Fragment implements View.OnClickL
 	String mDns2Address;
 
 	enum EditTextID {
-		ethernet_ipconfig1_id, ethernet_ipconfig2_id, ethernet_ipconfig3_id, ethernet_ipconfig4_id, ethernet_maskconfig1_id, ethernet_maskconfig2_id, ethernet_maskconfig3_id, ethernet_maskconfig4_id, ethernet_gateconfig1_id, ethernet_gateconfig2_id, ethernet_gateconfig3_id, ethernet_gateconfig4_id, ethernet_dns1config1_id, ethernet_dns1config2_id, ethernet_dns1config3_id, ethernet_dns1config4_id, ethernet_dns2config1_id, ethernet_dns2config2_id, ethernet_dns2config3_id, ethernet_dns2config4_id,
+		ethernet_ipconfig1_id, ethernet_ipconfig2_id,
+        ethernet_ipconfig3_id, ethernet_ipconfig4_id,
+        ethernet_maskconfig1_id, ethernet_maskconfig2_id,
+        ethernet_maskconfig3_id, ethernet_maskconfig4_id,
+        ethernet_gateconfig1_id, ethernet_gateconfig2_id,
+        ethernet_gateconfig3_id, ethernet_gateconfig4_id,
+        ethernet_dns1config1_id, ethernet_dns1config2_id,
+        ethernet_dns1config3_id, ethernet_dns1config4_id,
+        ethernet_dns2config1_id, ethernet_dns2config2_id,
+        ethernet_dns2config3_id, ethernet_dns2config4_id,
 	};
 
 	private HashMap<EditTextID, EditText> mHashMap = new HashMap<EditTextID, EditText>(20);
 
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		mView = inflater.inflate(R.layout.fragment_ethernetmanconfig, container, false);
+
+	@Override
+	protected void onCreateView(Bundle savedInstanceState) {
+		setContentView(R.layout.fragment_ethernetmanconfig);
+
 		mEthernetActvity = (EthernetActvity) getActivity();
-		mBtn_Finish = (Button) mView.findViewById(R.id.ethernetconfig_finish_id);
-		mBtn_LastStep = (Button) mView.findViewById(R.id.ethernetconfig_back_id);
+		mBtn_Finish = (Button) findViewById(R.id.ethernetconfig_finish_id);
+		mBtn_LastStep = (Button) findViewById(R.id.ethernetconfig_back_id);
 		mBtn_Finish.setOnClickListener(this);
 		mBtn_LastStep.setOnClickListener(this);
 		mBtn_Finish.setOnKeyListener(this);
@@ -53,48 +66,47 @@ public class EthernetManConfigFragment extends Fragment implements View.OnClickL
 		getFocus();
 		initHashMap();
 		initView();
-		return mView;
 	}
 
 	private void initHashMap() {
 		mHashMap.clear();
 		if (mHashMap.isEmpty()) {
-			mHashMap.put(EditTextID.ethernet_ipconfig1_id, (EditText) mView.findViewById(R.id.ethernet_ipconfig1_id));
-			mHashMap.put(EditTextID.ethernet_ipconfig2_id, (EditText) mView.findViewById(R.id.ethernet_ipconfig2_id));
-			mHashMap.put(EditTextID.ethernet_ipconfig3_id, (EditText) mView.findViewById(R.id.ethernet_ipconfig3_id));
-			mHashMap.put(EditTextID.ethernet_ipconfig4_id, (EditText) mView.findViewById(R.id.ethernet_ipconfig4_id));
+			mHashMap.put(EditTextID.ethernet_ipconfig1_id, (EditText) findViewById(R.id.ethernet_ipconfig1_id));
+			mHashMap.put(EditTextID.ethernet_ipconfig2_id, (EditText) findViewById(R.id.ethernet_ipconfig2_id));
+			mHashMap.put(EditTextID.ethernet_ipconfig3_id, (EditText) findViewById(R.id.ethernet_ipconfig3_id));
+			mHashMap.put(EditTextID.ethernet_ipconfig4_id, (EditText) findViewById(R.id.ethernet_ipconfig4_id));
 			mHashMap.put(EditTextID.ethernet_maskconfig1_id,
-					(EditText) mView.findViewById(R.id.ethernet_maskconfig1_id));
+					(EditText) findViewById(R.id.ethernet_maskconfig1_id));
 			mHashMap.put(EditTextID.ethernet_maskconfig2_id,
-					(EditText) mView.findViewById(R.id.ethernet_maskconfig2_id));
+					(EditText) findViewById(R.id.ethernet_maskconfig2_id));
 			mHashMap.put(EditTextID.ethernet_maskconfig3_id,
-					(EditText) mView.findViewById(R.id.ethernet_maskconfig3_id));
+					(EditText) findViewById(R.id.ethernet_maskconfig3_id));
 			mHashMap.put(EditTextID.ethernet_maskconfig4_id,
-					(EditText) mView.findViewById(R.id.ethernet_maskconfig4_id));
+					(EditText) findViewById(R.id.ethernet_maskconfig4_id));
 			mHashMap.put(EditTextID.ethernet_gateconfig1_id,
-					(EditText) mView.findViewById(R.id.ethernet_gateconfig1_id));
+					(EditText) findViewById(R.id.ethernet_gateconfig1_id));
 			mHashMap.put(EditTextID.ethernet_gateconfig2_id,
-					(EditText) mView.findViewById(R.id.ethernet_gateconfig2_id));
+					(EditText) findViewById(R.id.ethernet_gateconfig2_id));
 			mHashMap.put(EditTextID.ethernet_gateconfig3_id,
-					(EditText) mView.findViewById(R.id.ethernet_gateconfig3_id));
+					(EditText) findViewById(R.id.ethernet_gateconfig3_id));
 			mHashMap.put(EditTextID.ethernet_gateconfig4_id,
-					(EditText) mView.findViewById(R.id.ethernet_gateconfig4_id));
+					(EditText) findViewById(R.id.ethernet_gateconfig4_id));
 			mHashMap.put(EditTextID.ethernet_dns1config1_id,
-					(EditText) mView.findViewById(R.id.ethernet_dns1config1_id));
+					(EditText) findViewById(R.id.ethernet_dns1config1_id));
 			mHashMap.put(EditTextID.ethernet_dns1config2_id,
-					(EditText) mView.findViewById(R.id.ethernet_dns1config2_id));
+					(EditText) findViewById(R.id.ethernet_dns1config2_id));
 			mHashMap.put(EditTextID.ethernet_dns1config3_id,
-					(EditText) mView.findViewById(R.id.ethernet_dns1config3_id));
+					(EditText) findViewById(R.id.ethernet_dns1config3_id));
 			mHashMap.put(EditTextID.ethernet_dns1config4_id,
-					(EditText) mView.findViewById(R.id.ethernet_dns1config4_id));
+					(EditText) findViewById(R.id.ethernet_dns1config4_id));
 			mHashMap.put(EditTextID.ethernet_dns2config1_id,
-					(EditText) mView.findViewById(R.id.ethernet_dns2config1_id));
+					(EditText) findViewById(R.id.ethernet_dns2config1_id));
 			mHashMap.put(EditTextID.ethernet_dns2config2_id,
-					(EditText) mView.findViewById(R.id.ethernet_dns2config2_id));
+					(EditText) findViewById(R.id.ethernet_dns2config2_id));
 			mHashMap.put(EditTextID.ethernet_dns2config3_id,
-					(EditText) mView.findViewById(R.id.ethernet_dns2config3_id));
+					(EditText) findViewById(R.id.ethernet_dns2config3_id));
 			mHashMap.put(EditTextID.ethernet_dns2config4_id,
-					(EditText) mView.findViewById(R.id.ethernet_dns2config4_id));
+					(EditText) findViewById(R.id.ethernet_dns2config4_id));
 			mHashMap.get(EditTextID.ethernet_ipconfig1_id).setOnKeyListener(this);
 			mHashMap.get(EditTextID.ethernet_ipconfig2_id).setOnKeyListener(this);
 			mHashMap.get(EditTextID.ethernet_ipconfig3_id).setOnKeyListener(this);
@@ -120,12 +132,12 @@ public class EthernetManConfigFragment extends Fragment implements View.OnClickL
 	}
 
 	private void initView() {
-		String[] iparray = mEthernetActvity.getNetState().getNetStateString(Data_Id.sETHERNET_IP_ID).split("\\.");
-		String[] maskarray = mEthernetActvity.getNetState().getNetStateString(Data_Id.sETHERNET_MASK_ID).split("\\.");
-		String[] gatewayarray = mEthernetActvity.getNetState().getNetStateString(Data_Id.sETHERNET_GATE_ID)
+		String[] iparray = mEthernetActvity.getNetState().getNetStateString(DataID.sETHERNET_IP_ID).split("\\.");
+		String[] maskarray = mEthernetActvity.getNetState().getNetStateString(DataID.sETHERNET_MASK_ID).split("\\.");
+		String[] gatewayarray = mEthernetActvity.getNetState().getNetStateString(DataID.sETHERNET_GATE_ID)
 				.split("\\.");
-		String[] dns1array = mEthernetActvity.getNetState().getNetStateString(Data_Id.sETHERNET_DNS1_ID).split("\\.");
-		String[] dns2array = mEthernetActvity.getNetState().getNetStateString(Data_Id.sETHERNET_DNS2_ID).split("\\.");
+		String[] dns1array = mEthernetActvity.getNetState().getNetStateString(DataID.sETHERNET_DNS1_ID).split("\\.");
+		String[] dns2array = mEthernetActvity.getNetState().getNetStateString(DataID.sETHERNET_DNS2_ID).split("\\.");
 		mHashMap.get(EditTextID.ethernet_ipconfig1_id).setText(iparray[0]);
 		mHashMap.get(EditTextID.ethernet_ipconfig2_id).setText(iparray[1]);
 		mHashMap.get(EditTextID.ethernet_ipconfig3_id).setText(iparray[2]);
@@ -319,11 +331,11 @@ public class EthernetManConfigFragment extends Fragment implements View.OnClickL
 	private void onClick_finish_button() {
 		getconfigdate();
 		if (checkconfigdata()) {
-			mEthernetActvity.getNetState().setNetStateString(Data_Id.sETHERNET_IP_ID, mIpAddress);
-			mEthernetActvity.getNetState().setNetStateString(Data_Id.sETHERNET_MASK_ID, mMaskAddress);
-			mEthernetActvity.getNetState().setNetStateString(Data_Id.sETHERNET_GATE_ID, mGatewayAddress);
-			mEthernetActvity.getNetState().setNetStateString(Data_Id.sETHERNET_DNS1_ID, mDns1Address);
-			mEthernetActvity.getNetState().setNetStateString(Data_Id.sETHERNET_DNS2_ID, mDns2Address);
+			mEthernetActvity.getNetState().setNetStateString(DataID.sETHERNET_IP_ID, mIpAddress);
+			mEthernetActvity.getNetState().setNetStateString(DataID.sETHERNET_MASK_ID, mMaskAddress);
+			mEthernetActvity.getNetState().setNetStateString(DataID.sETHERNET_GATE_ID, mGatewayAddress);
+			mEthernetActvity.getNetState().setNetStateString(DataID.sETHERNET_DNS1_ID, mDns1Address);
+			mEthernetActvity.getNetState().setNetStateString(DataID.sETHERNET_DNS2_ID, mDns2Address);
 			storemaninfo();
 			jump_mandetect_fragment();
 		} else {

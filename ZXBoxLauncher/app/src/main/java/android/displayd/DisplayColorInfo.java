@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.com.android.displayd;
+package android.displayd;
 
 
 import android.os.Parcel;

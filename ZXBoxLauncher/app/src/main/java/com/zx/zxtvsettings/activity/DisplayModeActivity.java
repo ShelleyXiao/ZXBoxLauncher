@@ -1,5 +1,7 @@
 package com.zx.zxtvsettings.activity;
 
+import android.displayd.DisplayDAgent;
+import android.displayd.DisplayModeInfo;
 import android.graphics.Color;
 import android.os.RemoteException;
 import android.util.Log;
@@ -8,8 +10,9 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import com.zx.zxboxlauncher.activity.BaseActivity;
+
 import com.zx.zxboxlauncher.R;
+import com.zx.zxboxlauncher.activity.BaseActivity;
 
 import java.util.ArrayList;
 
@@ -19,10 +22,10 @@ public class DisplayModeActivity extends BaseActivity
 {
     private static final String TAG= "DisplayModeActivity";
 //    private final int = R.id.btn_display_mode;
-    private com.com.android.displayd.DisplayDAgent mDisplayd=null;
+    private DisplayDAgent mDisplayd=null;
     private RadioGroup mRadioGroup;
-    ArrayList<com.com.android.displayd.DisplayModeInfo> mDisplayModeArray;
-    com.com.android.displayd.DisplayModeInfo mDisplayModeCurrent;
+    ArrayList<DisplayModeInfo> mDisplayModeArray;
+    DisplayModeInfo mDisplayModeCurrent;
     CompoundButton.OnCheckedChangeListener mDisplayModeSelectedListener = 
         new CompoundButton.OnCheckedChangeListener(){
             @Override
@@ -32,7 +35,7 @@ public class DisplayModeActivity extends BaseActivity
 
                 RadioButton btn = (RadioButton)buttonView;
 
-                com.com.android.displayd.DisplayModeInfo mode_to_set = (com.com.android.displayd.DisplayModeInfo)btn.getTag();
+                DisplayModeInfo mode_to_set = (DisplayModeInfo)btn.getTag();
                 try{
                     mDisplayd.setMode(mode_to_set);
                 }catch(RemoteException e){
@@ -68,7 +71,7 @@ public class DisplayModeActivity extends BaseActivity
     @Override
     protected void setupViews() {
         mRadioGroup = (RadioGroup)findViewById(R.id.display_mode_radiogroup);
-        mDisplayd = new com.com.android.displayd.DisplayDAgent();
+        mDisplayd = new DisplayDAgent();
         updateDisplayMode();
         updateUI();
     }
@@ -131,9 +134,9 @@ public class DisplayModeActivity extends BaseActivity
     }
     private void updateUI(){
         int i;
-        com.com.android.displayd.DisplayModeInfo modenull = new com.com.android.displayd.DisplayModeInfo(0);
+        DisplayModeInfo modenull = new DisplayModeInfo(0);
         for(i=0;i<mDisplayModeArray.size();i++){
-            com.com.android.displayd.DisplayModeInfo m = mDisplayModeArray.get(i);
+            DisplayModeInfo m = mDisplayModeArray.get(i);
             if(m.isEqual(modenull))
                 continue;
             if(m.signature.equals("other"))
@@ -156,28 +159,28 @@ public class DisplayModeActivity extends BaseActivity
         }
 
 
-        for(i=0;i<mDisplayModeArray.size();i++){
-            com.com.android.displayd.DisplayModeInfo m = mDisplayModeArray.get(i);
-            if(m.isEqual(modenull))
-                continue;
-            if(m.signature.equals("other"))
-                continue;
-            RadioButton btn=new RadioButton(this);
-            btn.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-            btn.setLayoutParams(new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)); //width, height
-            btn.setBackgroundResource(R.drawable.radio_button_background_light);
-            btn.setText(m.signature);
-            btn.setTextColor(Color.WHITE);
-            btn.setTextSize(32);
-            btn.setPadding(20,10,20,10);//left,rop,right,bottom, padding right seems no use...
-            btn.setTag(m);
-            if(m.isEqual(mDisplayModeCurrent))
-                btn.setChecked(true);
-            btn.setOnCheckedChangeListener(mDisplayModeSelectedListener);
-
-            mRadioGroup.addView(btn);
-        }
+//        for(i=0;i<mDisplayModeArray.size();i++){
+//            DisplayModeInfo m = mDisplayModeArray.get(i);
+//            if(m.isEqual(modenull))
+//                continue;
+//            if(m.signature.equals("other"))
+//                continue;
+//            RadioButton btn=new RadioButton(this);
+//            btn.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+//            btn.setLayoutParams(new ViewGroup.LayoutParams(
+//                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)); //width, height
+//            btn.setBackgroundResource(R.drawable.radio_button_background_light);
+//            btn.setText(m.signature);
+//            btn.setTextColor(Color.WHITE);
+//            btn.setTextSize(32);
+//            btn.setPadding(20,10,20,10);//left,rop,right,bottom, padding right seems no use...
+//            btn.setTag(m);
+//            if(m.isEqual(mDisplayModeCurrent))
+//                btn.setChecked(true);
+//            btn.setOnCheckedChangeListener(mDisplayModeSelectedListener);
+//
+//            mRadioGroup.addView(btn);
+//        }
         setNextFocus();
     }
 

@@ -57,7 +57,7 @@ public class WifiConnectDailogActivity extends Floating {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		mWifiManager = (WifiManager)getSystemService(WIFI_SERVICE);
+		mWifiManager = (WifiManager)getApplicationContext().getSystemService(WIFI_SERVICE);
 		
 		doNewIntent(getIntent());
 	}

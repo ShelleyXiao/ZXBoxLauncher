@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package com.com.android.displayd;
+package android.displayd;
 
 
 import android.os.Parcel;
-//import android.os.Parcelable;
-import android.os.RemoteException;
 import android.util.Log;
-import java.util.ArrayList;
-import java.util.List;
+
+//import android.os.Parcelable;
 
 //Parcelable interface is not suitable for transaction across native/java
 public class DisplayModeInfo {

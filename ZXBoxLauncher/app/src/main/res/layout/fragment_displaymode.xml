@@ -2,11 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/wifiactivity_bg"
+                android:background="@drawable/bg"
+                android:paddingTop="@dimen/activity_vertical_margin"
                 android:orientation="vertical">
 
     <com.zx.zxboxlauncher.view.StatusTitleView
-        android:id="@+id/status_bar"
+        android:id="@+id/status_title_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/px200"
         />
@@ -18,6 +19,7 @@
         android:layout_above="@+id/display_custom_rl"
         android:layout_alignLeft="@+id/display_custom_rl"
         android:layout_marginBottom="30dp"
+        android:layout_marginTop="@+id/display_custom_rl"
         android:focusable="false"
         android:text="@string/display_setting"
         android:textColor="#ffffff"
@@ -40,10 +42,10 @@
                 android:id="@+id/display_mode_radiogroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60dp"
-                android:layout_marginRight="60dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="@dimen/px100"
+                android:layout_marginRight="@dimen/px100"
+                android:layout_marginTop="@dimen/px80"
+                android:layout_marginBottom="@dimen/px80"
                 android:orientation="vertical">
 
             </RadioGroup>

@@ -13,6 +13,7 @@ import com.zx.zxboxlauncher.R;
 import com.zx.zxtvsettings.Utils.Logger;
 import com.zx.zxtvsettings.activity.EthernetActvity;
 import com.zx.zxtvsettings.fragment.BaseFragment;
+import com.zx.zxtvsettings.fragment.ethernet.mode.NetData;
 
 public class EthernetAutoDetectFragment extends BaseFragment {
     private static final String TAG = "EthernetAutoDetectFragment";
@@ -26,7 +27,7 @@ public class EthernetAutoDetectFragment extends BaseFragment {
         @Override
         public void run() {
             if (times >= 3) {
-                if (mCallbacks.ethernet_autodetect_ethernet()) {
+                if (mCallbacks.ethernetAutodetectEthernet()) {
                     Logger.getLogger().i( "ethernet_autodetect  success!");
                     detect_result();
 
@@ -53,10 +54,10 @@ public class EthernetAutoDetectFragment extends BaseFragment {
         setContentView(R.layout.fragment_ethernetautodetect);
 
         mEthernetActvity = (EthernetActvity) getActivity();
-        mTextView = (TextView) mView.findViewById(R.id.audodetect_text_id);
+        mTextView = (TextView) findViewById(R.id.audodetect_text_id);
         FragmentManager fm = getFragmentManager();
         times = 0;
-        mCallbacks.autodetect_ethernet();
+        mCallbacks.autodetectEthernet();
         if (fm.findFragmentByTag(NetData.EthernetAutoDetect_Tag) != null) {
             Logger.getLogger().i( "  getArguments()   " + getArguments());
             if (getArguments() != null) {
@@ -82,9 +83,9 @@ public class EthernetAutoDetectFragment extends BaseFragment {
     }
 
     public interface Callbacks {
-        boolean ethernet_autodetect_ethernet();
+        boolean ethernetAutodetectEthernet();
 
-        void autodetect_ethernet();
+        void autodetectEthernet();
     }
 
     private void detect_result() {

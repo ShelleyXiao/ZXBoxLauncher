@@ -13,12 +13,14 @@ import com.zx.zxboxlauncher.R;
 import com.zx.zxtvsettings.Utils.Logger;
 import com.zx.zxtvsettings.activity.EthernetActvity;
 import com.zx.zxtvsettings.fragment.BaseFragment;
+import com.zx.zxtvsettings.fragment.ethernet.mode.DataID;
+import com.zx.zxtvsettings.fragment.ethernet.mode.NetData;
+import com.zx.zxtvsettings.fragment.ethernet.mode.NetType;
 
 import java.util.HashMap;
 
 public class EthernetDetectResultFragment extends BaseFragment implements View.OnClickListener, View.OnKeyListener {
 	private static final String TAG = "EthernetDetectResultFragment";
-	private View mView = null;
 	private EthernetActvity mEthernetActvity = null;
 	private Button mBtn_LastStep = null;
 	private Button mBtn_finish = null;
@@ -36,10 +38,10 @@ public class EthernetDetectResultFragment extends BaseFragment implements View.O
 		setContentView(R.layout.fragment_ethernetdetectresult);
 
 		mEthernetActvity = (EthernetActvity) getActivity();
-		mBtn_LastStep = (Button) mView.findViewById(R.id.ethernetdetectresult_back_id);
+		mBtn_LastStep = (Button) findViewById(R.id.ethernetdetectresult_back_id);
 		mBtn_LastStep.setOnClickListener(this);
 		mBtn_LastStep.setOnKeyListener(this);
-		mBtn_finish = (Button) mView.findViewById(R.id.ethernetdetectresult_finish_id);
+		mBtn_finish = (Button) findViewById(R.id.ethernetdetectresult_finish_id);
 		mBtn_finish.setOnClickListener(this);
 		mBtn_finish.setOnKeyListener(this);
 		initHashMap();
@@ -63,59 +65,59 @@ public class EthernetDetectResultFragment extends BaseFragment implements View.O
 	private void initHashMap() {
 		mHashMap.clear();
 		if (mHashMap.isEmpty()) {
-			mHashMap.put(TextViewID.ethernetresult_ip_1_id, (TextView) mView.findViewById(R.id.ethernetresult_ip_1_id));
-			mHashMap.put(TextViewID.ethernetresult_ip_2_id, (TextView) mView.findViewById(R.id.ethernetresult_ip_2_id));
-			mHashMap.put(TextViewID.ethernetresult_ip_3_id, (TextView) mView.findViewById(R.id.ethernetresult_ip_3_id));
-			mHashMap.put(TextViewID.ethernetresult_ip_4_id, (TextView) mView.findViewById(R.id.ethernetresult_ip_4_id));
+			mHashMap.put(TextViewID.ethernetresult_ip_1_id, (TextView) findViewById(R.id.ethernetresult_ip_1_id));
+			mHashMap.put(TextViewID.ethernetresult_ip_2_id, (TextView) findViewById(R.id.ethernetresult_ip_2_id));
+			mHashMap.put(TextViewID.ethernetresult_ip_3_id, (TextView) findViewById(R.id.ethernetresult_ip_3_id));
+			mHashMap.put(TextViewID.ethernetresult_ip_4_id, (TextView) findViewById(R.id.ethernetresult_ip_4_id));
 			mHashMap.put(TextViewID.ethernetresult_mask_1_id,
-					(TextView) mView.findViewById(R.id.ethernetresult_mask_1_id));
+					(TextView) findViewById(R.id.ethernetresult_mask_1_id));
 			mHashMap.put(TextViewID.ethernetresult_mask_2_id,
-					(TextView) mView.findViewById(R.id.ethernetresult_mask_2_id));
+					(TextView) findViewById(R.id.ethernetresult_mask_2_id));
 			mHashMap.put(TextViewID.ethernetresult_mask_3_id,
-					(TextView) mView.findViewById(R.id.ethernetresult_mask_3_id));
+					(TextView) findViewById(R.id.ethernetresult_mask_3_id));
 			mHashMap.put(TextViewID.ethernetresult_mask_4_id,
-					(TextView) mView.findViewById(R.id.ethernetresult_mask_4_id));
+					(TextView) findViewById(R.id.ethernetresult_mask_4_id));
 			mHashMap.put(TextViewID.ethernetresult_gate_1_id,
-					(TextView) mView.findViewById(R.id.ethernetresult_gate_1_id));
+					(TextView) findViewById(R.id.ethernetresult_gate_1_id));
 			mHashMap.put(TextViewID.ethernetresult_gate_2_id,
-					(TextView) mView.findViewById(R.id.ethernetresult_gate_2_id));
+					(TextView) findViewById(R.id.ethernetresult_gate_2_id));
 			mHashMap.put(TextViewID.ethernetresult_gate_3_id,
-					(TextView) mView.findViewById(R.id.ethernetresult_gate_3_id));
+					(TextView) findViewById(R.id.ethernetresult_gate_3_id));
 			mHashMap.put(TextViewID.ethernetresult_gate_4_id,
-					(TextView) mView.findViewById(R.id.ethernetresult_gate_4_id));
+					(TextView) findViewById(R.id.ethernetresult_gate_4_id));
 			mHashMap.put(TextViewID.ethernetresult_dns1_1_id,
-					(TextView) mView.findViewById(R.id.ethernetresult_dns1_1_id));
+					(TextView) findViewById(R.id.ethernetresult_dns1_1_id));
 			mHashMap.put(TextViewID.ethernetresult_dns1_2_id,
-					(TextView) mView.findViewById(R.id.ethernetresult_dns1_2_id));
+					(TextView) findViewById(R.id.ethernetresult_dns1_2_id));
 			mHashMap.put(TextViewID.ethernetresult_dns1_3_id,
-					(TextView) mView.findViewById(R.id.ethernetresult_dns1_3_id));
+					(TextView) findViewById(R.id.ethernetresult_dns1_3_id));
 			mHashMap.put(TextViewID.ethernetresult_dns1_4_id,
-					(TextView) mView.findViewById(R.id.ethernetresult_dns1_4_id));
+					(TextView) findViewById(R.id.ethernetresult_dns1_4_id));
 			mHashMap.put(TextViewID.ethernetresult_dns2_1_id,
-					(TextView) mView.findViewById(R.id.ethernetresult_dns2_1_id));
+					(TextView) findViewById(R.id.ethernetresult_dns2_1_id));
 			mHashMap.put(TextViewID.ethernetresult_dns2_2_id,
-					(TextView) mView.findViewById(R.id.ethernetresult_dns2_2_id));
+					(TextView) findViewById(R.id.ethernetresult_dns2_2_id));
 			mHashMap.put(TextViewID.ethernetresult_dns2_3_id,
-					(TextView) mView.findViewById(R.id.ethernetresult_dns2_3_id));
+					(TextView) findViewById(R.id.ethernetresult_dns2_3_id));
 			mHashMap.put(TextViewID.ethernetresult_dns2_4_id,
-					(TextView) mView.findViewById(R.id.ethernetresult_dns2_4_id));
+					(TextView) findViewById(R.id.ethernetresult_dns2_4_id));
 		}
 	}
 
 	private void updateui() {
 		if (mEthernetActvity.getNetState().isConnected()) {
 			if (mEthernetActvity.getNetState().getNetType() == NetType.TYPE_ETHERNET) {
-				String[] iparray = mEthernetActvity.getNetState().getNetStateString(Data_Id.sETHERNET_IP_ID)
+				String[] iparray = mEthernetActvity.getNetState().getNetStateString(DataID.sETHERNET_IP_ID)
 						.split("\\.");
-				String[] maskarray = mEthernetActvity.getNetState().getNetStateString(Data_Id.sETHERNET_MASK_ID)
+				String[] maskarray = mEthernetActvity.getNetState().getNetStateString(DataID.sETHERNET_MASK_ID)
 						.split("\\.");
-				String[] gatewayarray = mEthernetActvity.getNetState().getNetStateString(Data_Id.sETHERNET_GATE_ID)
+				String[] gatewayarray = mEthernetActvity.getNetState().getNetStateString(DataID.sETHERNET_GATE_ID)
 						.split("\\.");
-				String[] dns1array = mEthernetActvity.getNetState().getNetStateString(Data_Id.sETHERNET_DNS1_ID)
+				String[] dns1array = mEthernetActvity.getNetState().getNetStateString(DataID.sETHERNET_DNS1_ID)
 						.split("\\.");
-				String[] dns2array = mEthernetActvity.getNetState().getNetStateString(Data_Id.sETHERNET_DNS2_ID)
+				String[] dns2array = mEthernetActvity.getNetState().getNetStateString(DataID.sETHERNET_DNS2_ID)
 						.split("\\.");
-				String[] macarray = mEthernetActvity.getNetState().getNetStateString(Data_Id.sETHERNET_MAC_ID)
+				String[] macarray = mEthernetActvity.getNetState().getNetStateString(DataID.sETHERNET_MAC_ID)
 						.split(":");
 				mHashMap.get(TextViewID.ethernetresult_ip_1_id).setText(iparray[0]);
 				mHashMap.get(TextViewID.ethernetresult_ip_2_id).setText(iparray[1]);

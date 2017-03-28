@@ -1,8 +1,6 @@
 package com.zx.zxboxlauncher.view;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -119,7 +117,7 @@ public class StatusTitleView extends RelativeLayout {
     }
 
     private void wifiSignalChange() {
-        WifiManager wm = (WifiManager) getContext().getSystemService(Context.WIFI_SERVICE);
+        WifiManager wm = (WifiManager) getContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wm.getConnectionInfo();
         if (wifiInfo.getBSSID() != null) {
             int signalLevel = WifiManager.calculateSignalLevel(

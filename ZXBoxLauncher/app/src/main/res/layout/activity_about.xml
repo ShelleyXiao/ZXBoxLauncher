@@ -5,13 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/bg"
     android:clipChildren="false"
     android:clipToPadding="false"
     tools:context=".activity.MainActivity">
 
     <com.zx.zxboxlauncher.view.StatusTitleView
-        android:id="@+id/status_bar"
+        android:id="@+id/status_title_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/px200"
         />

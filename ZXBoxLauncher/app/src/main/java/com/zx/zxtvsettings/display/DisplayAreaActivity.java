@@ -1,6 +1,9 @@
 package com.zx.zxtvsettings.display;
 
 import android.app.Activity;
+import android.displayd.DisplayBoundInfo;
+import android.displayd.DisplayDAgent;
+import android.displayd.DisplayModeInfo;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
@@ -17,9 +20,9 @@ import com.zx.zxboxlauncher.R;
 public class DisplayAreaActivity extends Activity {
     private static final String TAG = "DisplayAreaActivity";
 
-    private com.com.android.displayd.DisplayDAgent mDisplayd;
-    private com.com.android.displayd.DisplayModeInfo curDisplayMode;
-    private com.com.android.displayd.DisplayBoundInfo curDisplayBound;
+    private DisplayDAgent mDisplayd;
+    private DisplayModeInfo curDisplayMode;
+    private DisplayBoundInfo curDisplayBound;
 
     private TextView switcher;
     private ImageView areaUp, areaDown, areaLeft, areaRight;
@@ -85,7 +88,7 @@ public class DisplayAreaActivity extends Activity {
         synchronized (mLock) {
             if (!isLegalSetBound)
                 return;
-            com.com.android.displayd.DisplayBoundInfo bound = new com.com.android.displayd.DisplayBoundInfo(-1);
+            DisplayBoundInfo bound = new DisplayBoundInfo(-1);
             if (border == ADJUST_TOP) {
                 bound.Top = nextBoundX(curDisplayBound.Top, border);
                 if (bound.Top == curDisplayBound.Top)
@@ -158,11 +161,11 @@ public class DisplayAreaActivity extends Activity {
         areaLeft.setOnClickListener(areaAdjustListener);
         areaRight.setOnClickListener(areaAdjustListener);
 
-        mDisplayd = new com.com.android.displayd.DisplayDAgent();
+        mDisplayd = new DisplayDAgent();
         try {
             curDisplayMode = mDisplayd.getMode();
         } catch (RemoteException e) {
-            curDisplayMode = new com.com.android.displayd.DisplayModeInfo(0);
+            curDisplayMode = new DisplayModeInfo(0);
         }
         curDisplayMode.dump(TAG);
         limitX = curDisplayMode.Width / 2;
@@ -177,7 +180,7 @@ public class DisplayAreaActivity extends Activity {
         try {
             curDisplayBound = mDisplayd.getBounds();
         } catch (RemoteException e) {
-            curDisplayBound = new com.com.android.displayd.DisplayBoundInfo(0);
+            curDisplayBound = new DisplayBoundInfo(0);
         }
         curDisplayBound.dump(TAG);
     }

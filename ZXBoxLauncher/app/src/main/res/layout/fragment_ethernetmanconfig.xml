@@ -25,7 +25,7 @@
                 android:text="@string/ethernet_configtitle" />
         </LinearLayout>
 
-    <LinearLayout
+        <LinearLayout
         android:layout_width="600dp"
         android:layout_height="40dp"
         android:background="@color/white"
@@ -62,7 +62,7 @@
                     android:focusable="true"
                     android:inputType="number"
                     android:background="@null"
-                    android:textColor="@color/zx_color3"
+                    android:textColor="@color/zx_0E0A0B"
                     android:nextFocusLeft="@+id/ethernetconfig_back_id"
                     android:nextFocusUp="@+id/ethernet_ipconfig1_id"
                     android:textAppearance="@style/TextAppearance.TileTitle"
@@ -75,7 +75,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/zx_color3"
+                    android:textColor="@color/zx_0E0A0B"
                     android:layout_marginTop="5dp"
                     android:textAppearance="@style/TextAppearance.TileTitle"
                     android:text="@string/ethernet_dot" />
@@ -91,7 +91,7 @@
                     android:focusable="true"
                     android:inputType="number"
                     android:background="@null"
-                    android:textColor="@color/zx_color3"
+                    android:textColor="@color/zx_0E0A0B"
                     android:nextFocusUp="@+id/ethernet_ipconfig2_id"
                     android:textAppearance="@style/TextAppearance.TileTitle"
                     android:text="@string/ethernet_ipconfig_2" />
@@ -103,7 +103,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/zx_color3"
+                    android:textColor="@color/zx_0E0A0B"
                     android:layout_marginTop="5dp"
                     android:textAppearance="@style/TextAppearance.TileTitle"
                     android:text="@string/ethernet_dot" />
@@ -120,7 +120,7 @@
                     android:nextFocusUp="@+id/ethernet_ipconfig3_id"
                     android:inputType="number"
                     android:background="@null"
-                    android:textColor="@color/zx_color3"
+                    android:textColor="@color/zx_0E0A0B"
                     android:textAppearance="@style/TextAppearance.TileTitle"
                     android:text="@string/ethernet_ipconfig_3" />
             </LinearLayout>
@@ -131,7 +131,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/zx_color3"
+                    android:textColor="@color/zx_0E0A0B"
                     android:layout_marginTop="5dp"
                     android:textAppearance="@style/TextAppearance.TileTitle"
                     android:text="@string/ethernet_dot" />
@@ -148,7 +148,7 @@
                     android:focusable="true"
                     android:inputType="number"
                     android:background="@null"
-                    android:textColor="@color/zx_color3"
+                    android:textColor="@color/zx_0E0A0B"
                     android:textAppearance="@style/TextAppearance.TileTitle"
                     android:text="@string/ethernet_ipconfig_4" />
             </LinearLayout>
@@ -172,7 +172,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/zx_color3"
+                    android:textColor="@color/zx_0E0A0B"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:textAppearance="@style/TextAppearance.TileTitle"
@@ -195,7 +195,7 @@
                         android:focusable="true"
                         android:inputType="number"
                         android:background="@null"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:nextFocusLeft="@+id/ethernetconfig_back_id"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_maskconfig_1" />
@@ -207,7 +207,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:layout_marginTop="5dp"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dot" />
@@ -223,7 +223,7 @@
                         android:focusable="true"
                         android:inputType="number"
                         android:background="@null"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_maskconfig_2" />
                 </LinearLayout>
@@ -234,7 +234,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:layout_marginTop="5dp"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dot" />
@@ -250,7 +250,7 @@
                         android:focusable="true"
                         android:inputType="number"
                         android:background="@null"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_maskconfig_3" />
                 </LinearLayout>
@@ -261,7 +261,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:layout_marginTop="5dp"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dot" />
@@ -277,7 +277,7 @@
                         android:focusable="true"
                         android:inputType="number"
                         android:background="@null"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_maskconfig_4" />
                 </LinearLayout>
@@ -301,7 +301,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/zx_color3"
+                    android:textColor="@color/zx_0E0A0B"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:textAppearance="@style/TextAppearance.TileTitle"
@@ -324,7 +324,7 @@
                         android:focusable="true"
                         android:inputType="number"
                         android:background="@null"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:nextFocusLeft="@+id/ethernetconfig_back_id"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_gateconfig_1" />
@@ -336,7 +336,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:layout_marginTop="5dp"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dot" />
@@ -352,7 +352,7 @@
                         android:focusable="true"
                         android:inputType="number"
                         android:background="@null"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_gateconfig_2" />
                 </LinearLayout>
@@ -363,7 +363,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:layout_marginTop="5dp"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dot" />
@@ -379,7 +379,7 @@
                         android:focusable="true"
                         android:inputType="number"
                         android:background="@null"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_gateconfig_3" />
                 </LinearLayout>
@@ -390,7 +390,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:layout_marginTop="5dp"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dot" />
@@ -406,7 +406,7 @@
                         android:focusable="true"
                         android:inputType="number"
                         android:background="@null"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_gateconfig_4" />
                 </LinearLayout>
@@ -430,7 +430,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/zx_color3"
+                    android:textColor="@color/zx_0E0A0B"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:textAppearance="@style/TextAppearance.TileTitle"
@@ -453,7 +453,7 @@
                         android:focusable="true"
                         android:inputType="number"
                         android:background="@null"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:nextFocusLeft="@+id/ethernetconfig_back_id"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dns1config_1" />
@@ -465,7 +465,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:layout_marginTop="5dp"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dot" />
@@ -481,7 +481,7 @@
                         android:focusable="true"
                         android:inputType="number"
                         android:background="@null"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dns1config_2" />
                 </LinearLayout>
@@ -492,7 +492,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:layout_marginTop="5dp"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dot" />
@@ -508,7 +508,7 @@
                         android:focusable="true"
                         android:inputType="number"
                         android:background="@null"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dns1config_3" />
                 </LinearLayout>
@@ -519,7 +519,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:layout_marginTop="5dp"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dot" />
@@ -535,7 +535,7 @@
                         android:focusable="true"
                         android:inputType="number"
                         android:background="@null"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dns1config_4" />
                 </LinearLayout>
@@ -559,7 +559,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/zx_color3"
+                    android:textColor="@color/zx_0E0A0B"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:textAppearance="@style/TextAppearance.TileTitle"
@@ -582,7 +582,7 @@
                         android:focusable="true"
                         android:inputType="number"
                         android:background="@null"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:nextFocusLeft="@+id/ethernetconfig_back_id"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dns2config_1" />
@@ -594,7 +594,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:layout_marginTop="5dp"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dot" />
@@ -610,7 +610,7 @@
                         android:focusable="true"
                         android:inputType="number"
                         android:background="@null"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dns2config_2" />
                 </LinearLayout>
@@ -621,7 +621,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:layout_marginTop="5dp"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dot" />
@@ -637,7 +637,7 @@
                         android:focusable="true"
                         android:inputType="number"
                         android:background="@null"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dns2config_3" />
                 </LinearLayout>
@@ -648,7 +648,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:layout_marginTop="5dp"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dot" />
@@ -664,7 +664,7 @@
                         android:focusable="true"
                         android:inputType="number"
                         android:background="@null"
-                        android:textColor="@color/zx_color3"
+                        android:textColor="@color/zx_0E0A0B"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         android:text="@string/ethernet_dns2config_4" />
                 </LinearLayout>

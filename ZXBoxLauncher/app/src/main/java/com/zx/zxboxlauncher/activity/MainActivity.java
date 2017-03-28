@@ -206,12 +206,10 @@ public class MainActivity extends BaseActivity implements View.OnFocusChangeList
 
     }
 
-    @Override
-    public void netWorkChange() {
-        mStatusTitleView.netWorkChange();
-    }
-
-
+//    @Override
+//    public void netWorkChange() {
+//        mStatusTitleView.netWorkChange();
+//    }
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
