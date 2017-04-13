@@ -119,10 +119,10 @@ public class MainActivity1 extends BaseActivity {
 
     }
 
-    @Override
-    public void netWorkChange() {
-        mStatusTitleView.netWorkChange();
-    }
+//    @Override
+//    public void netWorkChange() {
+//        mStatusTitleView.netWorkChange();
+//    }
 
     class ViewPagerAdapter extends PagerAdapter {
 

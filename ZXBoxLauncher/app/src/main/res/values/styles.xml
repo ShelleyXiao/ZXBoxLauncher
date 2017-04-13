@@ -54,6 +54,41 @@
         <item name="android:focusable">false</item>
     </style>
 
+    <style name="Focus_Enable">
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+    </style>
+
     <style name="TextAppearance.TileTitle" parent="@android:style/TextAppearance.Material.Medium"></style>
+
+    <style name="Content_View_Style_short_short" parent="Focus_Enable">
+        <item name="android:layout_width">@dimen/px314</item>
+        <item name="android:layout_height">@dimen/px210</item>
+        <item name="android:layout_marginRight">@dimen/px20</item>
+        <item name="android:layout_marginTop">@dimen/px12</item>
+        <item name="android:descendantFocusability">beforeDescendants</item>
+    </style>
+
+    <style name="Content_View_Style_long_long" parent="Focus_Enable">
+        <item name="android:layout_width">@dimen/px720</item>
+        <item name="android:layout_height">@dimen/px432</item>
+        <item name="android:layout_marginRight">@dimen/px22</item>
+        <item name="android:descendantFocusability">beforeDescendants</item>
+    </style>
+
+    <style name="Content_View_Style_long_short" parent="Focus_Enable">
+        <item name="android:layout_width">@dimen/px300</item>
+        <item name="android:layout_height">@dimen/px210</item>
+        <item name="android:layout_marginRight">@dimen/px20</item>
+        <item name="android:descendantFocusability">beforeDescendants</item>
+    </style>
+
+    <style name="Content_View_Style_short_long" parent="Focus_Enable">
+        <item name="android:layout_width">@dimen/px286</item>
+        <item name="android:layout_height">@dimen/px432</item>
+        <item name="android:layout_marginRight">@dimen/px20</item>
+        <item name="android:descendantFocusability">beforeDescendants</item>
+    </style>
 
 </resources>

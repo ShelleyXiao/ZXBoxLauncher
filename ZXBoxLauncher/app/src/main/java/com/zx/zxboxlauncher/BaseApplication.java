@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.open.androidtvwidget.utils.OPENLOG;
-import com.zx.zxboxlauncher.activity.BaseActivity;
 
 import java.util.ArrayList;
 
@@ -23,7 +22,7 @@ public class BaseApplication extends Application {
     /**
      * Activity集合
      */
-    private static ArrayList<BaseActivity> activitys = new ArrayList<BaseActivity>();
+    private static ArrayList<Activity> activitys = new ArrayList<Activity>();
 
     @Override
     public void onCreate() {
@@ -37,7 +36,7 @@ public class BaseApplication extends Application {
      *
      * @param activity
      */
-    public void addActivity(BaseActivity activity) {
+    public void addActivity(Activity activity) {
         String className = activity.getClass().getName();
         for (Activity at : activitys) {
             if (className.equals(at.getClass().getName())) {
@@ -54,8 +53,8 @@ public class BaseApplication extends Application {
     @Override
     public void onTerminate() {
         super.onTerminate();
-        for (BaseActivity activity : activitys) {
-            activity.defaultFinish();
+        for (Activity activity : activitys) {
+            activity.finish();
         }
     }
 

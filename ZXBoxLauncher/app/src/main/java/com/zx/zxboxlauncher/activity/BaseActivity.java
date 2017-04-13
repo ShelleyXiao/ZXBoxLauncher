@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.zx.zxboxlauncher.BaseApplication;
 import com.zx.zxboxlauncher.R;
 import com.zx.zxboxlauncher.utils.LogUtils;
-import com.zx.zxboxlauncher.view.StatusTitleView;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -186,7 +185,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 //                netWorkYes();
 //            }
 
-            netWorkChange();
+//            netWorkChange();
         }
     }
 
@@ -206,14 +205,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.finish();
     }
 
-    protected void netWorkChange() {
-        StatusTitleView view = (StatusTitleView) findViewById(R.id.status_title_view);
-        if(null == view) {
-            throw new IllegalStateException("StatusTitleView not find!");
-        }
-
-        view.netWorkChange();
-    }
+//    protected void netWorkChange() {
+//        StatusTitleView view = (StatusTitleView) findViewById(R.id.status_title_view);
+//        if(null == view) {
+//            throw new IllegalStateException("StatusTitleView not find!");
+//        }
+//
+//        view.netWorkChange();
+//    }
 
     public void netWorkNO() {
         /*final AlertDialog.Builder builder = new AlertDialog.Builder(this);

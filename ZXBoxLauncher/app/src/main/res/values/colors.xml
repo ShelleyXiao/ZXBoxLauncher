@@ -14,6 +14,8 @@
     <color name="zx_87CEFA">#87CEFA</color>
     <color name="zx_ADFF2F">#ADFF2F</color>
 
+    <color name="zx_blue">#ff045fc5</color>
+
     <color name="listGridItemText">#00e4f9</color>
 
     <color name="titleTextColor">#bbc4edf2</color>
@@ -34,4 +36,7 @@
     <color name="un_select_backgroud">#4682B4</color>
     <color name="select_backgroud">#00E5EE</color>
     <color name="settings_backgroud">#000033</color>
+
+    <color name="time_statu">#ff03a9ff</color>
+
 </resources>
