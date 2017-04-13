@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.zx.zxboxlauncher.R;
 import com.zx.zxboxlauncher.utils.SystemUtils;
+import com.zx.zxboxlauncher.view.FavoriteApp;
 import com.zx.zxtvsettings.Utils.Logger;
 
 import static com.zx.zxboxlauncher.R.id.statu;
@@ -42,6 +43,10 @@ public class MainActivityNew extends BaseActivityNew implements View.OnClickList
     private TimeReceiver mTimeReceiver;
     private NetWorkChangeReceiver mNetWorkChangeReceiver;
 
+    private FavoriteApp mFavoriteApp;
+
+    private boolean downFlag = true;
+
     @Override
     protected void setupViews() {
         setFocusMoveView(R.id.mainUpView);
@@ -57,7 +62,6 @@ public class MainActivityNew extends BaseActivityNew implements View.OnClickList
         findViewById(R.id.add_app_5).setOnFocusChangeListener(mFocusChangeListener);
         findViewById(R.id.add_app_6).setOnFocusChangeListener(mFocusChangeListener);
 
-        findViewById(R.id.app_more).setOnKeyListener(this);
         findViewById(R.id.add_app_1).setOnKeyListener(this);
         findViewById(R.id.add_app_2).setOnKeyListener(this);
         findViewById(R.id.add_app_3).setOnKeyListener(this);
@@ -181,13 +185,15 @@ public class MainActivityNew extends BaseActivityNew implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
 
+        }
     }
 
 
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
-        if(event.getAction() == KeyEvent.ACTION_UP) {
+        if(event.getAction() == KeyEvent.ACTION_DOWN) {
             if(keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
                 switch (v.getId()) {
                     case R.id.add_app_1:
@@ -196,11 +202,25 @@ public class MainActivityNew extends BaseActivityNew implements View.OnClickList
                     case R.id.add_app_4:
                     case R.id.add_app_5:
                     case R.id.add_app_6:
+                        if(downFlag) {
+                            downFlag = false;
+                            if(mFavoriteApp == null) {
+                                mFavoriteApp = new FavoriteApp();
+                            }
 
-                        break;
+                            if (!mFavoriteApp.isVisible()) {
+                                mFavoriteApp.show(getFragmentManager(), "FAVORITEAPP");
+                            }
+                            return true;
+                        }
+                       break;
                 }
+
             }
+        } else if(event.getAction() == KeyEvent.ACTION_UP){
+            downFlag = true;
         }
+
         return false;
     }
 

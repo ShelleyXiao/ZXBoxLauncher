@@ -16,4 +16,7 @@ public class Constant
 	public static final int TIME_OUT = 5000;
 
 
+	public static final String FAVORITE = "FAVORITE";
+	public static final String FAVORITE_CONFIG = " ; ; ; ; ; ; ;";
+
 }

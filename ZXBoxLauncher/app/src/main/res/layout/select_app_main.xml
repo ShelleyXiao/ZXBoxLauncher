@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".activity.MainActivityNew" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px450"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_add_apps"
+        android:orientation="vertical"
+        android:padding="@dimen/px5" >
+        <RelativeLayout 
+            android:layout_width="match_parent"
+		    android:layout_height="@dimen/px50">
+            <TextView 
+		    android:id="@+id/select_app"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:textColor="@android:color/white"
+		    android:layout_centerVertical="true"
+		    android:layout_marginLeft="@dimen/px10"
+		    android:textSize="@dimen/px28"
+		    android:text="@string/select_app"
+		    />
+            <ImageView 
+	        android:id="@+id/up_anim"
+	        android:layout_width="@dimen/px20"
+	        android:layout_height="@dimen/px40"
+	        android:layout_centerInParent="true"
+	        android:visibility="gone"
+	        android:scaleType="fitCenter"
+	        android:src="@drawable/up_anim"
+	        />
+        </RelativeLayout>
+		
+        <com.zx.zxboxlauncher.view.MyHorizontalScrollView
+            android:id="@+id/my_horizontal_scroller"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px320" >
+
+        </com.zx.zxboxlauncher.view.MyHorizontalScrollView>
+    </LinearLayout>
+
+</LinearLayout>
