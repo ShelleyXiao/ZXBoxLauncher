@@ -23,4 +23,6 @@ public class Constant
 	public static final String TAG_ADD = "add";
 	public static final String TAG_MORE = "more";
 
+    public static final int LINE_NUM = 3;
+
 }

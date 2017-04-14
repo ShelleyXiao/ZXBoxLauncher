@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="@dimen/px320"
+              android:layout_height="@dimen/px240"
+              android:focusable="true"
+              android:orientation="vertical"
+              android:background="@drawable/app_item_focus"
+    >
+
+    <LinearLayout
+        android:id="@+id/app_action"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/contentview"
+        android:gravity="center"
+        >
+
+        <LinearLayout
+            android:layout_width="@dimen/px159"
+            android:layout_height="@dimen/px159"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/app_intent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                />
+
+            <ImageView
+                android:id="@+id/app_icon"
+                android:layout_width="@dimen/px100"
+                android:layout_height="@dimen/px100"
+                android:src="@drawable/ic_launcher"
+                />
+
+            <TextView
+                android:id="@+id/app_title"
+                android:layout_width="@dimen/px150"
+                android:layout_height="@dimen/px40"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="@string/app_name"
+                android:textColor="#FFFFFFFF"
+                android:textSize="@dimen/px24"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/focus_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/health_focus_border"
+        android:scaleType="fitCenter"
+        android:visibility="invisible"/>
+
+</LinearLayout>

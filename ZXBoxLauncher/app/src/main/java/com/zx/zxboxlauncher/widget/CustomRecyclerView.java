@@ -40,6 +40,7 @@ public class CustomRecyclerView extends RecyclerView {
 
     public CustomRecyclerView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        this.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
     }
 
     @Override
@@ -74,7 +75,7 @@ public class CustomRecyclerView extends RecyclerView {
                     }
                 case KeyEvent.KEYCODE_DPAD_LEFT:
                     View leftView = FocusFinder.getInstance().findNextFocus(this, focusView, View.FOCUS_LEFT);
-//                    Logger.getLogger().i(this, "left is null:" + (leftView == null));
+                    Logger.getLogger().i( "left is null:" + (leftView == null));
                     if (event.getAction() == KeyEvent.ACTION_UP) {
                         return true;
                     } else {
@@ -239,6 +240,7 @@ public class CustomRecyclerView extends RecyclerView {
             onSetItemData(holder, position);
             //item可以获得焦点，需要设置这个属性。
             holder.itemView.setFocusable(true);
+
             holder.itemView.setOnHoverListener(new OnHoverListener() {
                 @Override
                 public boolean onHover(View v, MotionEvent event) {
@@ -357,13 +359,7 @@ public class CustomRecyclerView extends RecyclerView {
 
         @Override
         public int getItemCount() {
-            if (mData != null) {
-                return getCount();
-            } else {
-                return 0;
-            }
+            return mData != null ? mData.size() : 0;
         }
-
-        protected abstract int getCount();
     }
 }

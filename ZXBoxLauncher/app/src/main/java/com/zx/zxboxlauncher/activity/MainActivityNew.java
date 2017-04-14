@@ -228,6 +228,7 @@ public class MainActivityNew extends BaseActivityNew implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.app_more:
+                startActivity(MoreActivity.class);
                 return;
             case R.id.main_filemanager_lay:
                 return;

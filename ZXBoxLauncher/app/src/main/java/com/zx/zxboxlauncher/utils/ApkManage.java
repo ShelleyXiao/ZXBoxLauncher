@@ -1,5 +1,6 @@
 package com.zx.zxboxlauncher.utils;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -7,24 +8,20 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.util.DisplayMetrics;
 
 import com.zx.zxboxlauncher.BaseApplication;
-import com.zx.zxboxlauncher.bean.AppInfoData;
+import com.zx.zxboxlauncher.bean.AppInfo;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static com.zx.zxboxlauncher.R.raw.app;
 
 public class ApkManage {
 	public static PackageInfo getAPKInfo(Context ctx, String apk, boolean type) {// 获取apk的信息
@@ -204,110 +201,7 @@ public class ApkManage {
 		}
 	}
 	
-	
-	 public static AppInfoData getApkFileInfo(Context ctx, String apkPath)
-	 {  
-	     System.out.println(apkPath);  
-	     File apkFile = new File(apkPath);  
-	     if (!apkFile.exists() || !apkPath.toLowerCase().endsWith(".apk"))
-	     {  
-	         System.out.println("file path is not correct");  
-	         return null;  
-	     }  
-	     
-	     AppInfoData appInfoData;  
-	     String PATH_PackageParser = "android.content.pm.PackageParser";  
-	     String PATH_AssetManager = "android.content.res.AssetManager";  
-	     try
-	     {  
-	         Class<?> pkgParserCls = Class.forName(PATH_PackageParser);  
-	         Class<?>[] typeArgs = {String.class};  
-	         Constructor<?> pkgParserCt = pkgParserCls.getConstructor(typeArgs);  
-	         Object[] valueArgs = {apkPath};  
-	         Object pkgParser = pkgParserCt.newInstance(valueArgs);  
-	         
-	         DisplayMetrics metrics = new DisplayMetrics();  
-	         metrics.setToDefaults();  
-	         typeArgs = new Class<?>[]{File.class,String.class,  
-	         DisplayMetrics.class,int.class};  
-	         Method pkgParser_parsePackageMtd = pkgParserCls.getDeclaredMethod("parsePackage", typeArgs);  
-	         
-	         valueArgs=new Object[]{new File(apkPath),apkPath,metrics,0};  
-	         
-	         Object pkgParserPkg = pkgParser_parsePackageMtd.invoke(pkgParser, valueArgs);  
-	         
-	         if (pkgParserPkg==null)
-	         {  
-	             return null;  
-	         }  
-	         Field appInfoFld = pkgParserPkg.getClass().getDeclaredField("applicationInfo");  
-	         
-	         if (appInfoFld.get(pkgParserPkg)==null)
-	         {  
-	             return null;  
-	         }  
-	         ApplicationInfo info = (ApplicationInfo) appInfoFld.get(pkgParserPkg);     
-	         
-	         Class<?> assetMagCls = Class.forName(PATH_AssetManager);     
-	         Object assetMag = assetMagCls.newInstance();  
-	         typeArgs = new Class[1];  
-	         typeArgs[0] = String.class;  
-	         Method assetMag_addAssetPathMtd = assetMagCls.getDeclaredMethod("addAssetPath", typeArgs);  
-	         valueArgs = new Object[1];  
-	         valueArgs[0] = apkPath;  
-	         assetMag_addAssetPathMtd.invoke(assetMag, valueArgs);  
-	         
-	         Resources res = ctx.getResources();  
-	         typeArgs = new Class[3];  
-	         typeArgs[0] = assetMag.getClass();  
-	         typeArgs[1] = res.getDisplayMetrics().getClass();  
-	         typeArgs[2] = res.getConfiguration().getClass();  
-	         Constructor<Resources> resCt = Resources.class.getConstructor(typeArgs);  
-	         valueArgs = new Object[3];  
-	         valueArgs[0] = assetMag;  
-	         valueArgs[1] = res.getDisplayMetrics();  
-	         valueArgs[2] = res.getConfiguration(); 
-	         
-	         res = (Resources) resCt.newInstance(valueArgs);  
-	         
-	         appInfoData = new AppInfoData();  
-	         if (info!=null)
-	         {  
-	             if (info.icon != 0) 
-	             {
-	                 Drawable icon = res.getDrawable(info.icon);
-	                 appInfoData.setAppicon(icon);  
-	             }  
-	             if (info.labelRes != 0) 
-	             {  
-	                 String neme = (String) res.getText(info.labelRes);
-	                 appInfoData.setAppname(neme);  
-	             }else 
-	             {  
-	                 String apkName=apkFile.getName();  
-	                 appInfoData.setAppname(apkName.substring(0,apkName.lastIndexOf(".")));  
-	             }  
-	             String pkgName = info.packageName;
-	             appInfoData.setApppackage(pkgName);  
-	         }
-	         else 
-	         {  
-	             return null;  
-	         }     
-	         PackageManager pm = ctx.getPackageManager();  
-	         PackageInfo packageInfo = pm.getPackageArchiveInfo(apkPath, PackageManager.GET_ACTIVITIES);  
-	         if (packageInfo != null)
-	         {  
-	             appInfoData.setAppversion(packageInfo.versionName);
-	             appInfoData.setAppversionCode(packageInfo.versionCode);
-	         }  
-	         return appInfoData;  
-	     } catch (Exception e)
-	     {   
-	         e.printStackTrace();  
-	     }  
-	     return null;  
-	 }
+
 
 	public static List<ResolveInfo> getMore(Context context) {
 		// TODO Auto-generated method stub
@@ -357,5 +251,39 @@ public class ApkManage {
 			sb.append(pkg[i]).append(";");
 		}
 		SharedPreferencesUtils.setParam(BaseApplication.getInstance(), Constant.FAVORITE, sb.toString());
+	}
+
+	public static  List<AppInfo> getMoreApps(Context context) {
+		PackageManager mPackManager = context.getPackageManager();
+		Intent mainiIntent = new Intent(Intent.ACTION_MAIN, null);
+		mainiIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+		List<ResolveInfo> resolveInfos = mPackManager.queryIntentActivities(mainiIntent, 0);
+		Collections.sort(resolveInfos, new ResolveInfo.DisplayNameComparator(mPackManager));
+		List<AppInfo> data = new ArrayList<AppInfo>();
+		data.clear();
+		for (ResolveInfo app : resolveInfos) {
+			data.add(getApp(context, app));
+		}
+		return data;
+	}
+
+	public static AppInfo getApp(Context context, ResolveInfo app) {
+        PackageManager mPackManager = context.getPackageManager();
+		AppInfo mAppInfo = new AppInfo();
+		mAppInfo.setAppName((String) app.loadLabel(mPackManager));
+		mAppInfo.setAppPackageName(app.activityInfo.packageName);
+		mAppInfo.setAppIcon(app.loadIcon(mPackManager));
+
+		if ((app.activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+			mAppInfo.setIsSystemApps(true);
+		} else {
+			mAppInfo.setIsSystemApps(false);
+		}
+
+		Intent intent = new Intent();
+		intent.setComponent(new ComponentName(app.activityInfo.packageName, app.activityInfo.name));
+		mAppInfo.setAppIntent(intent);
+
+		return mAppInfo;
 	}
 }
