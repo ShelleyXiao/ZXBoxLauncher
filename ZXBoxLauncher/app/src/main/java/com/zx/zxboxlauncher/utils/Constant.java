@@ -19,4 +19,8 @@ public class Constant
 	public static final String FAVORITE = "FAVORITE";
 	public static final String FAVORITE_CONFIG = " ; ; ; ; ; ; ;";
 
+	public static final String TAG_LOCK = "lock";
+	public static final String TAG_ADD = "add";
+	public static final String TAG_MORE = "more";
+
 }

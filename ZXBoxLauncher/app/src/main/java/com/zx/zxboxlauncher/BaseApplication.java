@@ -6,6 +6,8 @@ import android.app.Application;
 
 import com.open.androidtvwidget.utils.OPENLOG;
 
+import net.tsz.afinal.FinalDb;
+
 import java.util.ArrayList;
 
 
@@ -17,7 +19,10 @@ import java.util.ArrayList;
 public class BaseApplication extends Application {
 
     private static final String TAG = "BaseApplication";
+
     private static BaseApplication instance;
+
+    public FinalDb mFinalDb;
 
     /**
      * Activity集合
@@ -30,7 +35,10 @@ public class BaseApplication extends Application {
 
         instance = this;
 
+        mFinalDb = FinalDb.create(this);
+
         OPENLOG.initTag("ZX", true);
+
     }
 
     /**

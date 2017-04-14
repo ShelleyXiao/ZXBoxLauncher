@@ -10,14 +10,24 @@ import android.net.NetworkInfo;
 import android.text.format.DateFormat;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.zx.zxboxlauncher.BaseApplication;
 import com.zx.zxboxlauncher.R;
+import com.zx.zxboxlauncher.bean.Item;
+import com.zx.zxboxlauncher.utils.ApkManage;
+import com.zx.zxboxlauncher.utils.Constant;
 import com.zx.zxboxlauncher.utils.SystemUtils;
+import com.zx.zxboxlauncher.view.CheckApp;
+import com.zx.zxboxlauncher.view.ContentView;
 import com.zx.zxboxlauncher.view.FavoriteApp;
+import com.zx.zxboxlauncher.view.IViewUpdate;
 import com.zx.zxtvsettings.Utils.Logger;
+
+import java.util.List;
 
 import static com.zx.zxboxlauncher.R.id.statu;
 
@@ -31,7 +41,9 @@ import static com.zx.zxboxlauncher.R.id.statu;
  */
 
 
-public class MainActivityNew extends BaseActivityNew implements View.OnClickListener, View.OnKeyListener{
+public class MainActivityNew extends BaseActivityNew implements View.OnClickListener, View.OnKeyListener ,IViewUpdate{
+
+    private ViewGroup mViewGroup;
 
     private ImageView netStatu, setStatu;
     private LinearLayout net, set;
@@ -58,16 +70,18 @@ public class MainActivityNew extends BaseActivityNew implements View.OnClickList
         findViewById(R.id.add_app_1).setOnFocusChangeListener(mFocusChangeListener);
         findViewById(R.id.add_app_2).setOnFocusChangeListener(mFocusChangeListener);
         findViewById(R.id.add_app_3).setOnFocusChangeListener(mFocusChangeListener);
-        findViewById(R.id.add_app_3).setOnFocusChangeListener(mFocusChangeListener);
+        findViewById(R.id.add_app_4).setOnFocusChangeListener(mFocusChangeListener);
         findViewById(R.id.add_app_5).setOnFocusChangeListener(mFocusChangeListener);
         findViewById(R.id.add_app_6).setOnFocusChangeListener(mFocusChangeListener);
 
-        findViewById(R.id.add_app_1).setOnKeyListener(this);
-        findViewById(R.id.add_app_2).setOnKeyListener(this);
-        findViewById(R.id.add_app_3).setOnKeyListener(this);
-        findViewById(R.id.add_app_3).setOnKeyListener(this);
-        findViewById(R.id.add_app_5).setOnKeyListener(this);
-        findViewById(R.id.add_app_6).setOnKeyListener(this);
+//        findViewById(R.id.add_app_1).setOnKeyListener(this);
+//        findViewById(R.id.add_app_2).setOnKeyListener(this);
+//        findViewById(R.id.add_app_3).setOnKeyListener(this);
+//        findViewById(R.id.add_app_3).setOnKeyListener(this);
+//        findViewById(R.id.add_app_5).setOnKeyListener(this);
+//        findViewById(R.id.add_app_6).setOnKeyListener(this);
+
+        mViewGroup = (ViewGroup) findViewById(R.id.content);
 
         set = (LinearLayout) findViewById(R.id.set);
         net = (LinearLayout) findViewById(R.id.net);
@@ -83,6 +97,28 @@ public class MainActivityNew extends BaseActivityNew implements View.OnClickList
             statuTextView.setText(SystemUtils.getStatu());
         } else {
             statuTextView.setVisibility(View.INVISIBLE);
+        }
+
+        for (int i = 0; i < mViewGroup.getChildCount(); i++) {
+            View v = mViewGroup.getChildAt(i);
+            if (v != null) {
+                if (v instanceof ContentView) {
+                    if (v.getId() == R.id.app_more) {
+                        v.setTag(Constant.TAG_MORE);
+                    } else {
+                        v.setTag(Constant.TAG_ADD + "_" + i);
+                    }
+                    ((ContentView) v).initView();
+
+
+                    v.setOnKeyListener(this);
+                } else {
+                    v.setTag(Constant.TAG_LOCK);
+                }
+                // 这种设置会出现焦点框不适应问题？？？？？
+//                v.setOnFocusChangeListener(mFocusChangeListener);
+                v.setOnClickListener(this);
+            }
         }
 
     }
@@ -184,27 +220,55 @@ public class MainActivityNew extends BaseActivityNew implements View.OnClickList
     }
 
     @Override
+    public void updateViewByTag(String tag) {
+        refreshView(tag);
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.app_more:
+                return;
+            case R.id.main_filemanager_lay:
+                return;
+            case R.id.main_item_online:
+                return;
+            case R.id.main_item_video:
+                return;
+        }
 
+        Item item = null;
+        List<Item> current = BaseApplication.getInstance().mFinalDb.findAllByWhere(Item.class, "tag=" + "'" + v.getTag() + "'");
+        if (current != null && current.size() > 0) {
+            item = current.get(0);
+        }
+        Intent intent;
+        if (item != null) {
+            if(ApkManage.checkInstall(this, item.getPkg())) {
+                openApk(item.getPkg());
+            } else {
+                new CheckApp(this,(String)v.getTag()).show(getFragmentManager(), "CHECKAPP");
+            }
+        } else {
+            new CheckApp(this,(String)v.getTag()).show(getFragmentManager(), "CHECKAPP");
         }
     }
 
 
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
-        if(event.getAction() == KeyEvent.ACTION_DOWN) {
-            if(keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
                 switch (v.getId()) {
-                    case R.id.add_app_1:
+//                    case R.id.add_app_1:
                     case R.id.add_app_2:
                     case R.id.add_app_3:
                     case R.id.add_app_4:
                     case R.id.add_app_5:
                     case R.id.add_app_6:
-                        if(downFlag) {
+                        if (downFlag) {
                             downFlag = false;
-                            if(mFavoriteApp == null) {
+                            if (mFavoriteApp == null) {
                                 mFavoriteApp = new FavoriteApp();
                             }
 
@@ -213,15 +277,31 @@ public class MainActivityNew extends BaseActivityNew implements View.OnClickList
                             }
                             return true;
                         }
-                       break;
+                        break;
                 }
 
             }
-        } else if(event.getAction() == KeyEvent.ACTION_UP){
+        } else if (event.getAction() == KeyEvent.ACTION_UP) {
             downFlag = true;
         }
 
         return false;
+    }
+
+
+    public void refreshView(String tag) {
+        if (mViewGroup != null) {
+            for (int i = 0; i < mViewGroup.getChildCount(); i++) {
+                View view = mViewGroup.getChildAt(i);
+                if(view instanceof  ContentView) {
+                    ContentView v = (ContentView) view;
+                    if(tag.equals(v.getTag())){
+                        v.initView();
+                    }
+                }
+
+            }
+        }
     }
 
     private void startDownAppAnim() {
@@ -263,7 +343,7 @@ public class MainActivityNew extends BaseActivityNew implements View.OnClickList
             if (mAppReceiver != null) {
                 unregisterReceiver(mAppReceiver);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
 
         }
     }
@@ -290,7 +370,6 @@ public class MainActivityNew extends BaseActivityNew implements View.OnClickList
         }
     }
 
-
     public class NetWorkChangeReceiver extends BroadcastReceiver {
         private ConnectivityManager connectivityManager;
         private NetworkInfo info;
@@ -302,17 +381,17 @@ public class MainActivityNew extends BaseActivityNew implements View.OnClickList
             if (action.equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
                 connectivityManager = (ConnectivityManager) MainActivityNew.this.getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo mNetworkInfo = connectivityManager.getActiveNetworkInfo();
-                if(mNetworkInfo != null && mNetworkInfo.isAvailable()){
+                if (mNetworkInfo != null && mNetworkInfo.isAvailable()) {
                     switch (mNetworkInfo.getType()) {
-                        case  ConnectivityManager.TYPE_WIFI:
+                        case ConnectivityManager.TYPE_WIFI:
                             netStatuUpdate(ConnectivityManager.TYPE_WIFI);
                             break;
-                        case  ConnectivityManager.TYPE_ETHERNET:
+                        case ConnectivityManager.TYPE_ETHERNET:
                             netStatuUpdate(ConnectivityManager.TYPE_ETHERNET);
                             break;
                     }
 
-                }else{
+                } else {
                     netStatuUpdate(-1);
                 }
             }
@@ -356,9 +435,9 @@ public class MainActivityNew extends BaseActivityNew implements View.OnClickList
             String action = intent.getAction();
             if (action.equals(Intent.ACTION_TIME_TICK)) {
                 timeUpdate(SystemUtils.getTime(MainActivityNew.this));
-                if(!DateFormat.is24HourFormat(MainActivityNew.this)){
+                if (!DateFormat.is24HourFormat(MainActivityNew.this)) {
                     timeStatuUpdate(SystemUtils.getStatu());
-                }else{
+                } else {
                     timeStatuUpdate("");
                 }
             }

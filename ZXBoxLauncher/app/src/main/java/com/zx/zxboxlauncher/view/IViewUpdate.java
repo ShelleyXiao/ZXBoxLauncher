@@ -12,6 +12,6 @@ package com.zx.zxboxlauncher.view;
 
 public interface IViewUpdate {
 
-    void updateViewByTag();
+    void updateViewByTag(String tag);
 
 }

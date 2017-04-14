@@ -10,52 +10,43 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.zx.zxboxlauncher.BaseApplication;
 import com.zx.zxboxlauncher.R;
 import com.zx.zxboxlauncher.adpter.ScrollViewAppAdapter;
+import com.zx.zxboxlauncher.bean.Item;
 import com.zx.zxboxlauncher.utils.ApkManage;
 
 import java.util.List;
 
 /**
  * User: ShaudXiao
- * Date: 2017-04-13
- * Time: 17:03
+ * Date: 2017-04-14
+ * Time: 11:03
  * Company: zx
  * Description:
  * FIXME
  */
 
 @SuppressLint("ValidFragment")
-public class SelectApp extends DialogFragment {
+public class CheckApp extends DialogFragment {
 
-    IFavoriteUpdate update;
-    int index;
+    IViewUpdate update;
+    String tag;
     String title;
 
-    public SelectApp() {
+    public CheckApp() {
     }
 
-
-    public SelectApp(IFavoriteUpdate update, int position) {
-        // TODO Auto-generated constructor stub
-        this.index = position;
+    public CheckApp(IViewUpdate update, String tag) {
+        this.tag = tag;
         this.update = update;
         this.setStyle(0, R.style.Transparent);
     }
 
-    public SelectApp(IFavoriteUpdate update, int position, String title) {
-        // TODO Auto-generated constructor stub
-        this.index = position;
+    public CheckApp(IViewUpdate update, String tag, String title) {
+        this.tag = tag;
         this.update = update;
         this.title = title;
-
-    }
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
         this.setStyle(0, R.style.Transparent);
     }
 
@@ -78,15 +69,26 @@ public class SelectApp extends DialogFragment {
             public void onItemClick(BaseAdapter parent, View view, int position) {
                 // TODO Auto-generated method stub
                 PackageInfo info = (PackageInfo) parent.getItem(position);
-                ApkManage.selectApp(index, info.applicationInfo.packageName);
+                Item item = new Item();
+                item.setTag(tag);
+                item.setPkg(info.applicationInfo.packageName);
+
+                List<Item> current = BaseApplication.getInstance().mFinalDb.findAllByWhere(Item.class, "tag="
+                        + "'" + item.getTag() + "'");
+
+                if (current != null && current.size() > 0) {
+                    BaseApplication.getInstance().mFinalDb.update(item, "tag=" + "'" + item.getTag() + "'");
+                } else {
+                    BaseApplication.getInstance().mFinalDb.save(item);
+                }
+
+                update.updateViewByTag(tag);
                 dismiss();
-                update.refresh(index);
             }
         });
         List<PackageInfo> infos = ApkManage.getAllApps(getActivity());
         ScrollViewAppAdapter mAdapter = new ScrollViewAppAdapter(getActivity(), infos, R.layout.scroll_view_app_item);
         hs.setBaseAdapter(mAdapter);
-
         return v;
     }
 

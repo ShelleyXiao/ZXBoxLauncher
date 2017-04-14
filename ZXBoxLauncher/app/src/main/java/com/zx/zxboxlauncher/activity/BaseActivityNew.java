@@ -7,6 +7,7 @@ import android.animation.ObjectAnimator;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.net.ConnectivityManager;
@@ -176,6 +177,19 @@ public abstract class BaseActivityNew extends AppCompatActivity {
         }
         startActivityForResult(intent, requestCode);
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+    }
+
+    public boolean openApk(String pkg) {
+        try {
+            PackageManager pm = getPackageManager();
+            Intent intent = pm.getLaunchIntentForPackage(pkg);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            return true;
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            return false;
+        }
     }
 
     public void showToastLong(String msg) {

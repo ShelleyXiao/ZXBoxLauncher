@@ -6,6 +6,7 @@
                 android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/statu"
@@ -83,199 +84,249 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/app_more"-->
+            <!--style="@style/Content_View_Style_long_short"-->
+            <!--android:layout_toRightOf="@+id/main_filemanager_lay"-->
+            <!--android:background="@drawable/contentview"-->
+            <!--&gt;-->
+
+            <!--<ImageView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@drawable/voole_9"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_gravity="bottom"-->
+                <!--android:background="@drawable/border_down_shape"-->
+                <!--android:gravity="center_vertical|center_horizontal"-->
+                <!--android:text="@string/add"-->
+                <!--android:textColor="#ffffff"-->
+                <!--android:visibility="gone"/>-->
+
+
+        <!--</RelativeLayout>-->
+
+        <com.zx.zxboxlauncher.view.ContentView
             android:id="@+id/app_more"
             style="@style/Content_View_Style_long_short"
-            android:layout_toRightOf="@+id/main_filemanager_lay"
-            android:background="@drawable/contentview">
+            android:layout_toRightOf="@+id/main_filemanager_lay" >
+        </com.zx.zxboxlauncher.view.ContentView>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                android:src="@drawable/voole_9"/>
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/add_app_1"-->
+            <!--style="@style/Content_View_Style_long_short"-->
+            <!--android:layout_toRightOf="@id/main_filemanager_lay"-->
+            <!--android:layout_marginTop="@dimen/px10"-->
+            <!--android:layout_below="@+id/app_more"-->
+            <!--android:background="@drawable/contentview">-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="bottom"
-                android:background="@drawable/border_down_shape"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="@string/add"
-                android:textColor="#ffffff"
-                android:visibility="gone"/>
+            <!--<ImageView-->
+                <!--android:layout_width="@dimen/px160"-->
+                <!--android:layout_height="@dimen/px160"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginTop="@dimen/px20"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@drawable/add_common_icon"/>-->
 
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_gravity="bottom"-->
+                <!--android:background="@drawable/border_down_shape"-->
+                <!--android:gravity="center_vertical|center_horizontal"-->
+                <!--android:text="@string/add"-->
+                <!--android:textColor="#ffffff"/>-->
 
-        </RelativeLayout>
+        <!--</RelativeLayout>-->
 
-        <RelativeLayout
+        <com.zx.zxboxlauncher.view.ContentView
             android:id="@+id/add_app_1"
             style="@style/Content_View_Style_long_short"
             android:layout_toRightOf="@id/main_filemanager_lay"
             android:layout_marginTop="@dimen/px10"
-            android:layout_below="@+id/app_more"
-            android:background="@drawable/contentview">
+            android:layout_below="@+id/app_more" >
+        </com.zx.zxboxlauncher.view.ContentView>
 
-            <ImageView
-                android:layout_width="@dimen/px160"
-                android:layout_height="@dimen/px160"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/px20"
-                android:scaleType="fitXY"
-                android:src="@drawable/add_common_icon"/>
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/add_app_2"-->
+            <!--style="@style/Content_View_Style_short_short"-->
+            <!--android:layout_alignLeft="@+id/main_item_video"-->
+            <!--android:layout_below="@+id/main_item_video"-->
+            <!--android:background="@drawable/contentview">-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="bottom"
-                android:background="@drawable/border_down_shape"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="@string/add"
-                android:textColor="#ffffff"/>
+            <!--<ImageView-->
+                <!--android:layout_width="@dimen/px80"-->
+                <!--android:layout_height="@dimen/px80"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginTop="@dimen/px20"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@drawable/add_common_icon"/>-->
 
-        </RelativeLayout>
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_gravity="bottom"-->
+                <!--android:background="@drawable/border_down_shape"-->
+                <!--android:gravity="center_vertical|center_horizontal"-->
+                <!--android:text="@string/add"-->
+                <!--android:textColor="#ffffff"/>-->
 
-        <RelativeLayout
+
+        <!--</RelativeLayout>-->
+
+        <com.zx.zxboxlauncher.view.ContentView
             android:id="@+id/add_app_2"
             style="@style/Content_View_Style_short_short"
             android:layout_alignLeft="@+id/main_item_video"
-            android:layout_below="@+id/main_item_video"
-            android:background="@drawable/contentview">
+            android:layout_below="@+id/main_item_video" >
+        </com.zx.zxboxlauncher.view.ContentView>
 
-            <ImageView
-                android:layout_width="@dimen/px80"
-                android:layout_height="@dimen/px80"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/px20"
-                android:scaleType="fitXY"
-                android:src="@drawable/add_common_icon"/>
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/add_app_3"-->
+            <!--style="@style/Content_View_Style_short_short"-->
+            <!--android:layout_below="@+id/main_item_video"-->
+            <!--android:layout_toRightOf="@+id/add_app_2"-->
+            <!--android:background="@drawable/contentview">-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="bottom"
-                android:background="@drawable/border_down_shape"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="@string/add"
-                android:textColor="#ffffff"/>
+            <!--<ImageView-->
+                <!--android:layout_width="@dimen/px80"-->
+                <!--android:layout_height="@dimen/px80"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginTop="@dimen/px20"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@drawable/add_common_icon"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_gravity="bottom"-->
+                <!--android:background="@drawable/border_down_shape"-->
+                <!--android:gravity="center_vertical|center_horizontal"-->
+                <!--android:text="@string/add"-->
+                <!--android:textColor="#ffffff"/>-->
 
 
-        </RelativeLayout>
+        <!--</RelativeLayout>-->
 
-        <RelativeLayout
+        <com.zx.zxboxlauncher.view.ContentView
             android:id="@+id/add_app_3"
             style="@style/Content_View_Style_short_short"
             android:layout_below="@+id/main_item_video"
-            android:layout_toRightOf="@+id/add_app_2"
-            android:background="@drawable/contentview">
+            android:layout_toRightOf="@+id/add_app_2" >
+        </com.zx.zxboxlauncher.view.ContentView>
 
-            <ImageView
-                android:layout_width="@dimen/px80"
-                android:layout_height="@dimen/px80"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/px20"
-                android:scaleType="fitXY"
-                android:src="@drawable/add_common_icon"/>
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/add_app_4"-->
+            <!--style="@style/Content_View_Style_short_short"-->
+            <!--android:layout_below="@+id/main_item_video"-->
+            <!--android:layout_toRightOf="@+id/add_app_3"-->
+            <!--android:background="@drawable/contentview">-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="bottom"
-                android:background="@drawable/border_down_shape"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="@string/add"
-                android:textColor="#ffffff"/>
+            <!--<ImageView-->
+                <!--android:layout_width="@dimen/px80"-->
+                <!--android:layout_height="@dimen/px80"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginTop="@dimen/px20"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@drawable/add_common_icon"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_gravity="bottom"-->
+                <!--android:background="@drawable/border_down_shape"-->
+                <!--android:gravity="center_vertical|center_horizontal"-->
+                <!--android:text="@string/add"-->
+                <!--android:textColor="#ffffff"/>-->
 
 
-        </RelativeLayout>
+        <!--</RelativeLayout>-->
 
-        <RelativeLayout
+        <com.zx.zxboxlauncher.view.ContentView
             android:id="@+id/add_app_4"
             style="@style/Content_View_Style_short_short"
             android:layout_below="@+id/main_item_video"
-            android:layout_toRightOf="@+id/add_app_3"
-            android:background="@drawable/contentview">
+            android:layout_toRightOf="@+id/add_app_3" >
+        </com.zx.zxboxlauncher.view.ContentView>
 
-            <ImageView
-                android:layout_width="@dimen/px80"
-                android:layout_height="@dimen/px80"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/px20"
-                android:scaleType="fitXY"
-                android:src="@drawable/add_common_icon"/>
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/add_app_5"-->
+            <!--style="@style/Content_View_Style_short_short"-->
+            <!--android:layout_below="@+id/main_item_video"-->
+            <!--android:layout_toRightOf="@+id/add_app_4"-->
+            <!--android:background="@drawable/contentview">-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="bottom"
-                android:background="@drawable/border_down_shape"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="@string/add"
-                android:textColor="#ffffff"/>
+            <!--<ImageView-->
+                <!--android:layout_width="@dimen/px80"-->
+                <!--android:layout_height="@dimen/px80"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginTop="@dimen/px20"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@drawable/add_common_icon"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_gravity="bottom"-->
+                <!--android:background="@drawable/border_down_shape"-->
+                <!--android:gravity="center_vertical|center_horizontal"-->
+                <!--android:text="@string/add"-->
+                <!--android:textColor="#ffffff"/>-->
 
 
-        </RelativeLayout>
+        <!--</RelativeLayout>-->
 
-        <RelativeLayout
+        <com.zx.zxboxlauncher.view.ContentView
             android:id="@+id/add_app_5"
             style="@style/Content_View_Style_short_short"
             android:layout_below="@+id/main_item_video"
-            android:layout_toRightOf="@+id/add_app_4"
-            android:background="@drawable/contentview">
+            android:layout_toRightOf="@+id/add_app_4" >
+        </com.zx.zxboxlauncher.view.ContentView>
 
-            <ImageView
-                android:layout_width="@dimen/px80"
-                android:layout_height="@dimen/px80"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/px20"
-                android:scaleType="fitXY"
-                android:src="@drawable/add_common_icon"/>
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/add_app_6"-->
+            <!--style="@style/Content_View_Style_short_short"-->
+            <!--android:layout_below="@+id/main_item_video"-->
+            <!--android:layout_toRightOf="@+id/add_app_5"-->
+            <!--android:background="@drawable/contentview">-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="bottom"
-                android:background="@drawable/border_down_shape"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="@string/add"
-                android:textColor="#ffffff"/>
+            <!--<ImageView-->
+                <!--android:layout_width="@dimen/px80"-->
+                <!--android:layout_height="@dimen/px80"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginTop="@dimen/px20"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@drawable/add_common_icon"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_gravity="bottom"-->
+                <!--android:background="@drawable/border_down_shape"-->
+                <!--android:gravity="center_vertical|center_horizontal"-->
+                <!--android:text="@string/add"-->
+                <!--android:textColor="#ffffff"/>-->
 
 
-        </RelativeLayout>
+        <!--</RelativeLayout>-->
 
-        <RelativeLayout
+        <com.zx.zxboxlauncher.view.ContentView
             android:id="@+id/add_app_6"
             style="@style/Content_View_Style_short_short"
             android:layout_below="@+id/main_item_video"
-            android:layout_toRightOf="@+id/add_app_5"
-            android:background="@drawable/contentview">
-
-            <ImageView
-                android:layout_width="@dimen/px80"
-                android:layout_height="@dimen/px80"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/px20"
-                android:scaleType="fitXY"
-                android:src="@drawable/add_common_icon"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="bottom"
-                android:background="@drawable/border_down_shape"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="@string/add"
-                android:textColor="#ffffff"/>
-
-
-        </RelativeLayout>
+            android:layout_toRightOf="@+id/add_app_5">
+        </com.zx.zxboxlauncher.view.ContentView>
 
 
     </RelativeLayout>
