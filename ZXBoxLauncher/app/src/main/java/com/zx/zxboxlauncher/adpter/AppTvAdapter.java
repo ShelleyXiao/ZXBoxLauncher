@@ -42,6 +42,10 @@ public class AppTvAdapter extends CustomRecyclerView.CustomAdapter<AppInfo> {
         notifyDataSetChanged();
     }
 
+    public List<AppInfo> getDatas() {
+        return mData;
+    }
+
     @Override
     protected RecyclerView.ViewHolder onSetViewHolder(View view) {
         return new GalleryViewHolder(view);

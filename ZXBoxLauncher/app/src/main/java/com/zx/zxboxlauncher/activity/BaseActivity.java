@@ -53,7 +53,27 @@ public abstract class BaseActivity extends AppCompatActivity {
         BaseApplication.getInstance().addActivity(this);
 
         preliminary();
-        registerReceiver();
+//        registerReceiver();
+
+
+//        new Thread(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                while (true) {
+//                    try {
+//                        Thread.sleep(5000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                    View rootview = BaseActivity.this.getWindow().getDecorView();
+//                    View aaa = rootview.findFocus();
+//                    if (aaa != null)
+//                        Logger.getLogger().d("" + aaa.toString());
+//                }
+//
+//            }
+//        }).start();
     }
 
     public void onResume() {

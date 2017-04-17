@@ -58,6 +58,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.SettingMainActivity"></activity>
+
         <activity android:name="com.zx.zxtvsettings.activity.NetSetting"></activity>
         <activity android:name="com.zx.zxtvsettings.activity.EthernetActvity"></activity>
         <activity android:name="com.zx.zxtvsettings.activity.WifiActivity"></activity>

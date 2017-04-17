@@ -286,4 +286,17 @@ public class ApkManage {
 
 		return mAppInfo;
 	}
+
+	public static ResolveInfo getAppReaolveInfo(Context context, String packageName) {
+		PackageManager mPackManager = context.getPackageManager();
+		Intent mainiIntent = new Intent(Intent.ACTION_MAIN, null);
+		mainiIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+		mainiIntent.setPackage(packageName);
+		List<ResolveInfo> resolveInfos = mPackManager.queryIntentActivities(mainiIntent, 0);
+		if(resolveInfos != null && resolveInfos.size() > 0) {
+			return resolveInfos.get(0);
+		}
+
+		return null;
+    }
 }
