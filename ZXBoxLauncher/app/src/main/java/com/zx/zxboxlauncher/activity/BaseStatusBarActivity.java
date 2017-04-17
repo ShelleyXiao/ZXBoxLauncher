@@ -16,8 +16,8 @@ import android.widget.TextView;
 
 import com.zx.zxboxlauncher.R;
 import com.zx.zxboxlauncher.utils.SystemUtils;
-
-import static com.zx.zxboxlauncher.R.id.statu;
+import com.zx.zxtvsettings.activity.NetSetting;
+import com.zx.zxtvsettings.activity.SettingMainActivity;
 
 /**
  * User: ShaudXiao
@@ -29,7 +29,7 @@ import static com.zx.zxboxlauncher.R.id.statu;
  */
 
 
-public abstract class BaseStatusBarActivity extends BaseActivityNew{
+public class BaseStatusBarActivity extends BaseActivityNew{
 
     private ImageView netStatu, setStatu;
     private LinearLayout net, set;
@@ -69,6 +69,21 @@ public abstract class BaseStatusBarActivity extends BaseActivityNew{
     public void onResume() {
         super.onResume();
         register();
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    protected void setupViews() {
+
+    }
+
+    @Override
+    protected void initialized() {
+
     }
 
     @Override
@@ -124,7 +139,9 @@ public abstract class BaseStatusBarActivity extends BaseActivityNew{
                             return true;
                         case KeyEvent.KEYCODE_DPAD_CENTER:
                         case KeyEvent.KEYCODE_ENTER:
-
+                            Intent intent = new Intent(BaseStatusBarActivity.this, SettingMainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
                             break;
                     }
                 }
@@ -146,7 +163,9 @@ public abstract class BaseStatusBarActivity extends BaseActivityNew{
                             return true;
                         case KeyEvent.KEYCODE_DPAD_CENTER:
                         case KeyEvent.KEYCODE_ENTER:
-
+                            Intent intent = new Intent(BaseStatusBarActivity.this, NetSetting.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
                             break;
                     }
                 }
@@ -203,7 +222,7 @@ public abstract class BaseStatusBarActivity extends BaseActivityNew{
     }
 
     private void netStatuUpdate(int flag) {
-        switch (statu) {
+        switch (flag) {
             case ConnectivityManager.TYPE_WIFI:
                 netStatu.setImageResource(R.drawable.wlan);
                 break;
@@ -215,7 +234,6 @@ public abstract class BaseStatusBarActivity extends BaseActivityNew{
                 break;
         }
     }
-
 
     public class NetWorkChangeReceiver extends BroadcastReceiver {
         private ConnectivityManager connectivityManager;
@@ -256,8 +274,6 @@ public abstract class BaseStatusBarActivity extends BaseActivityNew{
         }
     }
 
-    public abstract void updateApp(Intent intent);
-
     public class TimeReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -271,5 +287,9 @@ public abstract class BaseStatusBarActivity extends BaseActivityNew{
                 }
             }
         }
+    }
+
+    public  void updateApp(Intent intent) {
+
     }
 }

@@ -5,11 +5,26 @@
     android:layout_height="match_parent"
     android:paddingTop="@dimen/activity_vertical_margin">
 
-    <com.zx.zxboxlauncher.view.StatusTitleView
-        android:id="@+id/status_title_view"
+    <!--<com.zx.zxboxlauncher.view.StatusTitleView-->
+        <!--android:id="@+id/status_title_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/px200"-->
+        <!--/>-->
+
+    <include
+        android:id="@+id/statu"
+        layout="@layout/status_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/px200"
+        android:layout_height="@dimen/px130"
+        android:layout_marginTop="@dimen/px10"
         />
+
+    <View
+        android:id="@+id/status_back"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="@drawable/tran"
+        android:visibility="invisible"/>
 
     <TextView
         android:layout_width="wrap_content"

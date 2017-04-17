@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zx.zxboxlauncher.R;
-import com.zx.zxboxlauncher.activity.BaseActivity;
+import com.zx.zxboxlauncher.activity.BaseStatusBarActivity;
 import com.zx.zxtvsettings.Utils.Tools;
 import com.zx.zxtvsettings.adapter.MyBluetoothAdapter;
 
@@ -39,7 +39,7 @@ import butterknife.OnClick;
  * FIXME
  */
 
-public class BluethoothActivity extends BaseActivity {
+public class BluethoothActivity extends BaseStatusBarActivity {
 
     @BindView(R.id.bluetooth_iv_open)
     ImageView mBluetoothIvOpen;

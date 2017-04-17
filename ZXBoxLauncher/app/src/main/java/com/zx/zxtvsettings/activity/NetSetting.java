@@ -55,11 +55,11 @@ public class NetSetting extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
-        if(NetWorkUtil.isNetWorkAvailable(this)) {
-            mSettingNetState.setText(R.string.net_state_connected);
-        } else {
-            mSettingNetState.setText(R.string.net_state_disconnected);
-        }
+//        if(NetWorkUtil.isNetWorkAvailable(this)) {
+//            mSettingNetState.setText(R.string.net_state_connected);
+//        } else {
+//            mSettingNetState.setText(R.string.net_state_disconnected);
+//        }
     }
 
 

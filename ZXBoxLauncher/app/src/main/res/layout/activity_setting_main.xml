@@ -5,20 +5,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bg"
+    android:background="@drawable/bg"
     tools:context=".activity.MainActivity">
 
-    <com.zx.zxtvsettings.view.ViewStatusTitleView
-        android:id="@+id/status_bar"
+    <!--<com.zx.zxtvsettings.view.ViewStatusTitleView-->
+    <!--android:id="@+id/status_bar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/px60"-->
+    <!--android:layout_margin="@dimen/px20"/>-->
+
+    <include
+        android:id="@+id/statu"
+        layout="@layout/status_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/px60"
-        android:layout_margin="@dimen/px20"/>
+        android:layout_height="@dimen/px130"
+        android:layout_marginTop="@dimen/px10"
+        />
+
+    <View
+        android:id="@+id/status_back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/tran"
+        android:visibility="invisible"/>
+
 
     <HorizontalScrollView
         android:id="@+id/hscroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/status_bar"
+        android:layout_below="@+id/statu"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:fillViewport="true"
@@ -29,6 +45,7 @@
             android:id="@+id/main_lay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:paddingLeft="90dp"
             android:paddingRight="80dp">
 
@@ -39,11 +56,11 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="@dimen/px100"
                 android:layout_marginTop="@dimen/px100"
-                android:src="@drawable/setting_net"
                 android:background="@drawable/sel_main_focus"
-                android:scaleType="fitXY"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/setting_net">
 
 
             </ImageButton>
@@ -57,11 +74,11 @@
                 android:layout_below="@+id/setting_net"
                 android:layout_marginLeft="@dimen/px100"
                 android:layout_marginTop="@dimen/px5"
-                android:src="@drawable/setting_display"
                 android:background="@drawable/sel_main_focus"
-                android:scaleType="fitXY"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/setting_display">
 
 
             </ImageButton>
@@ -73,11 +90,11 @@
                 android:layout_marginLeft="@dimen/px5"
                 android:layout_marginTop="@dimen/px100"
                 android:layout_toRightOf="@+id/setting_net"
-                android:src="@drawable/setting_bluethee"
                 android:background="@drawable/sel_main_focus"
-                android:scaleType="fitXY"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/setting_bluethee">
 
 
             </ImageButton>
@@ -90,11 +107,11 @@
                 android:layout_marginLeft="@dimen/px5"
                 android:layout_marginTop="@dimen/px5"
                 android:layout_toRightOf="@+id/setting_display"
-                android:src="@drawable/setting_uninstall"
                 android:background="@drawable/sel_main_focus"
-                android:scaleType="fitXY"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/setting_uninstall">
 
 
             </ImageButton>
@@ -106,11 +123,11 @@
                 android:layout_marginLeft="@dimen/px5"
                 android:layout_marginTop="@dimen/px100"
                 android:layout_toRightOf="@+id/setting_bluethee"
-                android:src="@drawable/setting_more"
                 android:background="@drawable/sel_main_focus"
-                android:scaleType="fitXY"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/setting_more">
 
             </ImageButton>
 
@@ -122,11 +139,11 @@
                 android:layout_marginLeft="@dimen/px5"
                 android:layout_marginTop="@dimen/px5"
                 android:layout_toRightOf="@+id/setting_uninstall"
-                android:src="@drawable/setting_about"
                 android:background="@drawable/sel_main_focus"
-                android:scaleType="fitXY"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/setting_about">
 
 
             </ImageButton>
@@ -138,11 +155,11 @@
                 android:layout_marginLeft="@dimen/px5"
                 android:layout_marginTop="@dimen/px100"
                 android:layout_toRightOf="@+id/setting_more"
-                android:src="@drawable/setting_clean"
                 android:background="@drawable/sel_main_focus"
-                android:scaleType="fitXY"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/setting_clean">
 
             </ImageButton>
 
@@ -150,6 +167,14 @@
         </RelativeLayout>
 
     </HorizontalScrollView>
+
+    <ImageView
+        android:id="@+id/mainUpView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/health_focus_border"
+        android:scaleType="fitCenter"
+        android:visibility="gone"/>
 
 
 </RelativeLayout>
