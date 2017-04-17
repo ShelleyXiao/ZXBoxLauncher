@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.zx.zxboxlauncher.R;
 import com.zx.zxboxlauncher.bean.AppInfo;
+import com.zx.zxboxlauncher.utils.Logger;
 import com.zx.zxboxlauncher.widget.CustomRecyclerView;
-import com.zx.zxtvsettings.Utils.Logger;
 
 import java.util.List;
 

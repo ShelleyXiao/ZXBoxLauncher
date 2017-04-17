@@ -17,7 +17,7 @@ import com.zx.zxboxlauncher.BaseApplication;
 import com.zx.zxboxlauncher.R;
 import com.zx.zxboxlauncher.bean.Item;
 import com.zx.zxboxlauncher.utils.Constant;
-import com.zx.zxtvsettings.Utils.Logger;
+import com.zx.zxboxlauncher.utils.Logger;
 
 import java.util.List;
 

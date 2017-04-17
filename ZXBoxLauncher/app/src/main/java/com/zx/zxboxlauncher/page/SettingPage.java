@@ -1,15 +1,9 @@
 package com.zx.zxboxlauncher.page;
 
-import android.content.Intent;
 import android.view.View;
 
 import com.zx.zxboxlauncher.R;
 import com.zx.zxboxlauncher.activity.MainActivity;
-import com.zx.zxtvsettings.activity.AboutActivity;
-import com.zx.zxtvsettings.activity.AppUninstallActivity;
-import com.zx.zxtvsettings.activity.BluethoothActivity;
-import com.zx.zxtvsettings.activity.DisplayModeActivity;
-import com.zx.zxtvsettings.activity.NetSetting;
 
 
 /**
@@ -46,33 +40,33 @@ public class SettingPage extends  BasePage implements View.OnClickListener {
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()) {
-            case R.id.setting_net:
-                Intent intent= new Intent();
-                intent.setClass(thisActivity.getApplicationContext(), NetSetting.class);
-                thisActivity.startActivity(intent);
-//                thisActivity.startActivity(NetSetting.class);
-                break;
-            case R.id.setting_display:
-                thisActivity.startActivity(DisplayModeActivity.class);
-                break;
-            case R.id.setting_bluethee:
-                thisActivity.startActivity(BluethoothActivity.class);
-                break;
-            case R.id.setting_uninstall:
-                thisActivity.startActivity(AppUninstallActivity.class);
-                break;
-            case R.id.setting_more:
-//                Intent intent =  new Intent(Settings.ACTION_SETTINGS);
+//        switch (view.getId()) {
+//            case R.id.setting_net:
+//                Intent intent= new Intent();
+//                intent.setClass(thisActivity.getApplicationContext(), NetSetting.class);
 //                thisActivity.startActivity(intent);
-                break;
-            case R.id.setting_about:
-                thisActivity.startActivity(AboutActivity.class);
-                break;
-//            case R.id.setting_clear:
-//                thisActivity.startActivity(ClearGarbageActivity.class);
+////                thisActivity.startActivity(NetSetting.class);
 //                break;
-        }
+//            case R.id.setting_display:
+//                thisActivity.startActivity(DisplayModeActivity.class);
+//                break;
+//            case R.id.setting_bluethee:
+//                thisActivity.startActivity(BluethoothActivity.class);
+//                break;
+//            case R.id.setting_uninstall:
+//                thisActivity.startActivity(AppUninstallActivity.class);
+//                break;
+//            case R.id.setting_more:
+////                Intent intent =  new Intent(Settings.ACTION_SETTINGS);
+////                thisActivity.startActivity(intent);
+//                break;
+//            case R.id.setting_about:
+//                thisActivity.startActivity(AboutActivity.class);
+//                break;
+////            case R.id.setting_clear:
+////                thisActivity.startActivity(ClearGarbageActivity.class);
+////                break;
+//        }
 
     }
 }

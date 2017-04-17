@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.zx.zxboxlauncher.R;
-import com.zx.zxtvsettings.Utils.Logger;
+import com.zx.zxboxlauncher.utils.Logger;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -13,7 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zx.zxtvsettings.Utils.Logger;
+import com.zx.zxboxlauncher.utils.Logger;
 
 import java.util.List;
 

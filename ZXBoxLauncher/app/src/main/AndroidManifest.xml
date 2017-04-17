@@ -50,7 +50,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.MainActivityNew">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -58,36 +58,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.zx.zxtvsettings.activity.SettingMainActivity"></activity>
-
-        <activity android:name="com.zx.zxtvsettings.activity.NetSetting"></activity>
-        <activity android:name="com.zx.zxtvsettings.activity.EthernetActvity"></activity>
-        <activity android:name="com.zx.zxtvsettings.activity.WifiActivity"></activity>
-        <activity android:name="com.zx.zxtvsettings.activity.WIfiApActivity"></activity>
-        <activity android:name="com.zx.zxtvsettings.activity.BluethoothActivity"></activity>
-        <activity android:name="com.zx.zxtvsettings.activity.SpeedTestActivity"></activity>
-        <activity android:name="com.zx.zxtvsettings.activity.AppUninstallActivity"></activity>
-        <activity android:name="com.zx.zxtvsettings.activity.AboutActivity"></activity>
-        <activity android:name="com.zx.zxtvsettings.activity.DisplayModeActivity"></activity>
         <activity android:name=".activity.MoreActivity"></activity>
 
-        <activity
-            android:name="com.zx.zxtvsettings.wifi.WifiConnectDailogActivity"
-            android:excludeFromRecents="true"
-            android:launchMode="singleInstance"
-            android:noHistory="true"
-            android:theme="@style/PlatformDialog">
 
-            <intent-filter>
-                <category android:name="android.intent.category.INFO"/>
-            </intent-filter>
-
-            <intent-filter>
-                <action android:name="com.zx.wifi.connecter.action.CONNECT_OR_EDIT"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-
-        </activity>
     </application>
 
 </manifest>

@@ -16,8 +16,6 @@ import android.widget.TextView;
 
 import com.zx.zxboxlauncher.R;
 import com.zx.zxboxlauncher.utils.SystemUtils;
-import com.zx.zxtvsettings.activity.NetSetting;
-import com.zx.zxtvsettings.activity.SettingMainActivity;
 
 /**
  * User: ShaudXiao
@@ -139,7 +137,8 @@ public class BaseStatusBarActivity extends BaseActivityNew{
                             return true;
                         case KeyEvent.KEYCODE_DPAD_CENTER:
                         case KeyEvent.KEYCODE_ENTER:
-                            Intent intent = new Intent(BaseStatusBarActivity.this, SettingMainActivity.class);
+                            Intent intent = new Intent();
+                            intent.setClassName("com.zx.zxtvsettings", "com.zx.zxtvsettings.activity.MainActivity");
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             break;
@@ -163,7 +162,8 @@ public class BaseStatusBarActivity extends BaseActivityNew{
                             return true;
                         case KeyEvent.KEYCODE_DPAD_CENTER:
                         case KeyEvent.KEYCODE_ENTER:
-                            Intent intent = new Intent(BaseStatusBarActivity.this, NetSetting.class);
+                            Intent intent = new Intent();
+                            intent.setClassName("com.zx.zxtvsettings", "com.zx.zxtvsettings.activity.NetSetting");
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             break;

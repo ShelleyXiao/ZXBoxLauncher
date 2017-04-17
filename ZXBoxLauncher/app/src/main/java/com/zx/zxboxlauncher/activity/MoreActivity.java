@@ -12,8 +12,8 @@ import com.zx.zxboxlauncher.adpter.AppTvAdapter;
 import com.zx.zxboxlauncher.adpter.SpaceItemDecoration;
 import com.zx.zxboxlauncher.bean.AppInfo;
 import com.zx.zxboxlauncher.utils.ApkManage;
+import com.zx.zxboxlauncher.utils.Logger;
 import com.zx.zxboxlauncher.widget.CustomRecyclerView;
-import com.zx.zxtvsettings.Utils.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
