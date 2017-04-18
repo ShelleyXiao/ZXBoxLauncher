@@ -475,4 +475,12 @@
         android:scaleType="fitCenter"
         android:visibility="gone"/>
 
+    <!--<com.zx.zxboxlauncher.view.BreathImageview-->
+        <!--android:id="@+id/mainUpView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/health_focus_border"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--android:visibility="gone"/>-->
+
 </RelativeLayout>

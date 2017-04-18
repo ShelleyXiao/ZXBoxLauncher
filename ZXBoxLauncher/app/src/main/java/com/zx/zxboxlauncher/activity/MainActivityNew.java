@@ -1,5 +1,6 @@
 package com.zx.zxboxlauncher.activity;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.view.KeyEvent;
@@ -169,13 +170,22 @@ public class MainActivityNew extends BaseStatusBarActivity implements View.OnCli
                     case R.id.add_app_6:
                         if (downFlag) {
                             downFlag = false;
+
+                            mFavoriteApp = (FavoriteApp) getFragmentManager().findFragmentByTag("FAVORITEAPP");
                             if (mFavoriteApp == null) {
                                 mFavoriteApp = new FavoriteApp();
+                                if (!mFavoriteApp.isVisible()) {
+                                    mFavoriteApp.show(getFragmentManager(), "FAVORITEAPP");
+                                }
+                            } else {
+                                if (!mFavoriteApp.isVisible()) {
+//                                    mFavoriteApp.show(getFragmentManager(), "FAVORITEAPP");
+                                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                                    ft.show(mFavoriteApp);
+                                }
                             }
 
-                            if (!mFavoriteApp.isVisible()) {
-                                mFavoriteApp.show(getFragmentManager(), "FAVORITEAPP");
-                            }
+
                             return true;
                         }
                         break;

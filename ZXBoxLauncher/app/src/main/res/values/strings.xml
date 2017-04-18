@@ -36,4 +36,6 @@
     <string name="apps">应用程序</string>
     <string name="app_delete_long">长按ok移除应用</string>
 
+    <string name="setting_uninstall">设置未安装</string>
+
 </resources>

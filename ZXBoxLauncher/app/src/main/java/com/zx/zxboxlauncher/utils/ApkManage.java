@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.text.TextUtils;
 
 import com.zx.zxboxlauncher.BaseApplication;
 import com.zx.zxboxlauncher.bean.AppInfo;
@@ -22,6 +23,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.zx.zxboxlauncher.R.raw.app;
+import static com.zx.zxboxlauncher.R.string.apps;
 
 public class ApkManage {
 	public static PackageInfo getAPKInfo(Context ctx, String apk, boolean type) {// 获取apk的信息
@@ -89,7 +91,10 @@ public class ApkManage {
 	    return apps;  
 	} 
 	
-	public static List<PackageInfo> getAllApps(Context ctx,String pkgs) {  
+	public static List<PackageInfo> getAllApps(Context ctx,String pkgs) {
+		if(ctx == null || TextUtils.isEmpty(pkgs)) {
+			return null;
+		}
 		List<PackageInfo> apps = new ArrayList<PackageInfo>();
 		String pkg[] = pkgs.split(";");
 		PackageManager pm = ctx.getPackageManager();

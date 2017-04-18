@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zx.zxboxlauncher.R;
+import com.zx.zxboxlauncher.utils.ApkManage;
 import com.zx.zxboxlauncher.utils.SystemUtils;
 
 /**
@@ -27,7 +28,7 @@ import com.zx.zxboxlauncher.utils.SystemUtils;
  */
 
 
-public class BaseStatusBarActivity extends BaseActivityNew{
+public class BaseStatusBarActivity extends BaseActivityNew {
 
     private ImageView netStatu, setStatu;
     private LinearLayout net, set;
@@ -137,10 +138,17 @@ public class BaseStatusBarActivity extends BaseActivityNew{
                             return true;
                         case KeyEvent.KEYCODE_DPAD_CENTER:
                         case KeyEvent.KEYCODE_ENTER:
-                            Intent intent = new Intent();
-                            intent.setClassName("com.zx.zxtvsettings", "com.zx.zxtvsettings.activity.MainActivity");
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
+
+                            if (ApkManage.checkInstall(BaseStatusBarActivity.this, "com.zx.zxtvsettings")) {
+                                Intent intent = new Intent();
+
+                                intent.setClassName("com.zx.zxtvsettings", "com.zx.zxtvsettings.activity.MainActivity");
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            } else {
+                                showToastLong(getString(R.string.setting_uninstall));
+                            }
+
                             break;
                     }
                 }
@@ -152,7 +160,6 @@ public class BaseStatusBarActivity extends BaseActivityNew{
 
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                // TODO Auto-generated method stub
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     switch (keyCode) {
                         case KeyEvent.KEYCODE_DPAD_DOWN:
@@ -162,10 +169,15 @@ public class BaseStatusBarActivity extends BaseActivityNew{
                             return true;
                         case KeyEvent.KEYCODE_DPAD_CENTER:
                         case KeyEvent.KEYCODE_ENTER:
-                            Intent intent = new Intent();
-                            intent.setClassName("com.zx.zxtvsettings", "com.zx.zxtvsettings.activity.NetSetting");
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
+                            if (ApkManage.checkInstall(BaseStatusBarActivity.this, "com.zx.zxtvsettings")) {
+                                Intent intent = new Intent();
+                                intent.setClassName("com.zx.zxtvsettings", "com.zx.zxtvsettings.activity.NetSetting");
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            } else {
+                                showToastLong(getString(R.string.setting_uninstall));
+                            }
+
                             break;
                     }
                 }
@@ -289,7 +301,7 @@ public class BaseStatusBarActivity extends BaseActivityNew{
         }
     }
 
-    public  void updateApp(Intent intent) {
+    public void updateApp(Intent intent) {
 
     }
 }
