@@ -27,10 +27,8 @@ import butterknife.Unbinder;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-    /**
-     * LOG打印标签
-     */
     public static final String TAG = BaseActivity.class.getSimpleName();
+
     private MyConnectionChanngeReceiver myReceiver;
     private boolean isNetWork = true;
     public Context context;
@@ -287,7 +285,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
-        unregisterReceiver();
+//        unregisterReceiver();
     }
 
     @Override
