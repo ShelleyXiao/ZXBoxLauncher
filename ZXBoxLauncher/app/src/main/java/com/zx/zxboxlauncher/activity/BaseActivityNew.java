@@ -22,7 +22,6 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Toast;
 
-import com.zx.zxboxlauncher.BaseApplication;
 import com.zx.zxboxlauncher.R;
 import com.zx.zxboxlauncher.utils.NetWorkUtil;
 
@@ -44,6 +43,8 @@ public abstract class BaseActivityNew extends AppCompatActivity {
 
     protected View currentView;
 
+    protected String Ip;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +59,7 @@ public abstract class BaseActivityNew extends AppCompatActivity {
             getWindow().setBackgroundDrawable(null);
 
         }
-        BaseApplication.getInstance().addActivity(this);
-
-        Bundle bundle = getIntent().getExtras();
+//        BaseApplication.getInstance().addActivity(this);
 
 
         //向用户展示信息前的准备工作在这个方法里处理
@@ -73,6 +72,8 @@ public abstract class BaseActivityNew extends AppCompatActivity {
         if (!NetWorkUtil.isNetWorkAvailable(this)) {
             netWorkNo();
         }
+
+
     }
 
     public void onPause() {
@@ -289,6 +290,10 @@ public abstract class BaseActivityNew extends AppCompatActivity {
             case TRIM_MEMORY_UI_HIDDEN:
                 break;
         }
+
+    }
+
+    private void getNetworkIp() {
 
     }
 

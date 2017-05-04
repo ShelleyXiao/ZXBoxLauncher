@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true" android:drawable="@drawable/atm_bt12_f"></item>
+    <item android:state_selected="true" android:drawable="@drawable/atm_bt12_f"></item>
+
+    <item android:drawable="@drawable/atm_bt12"></item>
+
+</selector>

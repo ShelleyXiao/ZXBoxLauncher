@@ -93,6 +93,7 @@ public class MainActivityNew extends BaseStatusBarActivity implements View.OnCli
 
     @Override
     protected void initialized() {
+        super.initialized();
 
         startDownAppAnim();
 

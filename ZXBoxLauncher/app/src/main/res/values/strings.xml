@@ -38,4 +38,12 @@
 
     <string name="setting_uninstall">设置未安装</string>
 
+    <string name="weather_default_location">深圳</string>
+
+    <string name="weather_switch_city">切换城市</string>
+    <string name="weather_pm">PM2.5</string>
+    <string name="weather_pm_qlty">优</string>
+
+    <string name="weather_city_select">当前城市:</string>
+
 </resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="@dimen/px240"
+                android:layout_height="@dimen/px140"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/px15"
+                android:gravity="center"
+                android:background="@drawable/city_item_focus">
+
+    <TextView
+        android:id="@+id/city_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:textColor="@android:color/primary_text_dark"
+        android:textSize="24sp"
+        />
+</RelativeLayout>
+

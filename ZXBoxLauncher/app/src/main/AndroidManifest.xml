@@ -31,12 +31,12 @@
     <!-- WindowManger 权限(浮动窗口)-->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
-    <supports-screens
-        android:anyDensity="true"
-        android:largeScreens="true"
-        android:normalScreens="true"
-        android:resizeable="true"
-        android:smallScreens="true"/>
+    <!--<supports-screens-->
+        <!--android:anyDensity="true"-->
+        <!--android:largeScreens="true"-->
+        <!--android:normalScreens="true"-->
+        <!--android:resizeable="true"-->
+        <!--android:smallScreens="true"/>-->
 
     <!-- 禁止触摸屏 -->
     <uses-feature
@@ -60,6 +60,10 @@
         </activity>
 
         <activity android:name=".activity.MoreActivity"></activity>
+
+        <activity android:name=".weather.ChoiceCityActivity"></activity>
+
+        <service android:name=".weather.AutoUpdateService"></service>
 
 
     </application>

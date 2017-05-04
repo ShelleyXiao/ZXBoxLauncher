@@ -37,8 +37,8 @@ public class AppTvAdapter extends CustomRecyclerView.CustomAdapter<AppInfo> {
     public void setDatas(List<AppInfo> datas) {
         mData.clear();
         mData.addAll(datas);
-        mData.addAll(datas);
-        mData.addAll(datas);
+//        mData.addAll(datas);
+//        mData.addAll(datas);
         notifyDataSetChanged();
     }
 

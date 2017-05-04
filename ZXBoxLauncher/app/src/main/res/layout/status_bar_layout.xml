@@ -106,4 +106,67 @@
             android:visibility="gone"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/weather"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/px72"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/px3"
+
+        android:layout_centerInParent="true"
+        android:background="@drawable/bar_selector"
+        android:clickable="true"
+        android:descendantFocusability="blocksDescendants"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal"
+        android:paddingRight="@dimen/px2">
+
+        <ImageView
+            android:id="@+id/weather_img"
+            android:layout_width="@dimen/px72"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            />
+
+        <TextView
+            android:id="@+id/weather_explain"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/px20"
+            android:gravity="center_vertical"
+            android:text="@string/setting"
+            android:textColor="@color/white"
+            android:textSize="@dimen/px56"
+            />
+
+        <TextView
+            android:id="@+id/temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/px20"
+            android:gravity="center_vertical"
+            android:text="@string/setting"
+            android:textColor="@color/white"
+            android:textSize="@dimen/px56"
+            />
+
+
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/px20"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/px5"
+            android:text="@string/weather_default_location"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            />
+
+    </LinearLayout>
+
 </RelativeLayout>

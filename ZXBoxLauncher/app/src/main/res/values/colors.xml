@@ -40,4 +40,6 @@
 
     <color name="time_statu">#ff03a9ff</color>
 
+    <color name="pm_qlty_bad">#f00</color>
+
 </resources>

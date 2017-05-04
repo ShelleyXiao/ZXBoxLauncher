@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/px30"
+                android:layout_marginLeft="@dimen/px50"
+                android:layout_marginRight="@dimen/px50"
+                android:layout_marginTop="@dimen/px30"
+                android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/weather_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:paddingRight="@dimen/px80"
+        >
+
+        <TextView
+            android:id="@+id/week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            />
+
+        <ImageView
+            android:id="@+id/weather_icon"
+            android:layout_width="@dimen/px180"
+            android:layout_height="@dimen/px180"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/w_99"
+            />
+
+        <TextView
+            android:id="@+id/explain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            />
+
+        <TextView
+            android:id="@+id/temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            />
+
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="@dimen/px1"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/weather_diviline"
+        android:layout_marginBottom="@dimen/px80"
+        />
+
+</RelativeLayout>
