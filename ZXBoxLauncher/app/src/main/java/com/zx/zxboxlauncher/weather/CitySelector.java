@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
@@ -155,6 +156,27 @@ public class CitySelector extends DialogFragment {
         mAdapter = new CityAdapter(getActivity(), mDataList);
 
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    Logger.getLogger().d(" mRecyclerView focued");
+                    if(mRecyclerView.getChildCount() > 0) {
+                        mRecyclerView.getChildAt(0).requestFocus();
+                    }
+                }
+            }
+        });
+
+        mRecyclerView.getViewTreeObserver().addOnGlobalFocusChangeListener(new ViewTreeObserver.OnGlobalFocusChangeListener() {
+            @Override
+            public void onGlobalFocusChanged(View oldFocus, View newFocus) {
+                Logger.getLogger().d("addOnGlobalFocusChangeListener mRecyclerView focued");
+                if(newFocus instanceof RecyclerView) {
+                    Logger.getLogger().d(" mRecyclerView focued");
+                }
+            }
+        });
 
         mAdapter.setOnItemClickListener(new CustomRecyclerView.CustomAdapter.OnItemClickListener() {
             @Override
@@ -179,23 +201,7 @@ public class CitySelector extends DialogFragment {
             }
         });
 
-//        mAdapter.setOnItemClickListener(new CityAdapter.OnRecyclerViewItemClickListener() {
-//            @Override
-//            public void onItemClick(View view, int pos) {
-//                if (currentLevel == LEVEL_PROVINCE) {
-//                    selectedProvince = mProvinceList.get(pos);
-//                    mRecyclerView.smoothScrollToPosition(0);
-//                    queryCities();
-//                } else if (currentLevel == LEVEL_CITY) {
-//                    String city = Util.replaceCity(mCityList.get(pos).CityName);
-//
-//                    SharedPreferenceUtil.getInstance().setCityName(city);
-//                    RxBus.getDefault().post(new ChangeCityEvent());
-//
-//                    dismiss();
-//                }
-//            }
-//        });
+        mRecyclerView.requestFocus();
     }
 
 
@@ -234,12 +240,18 @@ public class CitySelector extends DialogFragment {
                         currentLevel = LEVEL_PROVINCE;
                         mAdapter.notifyDataSetChanged();
                         Logger.getLogger().e(" refresh data ************");
+                        if (mRecyclerView.getChildCount() > 0) {
+                            mRecyclerView.getChildAt(0).requestFocus();
+                        }
+
                     }
                 })
                 .subscribe(new Subscriber<List<String>>() {
                     @Override
                     public void onCompleted() {
-
+                        if (mRecyclerView.getChildCount() > 0) {
+                            mRecyclerView.getChildAt(0).requestFocus();
+                        }
                     }
 
                     @Override

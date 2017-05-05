@@ -254,7 +254,6 @@ public class ApkManage {
 	}
 
 	public static void selectApp(int position, String packageName) {
-		// TODO Auto-generated method stub
 		String favorite = (String) SharedPreferencesUtils.getParam(BaseApplication.getInstance(), Constant.FAVORITE, Constant.FAVORITE_CONFIG);
 		String pkg[] = favorite.split(";");
 		if(pkg.length > position){
@@ -265,6 +264,22 @@ public class ApkManage {
 		for (int i = 0; i < pkg.length; i++) {
 			sb.append(pkg[i]).append(";");
 		}
+		SharedPreferencesUtils.setParam(BaseApplication.getInstance(), Constant.FAVORITE, sb.toString());
+	}
+
+	public static void updateSelectApp(int position) {
+        Logger.getLogger().i("updateSelectApp " + position);
+		String favorite = (String) SharedPreferencesUtils.getParam(BaseApplication.getInstance(), Constant.FAVORITE, Constant.FAVORITE_CONFIG);
+		String pkg[] = favorite.split(";");
+		if(position > pkg.length) {
+			return;
+		}
+		pkg[position]=" ";
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < pkg.length; i++) {
+			sb.append(pkg[i]).append(";");
+		}
+		Logger.getLogger().i("updateSelectApp " + sb.toString());
 		SharedPreferencesUtils.setParam(BaseApplication.getInstance(), Constant.FAVORITE, sb.toString());
 	}
 

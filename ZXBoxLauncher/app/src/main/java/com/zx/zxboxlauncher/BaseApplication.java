@@ -14,7 +14,7 @@ import java.util.ArrayList;
 /**
  * 功能描述：用于存放全局变量和公用的资源等
  *
- * @author wxt
+ * @author shaudxiao
  */
 public class BaseApplication extends Application {
 

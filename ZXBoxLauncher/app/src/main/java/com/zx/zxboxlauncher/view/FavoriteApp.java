@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.zx.zxboxlauncher.BaseApplication;
 import com.zx.zxboxlauncher.R;
+import com.zx.zxboxlauncher.activity.MainActivityNew;
 import com.zx.zxboxlauncher.adpter.ScrollViewAppAdapter;
 import com.zx.zxboxlauncher.utils.ApkManage;
 import com.zx.zxboxlauncher.utils.Constant;
@@ -32,7 +33,8 @@ import java.util.List;
  */
 
 
-public class FavoriteApp extends DialogFragment implements MyHorizontalScrollView.OnItemClickListener, MyHorizontalScrollView.OnKeyListener {
+public class FavoriteApp extends DialogFragment implements MyHorizontalScrollView.OnItemClickListener, MyHorizontalScrollView.OnKeyListener
+    ,MyHorizontalScrollView.OnItemLongClickListener{
 
     private MyHorizontalScrollView mHorizontalScrollView;
     private ImageView mUpView;
@@ -87,6 +89,7 @@ public class FavoriteApp extends DialogFragment implements MyHorizontalScrollVie
 
         mHorizontalScrollView.setOnKeyListener(this);
         mHorizontalScrollView.setOnItemClickListener(this);
+        mHorizontalScrollView.setOnItemLongClickListener(this);
 
         String favorite = (String) SharedPreferencesUtils.getParam(BaseApplication.getInstance(), Constant.FAVORITE, Constant.FAVORITE_CONFIG);
         List<PackageInfo> infos = ApkManage.getAllApps(getActivity(), favorite);
@@ -111,6 +114,32 @@ public class FavoriteApp extends DialogFragment implements MyHorizontalScrollVie
     }
 
     @Override
+    public boolean onItemLongClick(BaseAdapter adapter, View view, int position) {
+        PackageInfo info = (PackageInfo) adapter.getItem(position);
+
+        if(info != null) {
+            String favoirte = (String) SharedPreferencesUtils.getParam(BaseApplication.getInstance(), Constant.FAVORITE, Constant.FAVORITE_CONFIG);
+            List<PackageInfo> infos = ApkManage.getAllApps(getActivity(), favoirte);
+            if(isAdded(info, infos)) {
+                infos.remove(position);
+
+                mAppAdapter.setDatas(infos);
+                mHorizontalScrollView.setBaseAdapter(mAppAdapter);
+                mAppAdapter.notifyDataSetChanged();
+                mHorizontalScrollView.moveFocusView(position);
+
+                ApkManage.updateSelectApp(position);
+            }
+
+            ((MainActivityNew)getActivity()).showToastLong(getString(R.string.fav_app_del));
+
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
     public boolean onkey(View v, int keyCode, KeyEvent event, int position) {
         if(event.getAction() == KeyEvent.ACTION_DOWN) {
             switch (keyCode) {
@@ -124,5 +153,14 @@ public class FavoriteApp extends DialogFragment implements MyHorizontalScrollVie
         }
 
         return  false;
+    }
+
+    private boolean isAdded(PackageInfo info, List<PackageInfo> infoList) {
+        for(PackageInfo packageInfo : infoList) {
+            if(info.packageName.equals(packageInfo.packageName)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

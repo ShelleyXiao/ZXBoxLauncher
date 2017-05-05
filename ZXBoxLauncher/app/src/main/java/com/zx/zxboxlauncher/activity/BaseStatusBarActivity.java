@@ -9,9 +9,7 @@ import android.content.ServiceConnection;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -66,23 +64,21 @@ public class BaseStatusBarActivity extends BaseActivityNew implements IWeatherVi
 
     private boolean isBind = false;
 
-    private Handler mHandler = new Handler( ) {
-
-        @Override
-        public void handleMessage(Message msg) {
-            if(msg.what == 0x01) {
-                mWetherPresenter.getWeather(SharedPreferenceUtil.getInstance().getCityName());
-            }
-
-            super.handleMessage(msg);
-        }
-    };
+//    private Handler mHandler = new Handler( ) {
+//
+//        @Override
+//        public void handleMessage(Message msg) {
+//            if(msg.what == 0x01) {
+//                mWetherPresenter.getWeather(SharedPreferenceUtil.getInstance().getCityName());
+//            }
+//
+//            super.handleMessage(msg);
+//        }
+//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Logger.getLogger().i("onCreate************");
 
         set = (LinearLayout) findViewById(R.id.set);
         net = (LinearLayout) findViewById(R.id.net);
@@ -293,6 +289,7 @@ public class BaseStatusBarActivity extends BaseActivityNew implements IWeatherVi
                             }
                             return true;
                         case KeyEvent.KEYCODE_DPAD_LEFT:
+                            weather.requestFocus();
                             return true;
                         case KeyEvent.KEYCODE_DPAD_CENTER:
                         case KeyEvent.KEYCODE_ENTER:

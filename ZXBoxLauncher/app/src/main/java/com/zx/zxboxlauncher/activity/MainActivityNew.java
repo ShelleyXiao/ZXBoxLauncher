@@ -82,6 +82,7 @@ public class MainActivityNew extends BaseStatusBarActivity implements View.OnCli
                 // 这种设置会出现焦点框不适应问题？？？？？
 //                v.setOnFocusChangeListener(mFocusChangeListener);
                 v.setOnClickListener(this);
+                v.setOnLongClickListener(this);
             }
         }
 
@@ -134,12 +135,25 @@ public class MainActivityNew extends BaseStatusBarActivity implements View.OnCli
                 startActivity(MoreActivity.class);
                 return;
             case R.id.main_filemanager_lay:
+                //com.zhaoxin.fileexplorer/.FileViewActivity  com.zx.zx2000tvfileexploer.ui.MainActivity
+                if(ApkManage.checkInstall(this, "com.zx.zx2000tvfileexploer")) {
+                    Intent intent1 = new Intent();
+                    intent1.setClassName("com.zx.zx2000tvfileexploer", "com.zx.zx2000tvfileexploer.ui.MainActivity");
+                    intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent1);
+                } else {
+                    Intent intent1 = new Intent();
+                    intent1.setClassName("com.zhaoxin.fileexplorer", "com.zhaoxin.fileexplorer.FileViewActivity");
+                    intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent1);
+                }
+
                 return;
             case R.id.main_item_online:
                 return;
             case R.id.main_item_video:
                 Intent intent = new Intent();
-                intent.setClassName("com.zhaoxin.dlna.bestvdlna", "com.zhaoxin.dlna.bestvdlna.MainActivity");
+                intent.setClassName("com.zhaoxin.newplayer", "com.zhaoxin.newplayer.MainActivity");
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 return;
@@ -170,10 +184,12 @@ public class MainActivityNew extends BaseStatusBarActivity implements View.OnCli
         if (current != null && current.size() > 0) {
             item = current.get(0);
         }
-
         if(item != null) {
             BaseApplication.getInstance().mFinalDb.deleteByWhere(Item.class,   "tag=" + "'" + v.getTag() + "'");
             updateViewByTag(item.getTag());
+
+            showToastLong(getString(R.string.fav_app_del));
+            return true;
         }
 
         return false;

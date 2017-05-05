@@ -103,9 +103,14 @@ public class ContentView extends RelativeLayout {
         if (current != null && current.size() > 0) {
             item = current.get(0);
             Logger.getLogger().i("size = " + current.size() + " " + item.toString());
+        } else {
+            // 防止再次刷新数据出错
+            item = null;
         }
-        Logger.getLogger().i("size = " + current.size());
+
+        Logger.getLogger().i("size = " + current.size() );
         if (item != null) {
+            Logger.getLogger().i("size = " + current.size() + " " + item.toString());
 
             tv.setVisibility(INVISIBLE);
             PackageManager pm = mContext.getPackageManager();
@@ -135,6 +140,7 @@ public class ContentView extends RelativeLayout {
             textView.setVisibility(VISIBLE);
 
         } else {
+            Logger.getLogger().i(" add view*************");
             icon.setImageResource(R.drawable.add_common_icon);
             textView.setText(getResources().getString(
                     R.string.add));
@@ -155,7 +161,10 @@ public class ContentView extends RelativeLayout {
 
         imageView.setVisibility(VISIBLE);
         icon.setVisibility(VISIBLE);
+
     }
+
+
 
     public void focusDoAnim() {
 

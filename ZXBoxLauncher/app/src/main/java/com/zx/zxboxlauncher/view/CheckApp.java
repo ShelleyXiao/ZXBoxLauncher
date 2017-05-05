@@ -34,6 +34,8 @@ public class CheckApp extends DialogFragment {
     String tag;
     String title;
 
+    List<Item> isAddedList;
+
     public CheckApp() {
     }
 
@@ -41,6 +43,8 @@ public class CheckApp extends DialogFragment {
         this.tag = tag;
         this.update = update;
         this.setStyle(0, R.style.Transparent);
+
+        isAddedList = BaseApplication.getInstance().mFinalDb.findAll(Item.class);
     }
 
     public CheckApp(IViewUpdate update, String tag, String title) {
@@ -67,29 +71,46 @@ public class CheckApp extends DialogFragment {
         hs.setOnItemClickListener(new MyHorizontalScrollView.OnItemClickListener() {
             @Override
             public void onItemClick(BaseAdapter parent, View view, int position) {
-                // TODO Auto-generated method stub
                 PackageInfo info = (PackageInfo) parent.getItem(position);
-                Item item = new Item();
-                item.setTag(tag);
-                item.setPkg(info.applicationInfo.packageName);
 
-                List<Item> current = BaseApplication.getInstance().mFinalDb.findAllByWhere(Item.class, "tag="
-                        + "'" + item.getTag() + "'");
+                if (!isAdded(info)) {
+                    Item item = new Item();
+                    item.setTag(tag);
+                    item.setPkg(info.applicationInfo.packageName);
 
-                if (current != null && current.size() > 0) {
-                    BaseApplication.getInstance().mFinalDb.update(item, "tag=" + "'" + item.getTag() + "'");
-                } else {
-                    BaseApplication.getInstance().mFinalDb.save(item);
+                    List<Item> current = BaseApplication.getInstance().mFinalDb.findAllByWhere(Item.class, "tag="
+                            + "'" + item.getTag() + "'");
+
+                    if (current != null && current.size() > 0) {
+                        BaseApplication.getInstance().mFinalDb.update(item, "tag=" + "'" + item.getTag() + "'");
+                    } else {
+                        BaseApplication.getInstance().mFinalDb.save(item);
+                    }
+
+                    update.updateViewByTag(tag);
+                    dismiss();
                 }
 
-                update.updateViewByTag(tag);
-                dismiss();
             }
         });
         List<PackageInfo> infos = ApkManage.getAllApps(getActivity());
         ScrollViewAppAdapter mAdapter = new ScrollViewAppAdapter(getActivity(), infos, R.layout.scroll_view_app_item, false);
         hs.setBaseAdapter(mAdapter);
         return v;
+    }
+
+    private boolean isAdded(PackageInfo info) {
+        if (isAddedList != null && !isAddedList.isEmpty()) {
+            for (Item item : isAddedList) {
+                if (item != null && info != null) {
+                    if (info.packageName.equals(item.getPkg())) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
 

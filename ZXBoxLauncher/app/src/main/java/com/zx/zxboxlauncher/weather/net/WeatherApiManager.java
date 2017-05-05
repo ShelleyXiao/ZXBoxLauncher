@@ -1,6 +1,7 @@
 package com.zx.zxboxlauncher.weather.net;
 
 import com.zx.zxboxlauncher.BaseApplication;
+import com.zx.zxboxlauncher.BuildConfig;
 import com.zx.zxboxlauncher.utils.Logger;
 import com.zx.zxboxlauncher.utils.NetWorkUtil;
 
@@ -92,8 +93,7 @@ public class WeatherApiManager {
     private static void initOkHttp() throws IOException {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
-//        if (BuildConfig.DEBUG)
-        {
+        if (BuildConfig.DEBUG){
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(loggingInterceptor);

@@ -45,5 +45,7 @@
     <string name="weather_pm_qlty">优</string>
 
     <string name="weather_city_select">当前城市:</string>
+    
+    <string name="fav_app_del">收藏已删除！</string>
 
 </resources>

@@ -33,7 +33,7 @@ import java.util.Map;
 
 
 public class MyHorizontalScrollView extends HorizontalScrollView implements View.OnKeyListener, View.OnFocusChangeListener,
-        View.OnClickListener {
+        View.OnClickListener, View.OnLongClickListener {
 
     public final static int SCROLL_DEFAULT = 100;
 
@@ -46,6 +46,8 @@ public class MyHorizontalScrollView extends HorizontalScrollView implements View
     private Map<View, Integer> mViewPostion = new HashMap<>();
 
     private OnItemClickListener mOnItemClickListener;
+    private OnItemLongClickListener mOnItemLongClickListener;
+
     private OnKeyListener mOnKeyListener;
 
     public MyHorizontalScrollView(Context context) {
@@ -94,9 +96,18 @@ public class MyHorizontalScrollView extends HorizontalScrollView implements View
 
     @Override
     public void onClick(View v) {
-        if(null != mOnItemClickListener) {
+        if (null != mOnItemClickListener) {
             mOnItemClickListener.onItemClick(mBaseAdapter, v, mViewPostion.get(v));
         }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        if (mOnItemLongClickListener != null) {
+            return mOnItemLongClickListener.onItemLongClick(mBaseAdapter, v, mViewPostion.get(v));
+        }
+
+        return false;
     }
 
 
@@ -114,12 +125,16 @@ public class MyHorizontalScrollView extends HorizontalScrollView implements View
         mOnItemClickListener = onItemClickListener;
     }
 
+    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
+        mOnItemLongClickListener = onItemLongClickListener;
+    }
+
     public void setOnKeyListener(OnKeyListener onKeyListener) {
         mOnKeyListener = onKeyListener;
     }
 
     private void initView() {
-        if(mLinearLayout == null) {
+        if (mLinearLayout == null) {
             this.mLinearLayout = (LinearLayout) this.findViewById(R.id.scroll_linear);
         }
         mLinearLayout.removeAllViews();
@@ -131,6 +146,7 @@ public class MyHorizontalScrollView extends HorizontalScrollView implements View
             v.setOnKeyListener(this);
             v.setOnFocusChangeListener(this);
             v.setOnClickListener(this);
+            v.setOnLongClickListener(this);
 
             mLinearLayout.addView(v);
             mViewPostion.put(v, i);
@@ -183,6 +199,10 @@ public class MyHorizontalScrollView extends HorizontalScrollView implements View
 
     public interface OnItemClickListener {
         void onItemClick(BaseAdapter adapter, View view, int position);
+    }
+
+    public interface OnItemLongClickListener {
+        boolean onItemLongClick(BaseAdapter adapter, View view, int position);
     }
 
     public interface OnKeyListener {

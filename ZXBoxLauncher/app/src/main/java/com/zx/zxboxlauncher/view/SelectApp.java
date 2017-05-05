@@ -10,9 +10,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.zx.zxboxlauncher.BaseApplication;
 import com.zx.zxboxlauncher.R;
 import com.zx.zxboxlauncher.adpter.ScrollViewAppAdapter;
 import com.zx.zxboxlauncher.utils.ApkManage;
+import com.zx.zxboxlauncher.utils.Constant;
+import com.zx.zxboxlauncher.utils.SharedPreferencesUtils;
 
 import java.util.List;
 
@@ -31,6 +34,8 @@ public class SelectApp extends DialogFragment {
     IFavoriteUpdate update;
     int index;
     String title;
+
+    List<String> isAddPkg;
 
     public SelectApp() {
     }
@@ -56,6 +61,9 @@ public class SelectApp extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         this.setStyle(0, R.style.Transparent);
+
+        String favorite = (String) SharedPreferencesUtils.getParam(BaseApplication.getInstance(), Constant.FAVORITE, Constant.FAVORITE_CONFIG);
+        isAddPkg = ApkManage.getFavPackageName(getActivity(), favorite);
     }
 
     @Override
@@ -75,11 +83,12 @@ public class SelectApp extends DialogFragment {
         hs.setOnItemClickListener(new MyHorizontalScrollView.OnItemClickListener() {
             @Override
             public void onItemClick(BaseAdapter parent, View view, int position) {
-                // TODO Auto-generated method stub
                 PackageInfo info = (PackageInfo) parent.getItem(position);
-                ApkManage.selectApp(index, info.applicationInfo.packageName);
-                dismiss();
-                update.refresh(index);
+                if (!isAdded(info.packageName)) {
+                    ApkManage.selectApp(index, info.applicationInfo.packageName);
+                    dismiss();
+                    update.refresh(index);
+                }
             }
         });
         List<PackageInfo> infos = ApkManage.getAllApps(getActivity());
@@ -87,6 +96,17 @@ public class SelectApp extends DialogFragment {
         hs.setBaseAdapter(mAdapter);
 
         return v;
+    }
+
+    private boolean isAdded(String packageName) {
+        if (isAddPkg != null && !isAddPkg.isEmpty()) {
+            for (String name : isAddPkg) {
+                if (packageName.equals(name)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

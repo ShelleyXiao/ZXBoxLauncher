@@ -51,18 +51,22 @@ public class CustomRecyclerView extends RecyclerView {
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-        if(getChildAt(0) == null)  {
+        if (getChildAt(0) == null) {
             // 一般不会走到这里来
             return super.dispatchKeyEvent(event);
         }
         int dx = this.getChildAt(0).getWidth();
         View focusView = this.getFocusedChild();
         Logger.getLogger().e("focusView: " + focusView);
+        if (focusView == null) {
+            focusView = getChildAt(0);
+            focusView.requestFocus();
+        }
         if (focusView != null) {
             //处理左右方向键移动Item到边之后RecyclerView跟着移动
             switch (event.getKeyCode()) {
                 case KeyEvent.KEYCODE_DPAD_RIGHT:
-                    Logger.getLogger().i( "CustomRecyclerView.KEYCODE_DPAD_RIGHT.");
+                    Logger.getLogger().i("CustomRecyclerView.KEYCODE_DPAD_RIGHT.");
                     if (event.getAction() == KeyEvent.ACTION_UP) {
                         return true;
                     } else {
@@ -80,7 +84,7 @@ public class CustomRecyclerView extends RecyclerView {
                     }
                 case KeyEvent.KEYCODE_DPAD_LEFT:
                     View leftView = FocusFinder.getInstance().findNextFocus(this, focusView, View.FOCUS_LEFT);
-                    Logger.getLogger().i( "left is null:" + (leftView == null));
+                    Logger.getLogger().i("left is null:" + (leftView == null));
                     if (event.getAction() == KeyEvent.ACTION_UP) {
                         return true;
                     } else {
@@ -166,7 +170,7 @@ public class CustomRecyclerView extends RecyclerView {
 //            }
             return isVisible;
         } else if (layoutManager instanceof LinearLayoutManager) {
-            return allItemNum -1 == position;
+            return allItemNum - 1 == position;
         }
         return false;
     }
@@ -188,7 +192,6 @@ public class CustomRecyclerView extends RecyclerView {
         }
         return -1;
     }
-
 
 
     /**
@@ -236,7 +239,8 @@ public class CustomRecyclerView extends RecyclerView {
          *
          * @return item对应的layout
          */
-        protected abstract @NonNull
+        protected abstract
+        @NonNull
         int onSetItemLayout();
 
         @Override
@@ -295,14 +299,14 @@ public class CustomRecyclerView extends RecyclerView {
                 holder.itemView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mListener.onItemClick(v,position);
+                        mListener.onItemClick(v, position);
                     }
                 });
 
                 holder.itemView.setOnLongClickListener(new OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
-                        mListener.onItemLongClick(v,position);
+                        mListener.onItemLongClick(v, position);
                         return true;
                     }
                 });
@@ -327,7 +331,7 @@ public class CustomRecyclerView extends RecyclerView {
             if (itemView == null) {
                 return;
             }
-            onItemFocus(itemView,position);
+            onItemFocus(itemView, position);
         }
 
         /**
@@ -351,7 +355,7 @@ public class CustomRecyclerView extends RecyclerView {
             }
 
 
-            onItemGetNormal(itemView,position);
+            onItemGetNormal(itemView, position);
 
         }
 
