@@ -49,6 +49,7 @@ public class WeatherCase {
                     @Override
                     public Observable<WeatherApi> call(WeatherApi weatherApi) {
                         String status = weatherApi.HeWeather5.get(0).status;
+                        Logger.getLogger().e("status" + status);
                         if ("no more requests".equals(status)) {
                             return Observable.error(new RuntimeException("/(ㄒoㄒ)/~~,API免费次数已用完"));
                         } else if ("unknown city".equals(status)) {

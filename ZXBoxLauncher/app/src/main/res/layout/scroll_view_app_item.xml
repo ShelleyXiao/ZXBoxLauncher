@@ -1,31 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="@dimen/px320"
-              android:layout_height="@dimen/px280"
-              android:layout_margin="@dimen/px10"
-              android:layout_marginLeft="@dimen/px20"
-              android:layout_marginRight="@dimen/px20"
-              android:background="@color/zx_color2"
-              android:gravity="center_horizontal"
-              android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="@dimen/px320"
+                android:layout_height="@dimen/px280"
+                android:layout_marginLeft="@dimen/px20"
+                android:background="@color/zx_color2">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/is_added"
+            android:layout_width="@dimen/px80"
+            android:layout_height="@dimen/px80"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/app_added"
+            android:visibility="gone"
+            />
+
+    </RelativeLayout>
+
+
 
     <ImageView
         android:id="@+id/item_img"
         android:layout_width="@dimen/px160"
         android:layout_height="@dimen/px160"
-        android:layout_marginTop="@dimen/px25"
+        android:layout_centerInParent="true"
         android:scaleType="fitCenter"/>
 
     <TextView
         android:id="@+id/item_name"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/px40"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/px20"
         android:layout_marginTop="@dimen/px25"
         android:gravity="center"
         android:marqueeRepeatLimit="marquee_forever"
         android:singleLine="true"
-        android:text="@string/app_name"
         android:textColor="@android:color/white"
         android:textSize="@dimen/px28"
         />
-</LinearLayout>
+
+</RelativeLayout>

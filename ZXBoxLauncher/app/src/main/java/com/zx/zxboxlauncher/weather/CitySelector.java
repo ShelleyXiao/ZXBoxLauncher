@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
+import com.open.androidtvwidget.leanback.recycle.GridLayoutManagerTV;
 import com.zx.zxboxlauncher.R;
 import com.zx.zxboxlauncher.utils.Logger;
 import com.zx.zxboxlauncher.weather.adapter.CityAdapter;
@@ -65,8 +65,10 @@ public class CitySelector extends DialogFragment {
     public static final int LEVEL_CITY = 2;
     private int currentLevel;
 
+    public IDismissListener mIDismissListener;
 
-    public CitySelector() {
+    public CitySelector(IDismissListener listener) {
+        mIDismissListener = listener;
     }
 
 
@@ -112,9 +114,9 @@ public class CitySelector extends DialogFragment {
         mRecyclerView = (RecyclerView) v.findViewById(R.id.recyclerview);
         mProgressBar = (ProgressBar) v.findViewById(R.id.progressBar);
 
-        if (mProgressBar != null) {
-            mProgressBar.setVisibility(View.VISIBLE);
-        }
+//        if (mProgressBar != null) {
+//            mProgressBar.setVisibility(View.VISIBLE);
+//        }
 
         initData();
 
@@ -147,10 +149,11 @@ public class CitySelector extends DialogFragment {
 
     private void initRecyclerView() {
 
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 8));
+        mRecyclerView.setLayoutManager(new GridLayoutManagerTV(getActivity(), 8));
         mRecyclerView.setHasFixedSize(true);
         //mRecyclerView.setItemAnimator(new FadeInUpAnimator());
         mAdapter = new CityAdapter(getActivity(), mDataList);
+
         mRecyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListener(new CustomRecyclerView.CustomAdapter.OnItemClickListener() {
@@ -158,7 +161,7 @@ public class CitySelector extends DialogFragment {
             public void onItemClick(View view, int pos) {
                 if (currentLevel == LEVEL_PROVINCE) {
                     selectedProvince = mProvinceList.get(pos);
-                    mRecyclerView.smoothScrollToPosition(0);
+//                    mRecyclerView.smoothScrollToPosition(0);
                     queryCities();
                 } else if (currentLevel == LEVEL_CITY) {
                     String city = Util.replaceCity(mCityList.get(pos).CityName);
@@ -207,7 +210,6 @@ public class CitySelector extends DialogFragment {
                 if (mProvinceList.isEmpty()) {
                     mProvinceList.addAll(WeatherDB.loadProvince(DBManager.getInstance().getDatabase()));
                 }
-                Logger.getLogger().d("inti data ************** mProvinceList " + mProvinceList.get(0).ProName);
                 mDataList.clear();
                 return Observable.from(mProvinceList);
             }
@@ -215,7 +217,7 @@ public class CitySelector extends DialogFragment {
 
             @Override
             public String call(Province province) {
-                Logger.getLogger().d("province.ProName " + province.ProName);
+//                Logger.getLogger().d("province.ProName " + province.ProName);
                 return province.ProName;
             }
         }).toList()
@@ -231,23 +233,25 @@ public class CitySelector extends DialogFragment {
                     public void call() {
                         currentLevel = LEVEL_PROVINCE;
                         mAdapter.notifyDataSetChanged();
+                        Logger.getLogger().e(" refresh data ************");
                     }
-                }).subscribe(new Subscriber<List<String>>() {
-            @Override
-            public void onCompleted() {
+                })
+                .subscribe(new Subscriber<List<String>>() {
+                    @Override
+                    public void onCompleted() {
 
-            }
+                    }
 
-            @Override
-            public void onError(Throwable e) {
+                    @Override
+                    public void onError(Throwable e) {
 
-            }
+                    }
 
-            @Override
-            public void onNext(List<String> s) {
-                mDataList.addAll(s);
-            }
-        });
+                    @Override
+                    public void onNext(List<String> s) {
+                        mDataList.addAll(s);
+                    }
+                });
     }
 
     private void queryCities() {
@@ -264,7 +268,7 @@ public class CitySelector extends DialogFragment {
 
             @Override
             public String call(City city) {
-
+//                Logger.getLogger().i("city " + city.CityName);
                 return city.CityName;
             }
         }).toList()
@@ -274,6 +278,7 @@ public class CitySelector extends DialogFragment {
                     public void call() {
                         currentLevel = LEVEL_CITY;
                         mAdapter.notifyDataSetChanged();
+                        Logger.getLogger().e(" refresh data ************");
                     }
                 })
                 .subscribe(new Subscriber<List<String>>() {
@@ -298,6 +303,18 @@ public class CitySelector extends DialogFragment {
     public void onDestroy() {
         super.onDestroy();
         DBManager.getInstance().closeDatabase();
+    }
+
+    @Override
+    public void dismiss() {
+        super.dismiss();
+        if(null != mIDismissListener) {
+            mIDismissListener.onDismissListener();
+        }
+    }
+
+    public interface IDismissListener {
+         void onDismissListener();
     }
 
 }

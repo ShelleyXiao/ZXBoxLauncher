@@ -1,6 +1,7 @@
 package com.zx.zxboxlauncher.weather.presenter;
 
 import com.fernandocejas.frodo.annotation.RxLogSubscriber;
+import com.zx.zxboxlauncher.activity.BaseStatusBarActivity;
 import com.zx.zxboxlauncher.utils.Logger;
 import com.zx.zxboxlauncher.weather.IWeatherView;
 import com.zx.zxboxlauncher.weather.bean.Weather;
@@ -35,9 +36,11 @@ public class WetherPresenter extends BasePresenter{
     }
 
     public void getWeather(String city) {
+        Logger.getLogger().e("city " + city);
         Subscription subscription = WeatherCase.getWeather(city)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread(), true)
+                .compose(((BaseStatusBarActivity)mWeatherView).<Weather>bindToLifecycle())
 //                .subscribe(new Subscriber<Weather>() {
 //                    @Override
 //                    public void onCompleted() {
@@ -56,12 +59,12 @@ public class WetherPresenter extends BasePresenter{
 //                        mWeatherView.updateWeatherUi(weather);
 //                    }
 //                });
-        .subscribe(new MySubscriberBackpressure());
+        .subscribe(new MySubscriberBackpressure()); //调试用
 
         addSubscription(subscription);
     }
 
-
+    //已绑定组件生命周期，不需要手动处理
     public void onStop() {
         unsubcrible();
     }

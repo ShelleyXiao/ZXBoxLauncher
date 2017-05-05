@@ -30,7 +30,8 @@ import java.util.List;
  */
 
 
-public class MainActivityNew extends BaseStatusBarActivity implements View.OnClickListener, View.OnKeyListener, IViewUpdate {
+public class MainActivityNew extends BaseStatusBarActivity implements View.OnClickListener, View.OnKeyListener, IViewUpdate
+        , View.OnLongClickListener {
 
     private ViewGroup mViewGroup;
 
@@ -137,6 +138,10 @@ public class MainActivityNew extends BaseStatusBarActivity implements View.OnCli
             case R.id.main_item_online:
                 return;
             case R.id.main_item_video:
+                Intent intent = new Intent();
+                intent.setClassName("com.zhaoxin.dlna.bestvdlna", "com.zhaoxin.dlna.bestvdlna.MainActivity");
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 return;
         }
 
@@ -157,6 +162,22 @@ public class MainActivityNew extends BaseStatusBarActivity implements View.OnCli
         }
     }
 
+    @Override
+    public boolean onLongClick(View v) {
+
+        Item item = null;
+        List<Item> current = BaseApplication.getInstance().mFinalDb.findAllByWhere(Item.class, "tag=" + "'" + v.getTag() + "'");
+        if (current != null && current.size() > 0) {
+            item = current.get(0);
+        }
+
+        if(item != null) {
+            BaseApplication.getInstance().mFinalDb.deleteByWhere(Item.class,   "tag=" + "'" + v.getTag() + "'");
+            updateViewByTag(item.getTag());
+        }
+
+        return false;
+    }
 
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {

@@ -51,8 +51,13 @@ public class CustomRecyclerView extends RecyclerView {
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
+        if(getChildAt(0) == null)  {
+            // 一般不会走到这里来
+            return super.dispatchKeyEvent(event);
+        }
         int dx = this.getChildAt(0).getWidth();
         View focusView = this.getFocusedChild();
+        Logger.getLogger().e("focusView: " + focusView);
         if (focusView != null) {
             //处理左右方向键移动Item到边之后RecyclerView跟着移动
             switch (event.getKeyCode()) {

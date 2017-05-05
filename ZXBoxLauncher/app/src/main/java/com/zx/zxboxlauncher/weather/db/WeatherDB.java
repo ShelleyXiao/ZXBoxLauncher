@@ -3,7 +3,6 @@ package com.zx.zxboxlauncher.weather.db;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.zx.zxboxlauncher.utils.Logger;
 import com.zx.zxboxlauncher.weather.bean.City;
 import com.zx.zxboxlauncher.weather.bean.Province;
 import com.zx.zxboxlauncher.weather.utils.Util;
@@ -28,7 +27,6 @@ public class WeatherDB  {
     }
 
     public static List<Province> loadProvince(SQLiteDatabase db) {
-        Logger.getLogger().i("*********loadProvince***********db*" + db.isOpen());
         if(db == null) {
             throw new IllegalArgumentException("db null!!");
         }
@@ -40,7 +38,6 @@ public class WeatherDB  {
             province.ProSort = cursor.getInt(cursor.getColumnIndex("ProSort"));
             province.ProName = cursor.getString(cursor.getColumnIndex("ProName"));
             list.add(province);
-            Logger.getLogger().d("province.ProName " + province.ProName);
         } while (cursor.moveToNext());
         Util.closeQuietly(cursor);
 

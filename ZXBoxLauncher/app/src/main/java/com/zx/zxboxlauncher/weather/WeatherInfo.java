@@ -101,10 +101,17 @@ public class WeatherInfo extends DialogFragment implements IWeatherView {
         if (mWeather != null) {
             tvTempreature.setText(mWeather.now.tmp + "°");
             tvExplain.setText(mWeather.now.cond.txt);
-            tvPm.setText(mWeather.aqi.city.pm25 + " " + mWeather.aqi.city.qlty);
-            if (!mWeather.aqi.city.qlty.equals(getString(R.string.weather_pm_qlty))) {
-                tvPm.setTextColor(getResources().getColor(R.color.pm_qlty_bad));
+
+            if (mWeather.aqi != null && mWeather.aqi.city != null) {
+                tvPm.setText(Util.safeText(mWeather.aqi.city.pm25 + " ", mWeather.aqi.city.qlty));
+                if (!mWeather.aqi.city.qlty.equals(getString(R.string.weather_pm_qlty))) {
+                    tvPm.setTextColor(getResources().getColor(R.color.pm_qlty_bad));
+                }
+            } else {
+                view.findViewById(R.id.now_pm_label).setVisibility(View.INVISIBLE);
+                tvPm.setVisibility(View.INVISIBLE);
             }
+
             tvLocation.setText(SharedPreferenceUtil.getInstance().getCityName());
         }
 
@@ -116,6 +123,7 @@ public class WeatherInfo extends DialogFragment implements IWeatherView {
                 intent.putExtra("weather", mWeather);
 
                 startActivity(intent);
+                dismiss();
             }
         });
 

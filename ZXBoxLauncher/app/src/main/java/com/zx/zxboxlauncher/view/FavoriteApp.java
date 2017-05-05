@@ -27,7 +27,7 @@ import java.util.List;
  * Date: 2017-04-13
  * Time: 16:32
  * Company: zx
- * Description:
+ * Description: 二级收藏 app
  * FIXME
  */
 

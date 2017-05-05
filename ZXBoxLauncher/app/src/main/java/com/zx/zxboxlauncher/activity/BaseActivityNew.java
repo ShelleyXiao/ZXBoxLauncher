@@ -13,7 +13,6 @@ import android.graphics.RectF;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -22,6 +21,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Toast;
 
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.zx.zxboxlauncher.R;
 import com.zx.zxboxlauncher.utils.NetWorkUtil;
 
@@ -29,7 +29,7 @@ import com.zx.zxboxlauncher.utils.NetWorkUtil;
 /**
  * Created by WXT on 2016/7/8.
  */
-public abstract class BaseActivityNew extends AppCompatActivity {
+public abstract class BaseActivityNew extends RxAppCompatActivity {
 
     private static final int DEFAULT_TRAN_DUR_ANIM = 300;
 

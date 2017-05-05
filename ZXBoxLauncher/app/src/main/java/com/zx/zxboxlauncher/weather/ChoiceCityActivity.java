@@ -24,7 +24,7 @@ import com.zx.zxboxlauncher.weather.utils.SharedPreferenceUtil;
  */
 
 
-public class ChoiceCityActivity extends BaseActivityNew {
+public class ChoiceCityActivity extends BaseActivityNew implements CitySelector.IDismissListener {
 
     private Weather mWeather;
 
@@ -56,7 +56,7 @@ public class ChoiceCityActivity extends BaseActivityNew {
             @Override
             public void onClick(View v) {
 
-                new CitySelector().show(getFragmentManager(), "city");
+                new CitySelector(ChoiceCityActivity.this).show(getFragmentManager(), "city");
                 Logger.getLogger().i("show dialog******************* ");
             }
         });
@@ -76,5 +76,12 @@ public class ChoiceCityActivity extends BaseActivityNew {
             tvTemprature.setText(mWeather.now.tmp + "°");
         }
 
+
+
+    }
+
+    @Override
+    public void onDismissListener() {
+        finish();
     }
 }

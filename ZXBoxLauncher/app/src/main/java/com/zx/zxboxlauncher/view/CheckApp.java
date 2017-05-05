@@ -23,7 +23,7 @@ import java.util.List;
  * Date: 2017-04-14
  * Time: 11:03
  * Company: zx
- * Description:
+ * Description: 主界面选择App
  * FIXME
  */
 
@@ -87,9 +87,10 @@ public class CheckApp extends DialogFragment {
             }
         });
         List<PackageInfo> infos = ApkManage.getAllApps(getActivity());
-        ScrollViewAppAdapter mAdapter = new ScrollViewAppAdapter(getActivity(), infos, R.layout.scroll_view_app_item);
+        ScrollViewAppAdapter mAdapter = new ScrollViewAppAdapter(getActivity(), infos, R.layout.scroll_view_app_item, false);
         hs.setBaseAdapter(mAdapter);
         return v;
     }
+
 
 }

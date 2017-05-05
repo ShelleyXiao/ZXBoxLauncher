@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -89,7 +90,16 @@ public class ApkManage {
 //	    }
 	    
 	    return apps;  
-	} 
+	}
+
+	public static List<String> getFavPackageName(Context ctx,String pkgs) {
+		if(ctx == null || TextUtils.isEmpty(pkgs)) {
+			return null;
+		}
+		List<PackageInfo> apps = new ArrayList<PackageInfo>();
+		String pkg[] = pkgs.split(";");
+		return Arrays.asList(pkg);
+	}
 	
 	public static List<PackageInfo> getAllApps(Context ctx,String pkgs) {
 		if(ctx == null || TextUtils.isEmpty(pkgs)) {

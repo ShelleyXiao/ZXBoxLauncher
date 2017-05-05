@@ -26,11 +26,21 @@ import java.util.List;
 
 public class CityAdapter extends CustomRecyclerView.CustomAdapter<String> {
 
-
     public CityAdapter(Context context, List<String> dataList) {
         super(context, dataList);
+
+        setHasStableIds(true);
     }
 
+    public void setDatas(List<String> datas) {
+        mData.clear();
+        mData = datas;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
     @Override
     protected RecyclerView.ViewHolder onSetViewHolder(View view) {

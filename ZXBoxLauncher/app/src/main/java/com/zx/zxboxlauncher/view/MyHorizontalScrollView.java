@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.zx.zxboxlauncher.R;
-import com.zx.zxboxlauncher.utils.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -67,7 +66,7 @@ public class MyHorizontalScrollView extends HorizontalScrollView implements View
         this.mLinearLayout = (LinearLayout) view.findViewById(R.id.scroll_linear);
         this.focus = (ImageView) view.findViewById(R.id.focus_view);
 
-        Logger.getLogger().i("MyHorizontalScrollView " + mLinearLayout);
+//        Logger.getLogger().i("MyHorizontalScrollView " + mLinearLayout);
     }
 
     @Override

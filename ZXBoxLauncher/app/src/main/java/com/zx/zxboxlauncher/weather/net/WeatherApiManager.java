@@ -1,7 +1,7 @@
 package com.zx.zxboxlauncher.weather.net;
 
 import com.zx.zxboxlauncher.BaseApplication;
-import com.zx.zxboxlauncher.BuildConfig;
+import com.zx.zxboxlauncher.utils.Logger;
 import com.zx.zxboxlauncher.utils.NetWorkUtil;
 
 import java.io.File;
@@ -84,7 +84,7 @@ public class WeatherApiManager {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build().create(WeatherService.class);
         }
-
+        Logger.getLogger().e(" ************* getWeatherService " + mWeatherService.toString());
         return mWeatherService;
     }
 
@@ -92,9 +92,10 @@ public class WeatherApiManager {
     private static void initOkHttp() throws IOException {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
-        if (BuildConfig.DEBUG) {
+//        if (BuildConfig.DEBUG)
+        {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(loggingInterceptor);
         }
 
@@ -125,6 +126,7 @@ public class WeatherApiManager {
                 return rpBuilder.build();
             }
         };
+
         builder.cache(cache).addInterceptor(cacheInterceptor);
 
         // 设置超时
@@ -136,8 +138,8 @@ public class WeatherApiManager {
         builder.retryOnConnectionFailure(true);
 
         sOkHttpClient = builder.build();
-        ;
     }
+
 
 
 }

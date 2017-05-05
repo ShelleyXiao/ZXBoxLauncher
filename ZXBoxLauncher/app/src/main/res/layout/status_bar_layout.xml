@@ -86,7 +86,8 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:orientation="horizontal"
-        android:paddingRight="@dimen/px2">
+        android:paddingRight="@dimen/px2"
+        android:nextFocusLeft="@+id/weather">
 
         <ImageView
             android:id="@+id/set_statu"
@@ -113,7 +114,6 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/px3"
-
         android:layout_centerInParent="true"
         android:background="@drawable/bar_selector"
         android:clickable="true"
@@ -121,7 +121,8 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:orientation="horizontal"
-        android:paddingRight="@dimen/px2">
+        android:paddingRight="@dimen/px2"
+        android:nextFocusRight="@+id/set">
 
         <ImageView
             android:id="@+id/weather_img"

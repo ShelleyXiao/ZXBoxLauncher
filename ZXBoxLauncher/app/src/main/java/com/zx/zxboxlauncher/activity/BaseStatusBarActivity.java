@@ -9,7 +9,10 @@ import android.content.ServiceConnection;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
@@ -26,10 +29,15 @@ import com.zx.zxboxlauncher.utils.SystemUtils;
 import com.zx.zxboxlauncher.weather.AutoUpdateService;
 import com.zx.zxboxlauncher.weather.IWeatherView;
 import com.zx.zxboxlauncher.weather.WeatherInfo;
+import com.zx.zxboxlauncher.weather.bean.ChangeCityEvent;
 import com.zx.zxboxlauncher.weather.bean.Weather;
 import com.zx.zxboxlauncher.weather.presenter.WetherPresenter;
 import com.zx.zxboxlauncher.weather.utils.ImageLoader;
+import com.zx.zxboxlauncher.weather.utils.RxBus;
 import com.zx.zxboxlauncher.weather.utils.SharedPreferenceUtil;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * User: ShaudXiao
@@ -58,9 +66,23 @@ public class BaseStatusBarActivity extends BaseActivityNew implements IWeatherVi
 
     private boolean isBind = false;
 
+    private Handler mHandler = new Handler( ) {
+
+        @Override
+        public void handleMessage(Message msg) {
+            if(msg.what == 0x01) {
+                mWetherPresenter.getWeather(SharedPreferenceUtil.getInstance().getCityName());
+            }
+
+            super.handleMessage(msg);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Logger.getLogger().i("onCreate************");
 
         set = (LinearLayout) findViewById(R.id.set);
         net = (LinearLayout) findViewById(R.id.net);
@@ -85,13 +107,35 @@ public class BaseStatusBarActivity extends BaseActivityNew implements IWeatherVi
         isBind = bindService(new Intent(this, AutoUpdateService.class), mServiceConnection, AppCompatActivity.BIND_AUTO_CREATE);
 
         mWetherPresenter = new WetherPresenter(this);
-        mWetherPresenter.getWeather("shenzhen");
+        mWetherPresenter.getWeather(SharedPreferenceUtil.getInstance().getCityName());
+
+        RxBus.getDefault().toObservable(ChangeCityEvent.class).observeOn(AndroidSchedulers.mainThread()).subscribe(
+                new Subscriber<ChangeCityEvent>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(ChangeCityEvent changeCityEvent) {
+                        Logger.getLogger().e("RxBus event *************");
+                        mWetherPresenter.getWeather(SharedPreferenceUtil.getInstance().getCityName());
+//                        mHandler.sendEmptyMessage(0x01);
+                    }
+                });
     }
 
     @Override
     public void onResume() {
         super.onResume();
         register();
+
+        Logger.getLogger().i("onResume************");
     }
 
     @Override
@@ -115,14 +159,17 @@ public class BaseStatusBarActivity extends BaseActivityNew implements IWeatherVi
         super.onStop();
 
         unRegister();
-        mWetherPresenter.onStop();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
         if(isBind) {
             unbindService(mServiceConnection);
         }
     }
-
-
 
     private void initIcon() {
         SharedPreferenceUtil.getInstance().putInt("未知", R.mipmap.w_99);
@@ -257,6 +304,7 @@ public class BaseStatusBarActivity extends BaseActivityNew implements IWeatherVi
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                             } else {
+                                ApkManage.openApk(BaseStatusBarActivity.this, "com.android.settings");
                                 showToastLong(getString(R.string.setting_uninstall));
                             }
 
@@ -286,6 +334,8 @@ public class BaseStatusBarActivity extends BaseActivityNew implements IWeatherVi
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                             } else {
+                                Intent intent1 = new Intent(Settings.ACTION_WIFI_SETTINGS);
+                                startActivity(intent1);
                                 showToastLong(getString(R.string.setting_uninstall));
                             }
 
@@ -385,7 +435,7 @@ public class BaseStatusBarActivity extends BaseActivityNew implements IWeatherVi
         if (weather == null) {
             updateError();
         }
-
+        Logger.getLogger().i("weathre " + weather.now.cond.toString());
         mCurrentWeather.status = weather.status;
         mCurrentWeather.aqi = weather.aqi;
         mCurrentWeather.basic = weather.basic;

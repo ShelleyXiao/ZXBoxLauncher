@@ -21,7 +21,7 @@ import java.util.List;
  * Date: 2017-04-13
  * Time: 17:03
  * Company: zx
- * Description:
+ * Description: 二级收藏 app 选择
  * FIXME
  */
 
@@ -37,7 +37,6 @@ public class SelectApp extends DialogFragment {
 
 
     public SelectApp(IFavoriteUpdate update, int position) {
-        // TODO Auto-generated constructor stub
         this.index = position;
         this.update = update;
         this.setStyle(0, R.style.Transparent);
@@ -84,7 +83,7 @@ public class SelectApp extends DialogFragment {
             }
         });
         List<PackageInfo> infos = ApkManage.getAllApps(getActivity());
-        ScrollViewAppAdapter mAdapter = new ScrollViewAppAdapter(getActivity(), infos, R.layout.scroll_view_app_item);
+        ScrollViewAppAdapter mAdapter = new ScrollViewAppAdapter(getActivity(), infos, R.layout.scroll_view_app_item, true);
         hs.setBaseAdapter(mAdapter);
 
         return v;
