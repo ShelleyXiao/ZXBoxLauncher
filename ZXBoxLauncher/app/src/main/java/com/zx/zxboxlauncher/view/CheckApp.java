@@ -57,7 +57,6 @@ public class CheckApp extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         View v = inflater.inflate(R.layout.select_app_main, null);
 
         TextView tv = (TextView) v.findViewById(R.id.select_app);

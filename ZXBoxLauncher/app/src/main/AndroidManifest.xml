@@ -17,7 +17,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.CONNECTIVITY_INTERNAL" />
+    <uses-permission android:name="android.permission.CONNECTIVITY_INTERNAL"/>
 
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
@@ -32,11 +32,11 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <!--<supports-screens-->
-        <!--android:anyDensity="true"-->
-        <!--android:largeScreens="true"-->
-        <!--android:normalScreens="true"-->
-        <!--android:resizeable="true"-->
-        <!--android:smallScreens="true"/>-->
+    <!--android:anyDensity="true"-->
+    <!--android:largeScreens="true"-->
+    <!--android:normalScreens="true"-->
+    <!--android:resizeable="true"-->
+    <!--android:smallScreens="true"/>-->
 
     <!-- 禁止触摸屏 -->
     <uses-feature
@@ -46,11 +46,14 @@
     <application
         android:name=".BaseApplication"
         android:allowBackup="true"
+        android:configChanges="keyboard|keyboardHidden|navigation"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:configChanges="keyboard|keyboardHidden|navigation"
         android:theme="@style/AppTheme">
+
+
         <activity android:name=".activity.MainActivityNew">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

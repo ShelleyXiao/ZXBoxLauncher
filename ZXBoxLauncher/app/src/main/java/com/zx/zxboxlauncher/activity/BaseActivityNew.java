@@ -16,13 +16,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Toast;
 
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.zx.zxboxlauncher.R;
+import com.zx.zxboxlauncher.utils.Logger;
 import com.zx.zxboxlauncher.utils.NetWorkUtil;
 
 
@@ -328,17 +328,19 @@ public abstract class BaseActivityNew extends RxAppCompatActivity {
 
             if (hasFocus) {
                 currentView = v;
-
+                Logger.getLogger().i("has Focus true");
                 setFocusView(v);
                 moveView.setVisibility(View.VISIBLE);
                 flyWhiteBorder(v, moveView, 1.1f, 1.1f);
             } else {
+                Logger.getLogger().i("has Focus false");
                 cancleFocusView(v);
+
+                moveView.clearAnimation();
                 moveView.setVisibility(View.GONE);
             }
         }
     };
-
 
     protected void setFocusView(final View v) {
         v.bringToFront();
@@ -355,7 +357,7 @@ public abstract class BaseActivityNew extends RxAppCompatActivity {
 
         AnimatorSet scale = new AnimatorSet();
         scale.setDuration(DEFAULT_TRAN_DUR_ANIM);
-        scale.setInterpolator(new AccelerateDecelerateInterpolator());
+        scale.setInterpolator(new AccelerateInterpolator());
         scale.playTogether(scaleX, scaleY);
         scale.start();
         scale.addListener(new AnimatorListenerAdapter() {
@@ -402,7 +404,9 @@ public abstract class BaseActivityNew extends RxAppCompatActivity {
         });
     }
 
-    public void flyWhiteBorder(final View focusView, View moveView, float scaleX, float scaleY) {
+    protected AnimatorSet mCurrentAnimatorSet;
+
+    public void flyWhiteBorder(final View focusView, final View moveView, final float scaleX, final float scaleY) {
         int newWidth = 0;
         int newHeight = 0;
         int oldWidth = 0;
@@ -417,6 +421,7 @@ public abstract class BaseActivityNew extends RxAppCompatActivity {
             newHeight = (int) (Math.rint(focusView.getMeasuredHeight() * scaleY));
             oldWidth = moveView.getMeasuredWidth();
             oldHeight = moveView.getMeasuredHeight();
+            Logger.getLogger().i("moveView: " + "oldWidth " + oldWidth + " oldHeight = " + oldHeight);
             Rect fromRect = findLocationWithView(moveView);
             Rect toRect = findLocationWithView(focusView);
             int x = toRect.left - fromRect.left - ((int) Math.rint(mUpPaddingRect.left));
@@ -426,22 +431,61 @@ public abstract class BaseActivityNew extends RxAppCompatActivity {
 
             newWidth += ((int) Math.rint(mUpPaddingRect.right) + (int) Math.rint(mUpPaddingRect.left));
             newHeight += ((int) Math.rint(mUpPaddingRect.bottom) + (int) Math.rint(mUpPaddingRect.top));
+
+//            Logger.getLogger().e("moveView" + ": newX " + newX + " " + " newY = " + newY + " focusView.getMeasuredWidth()  " + focusView.getMeasuredWidth()
+//                    + " getMeasuredHeight: " + focusView.getMeasuredHeight());
         }
+
+        if (mCurrentAnimatorSet != null) {
+            mCurrentAnimatorSet.cancel();
+        }
+
+//        Logger.getLogger().e("moveView: " + "newWidth  " + newWidth + " " + " newHeight = " + newHeight);
 
         ObjectAnimator transAnimatorX = ObjectAnimator.ofFloat(moveView, "translationX", newX);
         ObjectAnimator transAnimatorY = ObjectAnimator.ofFloat(moveView, "translationY", newY);
         // BUG，因为缩放会造成图片失真(拉伸).
-        // hailong.qiu 2016.02.26 修复 :)
         ObjectAnimator scaleXAnimator = ObjectAnimator.ofInt(new ScaleView(moveView), "width", oldWidth,
                 (int) newWidth);
         ObjectAnimator scaleYAnimator = ObjectAnimator.ofInt(new ScaleView(moveView), "height", oldHeight,
                 (int) newHeight);
         //
         AnimatorSet mAnimatorSet = new AnimatorSet();
-        mAnimatorSet.playTogether(transAnimatorX, transAnimatorY, scaleXAnimator, scaleYAnimator);
+        mAnimatorSet.playTogether(scaleXAnimator, scaleYAnimator, transAnimatorX, transAnimatorY);
         mAnimatorSet.setInterpolator(new DecelerateInterpolator(1));
         mAnimatorSet.setDuration(DEFAULT_TRAN_DUR_ANIM);
         mAnimatorSet.start();
+
+        final int width = newWidth;
+        final int height = newHeight;
+        mAnimatorSet.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                //修改框不匹配问题，做一次纠正
+                if(focusView.getMeasuredWidth() != width || focusView.getMeasuredHeight() != height) {
+                    moveView.getLayoutParams().width = width;
+                    moveView.getLayoutParams().height = height;
+                    moveView.requestLayout();
+                }
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+
+        mCurrentAnimatorSet = mAnimatorSet;
     }
 
     public Rect findLocationWithView(View view) {
