@@ -15,8 +15,10 @@ import com.zx.zxboxlauncher.R;
 import com.zx.zxboxlauncher.adpter.ScrollViewAppAdapter;
 import com.zx.zxboxlauncher.utils.ApkManage;
 import com.zx.zxboxlauncher.utils.Constant;
+import com.zx.zxboxlauncher.utils.Logger;
 import com.zx.zxboxlauncher.utils.SharedPreferencesUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -92,7 +94,17 @@ public class SelectApp extends DialogFragment {
             }
         });
         List<PackageInfo> infos = ApkManage.getAllApps(getActivity());
-        ScrollViewAppAdapter mAdapter = new ScrollViewAppAdapter(getActivity(), infos, R.layout.scroll_view_app_item, true);
+
+        List<PackageInfo> appPreSelect = new ArrayList<>();
+        for(PackageInfo pkg : infos) {
+            if(isAdded(pkg.packageName)
+                    || ApkManage.mPreInstallApp.contains(pkg.packageName)) {
+                continue;
+            }
+            appPreSelect.add(pkg);
+        }
+
+        ScrollViewAppAdapter mAdapter = new ScrollViewAppAdapter(getActivity(), appPreSelect, R.layout.scroll_view_app_item, true);
         hs.setBaseAdapter(mAdapter);
 
         return v;
@@ -106,6 +118,7 @@ public class SelectApp extends DialogFragment {
                 }
             }
         }
+        Logger.getLogger().i(packageName);
         return false;
     }
 

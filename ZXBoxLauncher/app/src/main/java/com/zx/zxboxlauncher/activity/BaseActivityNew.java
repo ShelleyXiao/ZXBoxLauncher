@@ -22,8 +22,10 @@ import android.widget.Toast;
 
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.zx.zxboxlauncher.R;
+import com.zx.zxboxlauncher.utils.DensityUtil;
 import com.zx.zxboxlauncher.utils.Logger;
 import com.zx.zxboxlauncher.utils.NetWorkUtil;
+import com.zx.zxboxlauncher.view.focus.FocusBorder;
 
 
 /**
@@ -45,6 +47,8 @@ public abstract class BaseActivityNew extends RxAppCompatActivity {
 
     protected String Ip;
 
+    private FocusBorder mFocusBorder;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +68,14 @@ public abstract class BaseActivityNew extends RxAppCompatActivity {
 
         //向用户展示信息前的准备工作在这个方法里处理
         preliminary();
+
+        if (null == mFocusBorder) {
+            mFocusBorder = new FocusBorder.Builder()
+                    .asDrawable().borderResId(R.drawable.focus).build(this);
+        }
     }
 
+    @Override
     public void onResume() {
         super.onResume();
 
@@ -76,6 +86,7 @@ public abstract class BaseActivityNew extends RxAppCompatActivity {
 
     }
 
+    @Override
     public void onPause() {
         super.onPause();
     }
@@ -303,6 +314,12 @@ public abstract class BaseActivityNew extends RxAppCompatActivity {
 
     private RectF mUpPaddingRect = new RectF(10, 10, 10, 10);
 
+    protected void onMoveFocusBorder(View focusedView, float scale, float roundRadius) {
+        if(null != mFocusBorder) {
+            mFocusBorder.onFocus(focusedView, FocusBorder.OptionsFactory.get(scale, scale, roundRadius));
+        }
+    }
+
     /**
      * 提供选中放大的效果
      */
@@ -329,16 +346,19 @@ public abstract class BaseActivityNew extends RxAppCompatActivity {
             if (hasFocus) {
                 currentView = v;
                 Logger.getLogger().i("has Focus true");
-                setFocusView(v);
-                moveView.setVisibility(View.VISIBLE);
-                flyWhiteBorder(v, moveView, 1.1f, 1.1f);
+//                setFocusView(v);
+//                moveView.setVisibility(View.VISIBLE);
+//                flyWhiteBorder(v, moveView, 1.1f, 1.1f);
+                float radius = DensityUtil.dip2px(getContext(),10);
+                onMoveFocusBorder(v, 1.1f, radius);
             } else {
                 Logger.getLogger().i("has Focus false");
                 cancleFocusView(v);
 
-                moveView.clearAnimation();
-                moveView.setVisibility(View.GONE);
+//                moveView.clearAnimation();
+//                moveView.setVisibility(View.GONE);
             }
+            mFocusBorder.setVisible(hasFocus);
         }
     };
 
@@ -467,7 +487,7 @@ public abstract class BaseActivityNew extends RxAppCompatActivity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 //修改框不匹配问题，做一次纠正
-                if(focusView.getMeasuredWidth() != width || focusView.getMeasuredHeight() != height) {
+                if (focusView.getMeasuredWidth() != width || focusView.getMeasuredHeight() != height) {
                     moveView.getLayoutParams().width = width;
                     moveView.getLayoutParams().height = height;
                     moveView.requestLayout();

@@ -37,7 +37,7 @@ public class BaseApplication extends Application {
 
         mFinalDb = FinalDb.create(this);
 
-        OPENLOG.initTag("ZX", true);
+        OPENLOG.initTag("ZX", false);
 
     }
 

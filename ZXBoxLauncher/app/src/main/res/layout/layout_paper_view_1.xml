@@ -137,8 +137,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/mainview_huodong"/>
+                    android:scaleType="fitXY"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -165,8 +164,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/mainview_huodong"/>
+                    android:scaleType="fitXY"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -195,8 +193,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/mainview_huodong"/>
+                    android:scaleType="fitXY"/>
 
                 <TextView
                     android:layout_width="match_parent"

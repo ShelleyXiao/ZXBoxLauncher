@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.zx.zxboxlauncher.BaseApplication;
 import com.zx.zxboxlauncher.R;
@@ -47,7 +48,7 @@ public class MainActivityNew extends BaseStatusBarActivity implements View.OnCli
         findViewById(R.id.main_filemanager_lay).setOnFocusChangeListener(mFocusChangeListener);
         findViewById(R.id.main_item_online).setOnFocusChangeListener(mFocusChangeListener);
         findViewById(R.id.app_more).setOnFocusChangeListener(mFocusChangeListener);
-        findViewById(R.id.add_app_1).setOnFocusChangeListener(mFocusChangeListener);
+        findViewById(R.id.usbcamera).setOnFocusChangeListener(mFocusChangeListener);
         findViewById(R.id.add_app_2).setOnFocusChangeListener(mFocusChangeListener);
         findViewById(R.id.add_app_3).setOnFocusChangeListener(mFocusChangeListener);
         findViewById(R.id.add_app_4).setOnFocusChangeListener(mFocusChangeListener);
@@ -150,12 +151,37 @@ public class MainActivityNew extends BaseStatusBarActivity implements View.OnCli
 
                 return;
             case R.id.main_item_online:
+                if(ApkManage.checkInstall(this, "com.tianhua.sz.launcher")) {
+                    Intent intent2 = new Intent();
+                    intent2.setClassName("com.tianhua.sz.launcher", "com.tianhua.sz.launcher.activities.home.HomeActivity");
+                    intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent2);
+                } else {
+                    Toast.makeText(this, R.string.app_not_installed, Toast.LENGTH_SHORT).show();
+                }
                 return;
             case R.id.main_item_video:
-                Intent intent = new Intent();
-                intent.setClassName("com.zhaoxin.newplayer", "com.zhaoxin.newplayer.MainActivity");
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                if(ApkManage.checkInstall(this, "com.zhaoxin.bestplayer")) {
+                    Intent intent = new Intent();
+                    intent.setClassName("com.zhaoxin.bestplayer", "com.zhaoxin.bestplayer.MainActivity");
+//                intent.setClassName("com.zhaoxin.newplayer", "com.zhaoxin.newplayer.MainActivity");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(this, R.string.app_not_installed, Toast.LENGTH_SHORT).show();
+                }
+
+                return;
+            case R.id.usbcamera:
+                if(ApkManage.checkInstall(this, "com.zx.tv.camera")) {
+                    Intent intent = new Intent();
+                    intent.setClassName("com.zx.tv.camera", "com.zx.tv.camera.MainActivity");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(this, R.string.app_not_installed, Toast.LENGTH_SHORT).show();
+                }
+
                 return;
         }
 

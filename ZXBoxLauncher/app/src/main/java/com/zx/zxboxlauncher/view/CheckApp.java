@@ -15,7 +15,9 @@ import com.zx.zxboxlauncher.R;
 import com.zx.zxboxlauncher.adpter.ScrollViewAppAdapter;
 import com.zx.zxboxlauncher.bean.Item;
 import com.zx.zxboxlauncher.utils.ApkManage;
+import com.zx.zxboxlauncher.utils.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -93,21 +95,35 @@ public class CheckApp extends DialogFragment {
             }
         });
         List<PackageInfo> infos = ApkManage.getAllApps(getActivity());
-        ScrollViewAppAdapter mAdapter = new ScrollViewAppAdapter(getActivity(), infos, R.layout.scroll_view_app_item, false);
+        List<PackageInfo> preInstall = new ArrayList<>();
+        for(PackageInfo pkg : infos) {
+            if(isAdded(pkg)
+                    || ApkManage.mPreInstallApp.contains(pkg.packageName)) {
+                continue;
+            }
+            Logger.getLogger().i(pkg.packageName);
+            preInstall.add(pkg);
+        }
+        ScrollViewAppAdapter mAdapter = new ScrollViewAppAdapter(getActivity(), preInstall, R.layout.scroll_view_app_item, false);
         hs.setBaseAdapter(mAdapter);
         return v;
     }
 
     private boolean isAdded(PackageInfo info) {
+        Logger.getLogger().i(info.packageName);
         if (isAddedList != null && !isAddedList.isEmpty()) {
             for (Item item : isAddedList) {
                 if (item != null && info != null) {
-                    if (info.packageName.equals(item.getPkg())) {
+                    if (info.packageName.equals(item.getPkg())
+                             ) {
                         return true;
                     }
                 }
             }
         }
+//        if(info.packageName.contains("zxboxlauncher")) {
+//            return true;
+//        }
 
         return false;
     }

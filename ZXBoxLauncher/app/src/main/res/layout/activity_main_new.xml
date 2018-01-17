@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                android:src="@drawable/mainview_tuijian"/>
+                android:src="@drawable/videoplayer"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                android:src="@drawable/mainview_huodong"/>
+                android:src="@drawable/online_video"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -72,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                android:src="@drawable/mainview_huodong"/>
+                android:src="@drawable/filemanger_bg"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -113,6 +113,8 @@
 
         <!--</RelativeLayout>-->
 
+
+
         <com.zx.zxboxlauncher.view.ContentView
             android:id="@+id/app_more"
             style="@style/Content_View_Style_long_short"
@@ -147,13 +149,39 @@
 
         <!--</RelativeLayout>-->
 
-        <com.zx.zxboxlauncher.view.ContentView
-            android:id="@+id/add_app_1"
+        <RelativeLayout
+            android:id="@+id/usbcamera"
             style="@style/Content_View_Style_long_short"
             android:layout_toRightOf="@id/main_filemanager_lay"
             android:layout_marginTop="@dimen/px10"
-            android:layout_below="@+id/app_more" >
-        </com.zx.zxboxlauncher.view.ContentView>
+            android:layout_below="@+id/app_more">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/camera"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:background="@drawable/border_down_shape"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/main_item_usbcamera"
+                android:textColor="#ffffff"/>
+
+        </RelativeLayout>
+
+        <!--<com.zx.zxboxlauncher.view.ContentView-->
+            <!--android:id="@+id/usbcamera"-->
+            <!--style="@style/Content_View_Style_long_short"-->
+            <!--android:layout_toRightOf="@id/main_filemanager_lay"-->
+            <!--android:layout_marginTop="@dimen/px10"-->
+            <!--android:layout_below="@+id/app_more"-->
+            <!--android:background="@drawable/camera">-->
+        <!--</com.zx.zxboxlauncher.view.ContentView>-->
 
         <!--<RelativeLayout-->
             <!--android:id="@+id/add_app_2"-->

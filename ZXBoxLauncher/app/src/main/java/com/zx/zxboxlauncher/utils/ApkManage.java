@@ -27,6 +27,18 @@ import static com.zx.zxboxlauncher.R.raw.app;
 import static com.zx.zxboxlauncher.R.string.apps;
 
 public class ApkManage {
+
+	public static List<String> mPreInstallApp = new ArrayList<>();
+
+	static {
+		mPreInstallApp.add("com.zx.zx2000tvfileexploer");
+		mPreInstallApp.add("com.zhaoxin.fileexplorer");
+		mPreInstallApp.add("com.tianhua.sz.launcher");
+		mPreInstallApp.add("com.zhaoxin.bestplayer");
+		mPreInstallApp.add("com.zx.tv.camera");
+		mPreInstallApp.add("com.zx.zxboxlauncher");
+	}
+
 	public static PackageInfo getAPKInfo(Context ctx, String apk, boolean type) {// 获取apk的信息
 		PackageManager pm = ctx.getPackageManager();
 		PackageInfo pakinfo = null;
